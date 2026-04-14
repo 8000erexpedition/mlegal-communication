@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLegal Communication — Iris Meinking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #f7f4ef;
+      --bg-secondary:#ede8df;
+      --bg-dark:     #2c2520;
+      --accent:      #8c6b3a;
+      --accent-light:#b8924a;
+      --text:        #1f1c18;
+      --muted:       rgba(31, 28, 24, 0.45);
+      --border:      rgba(31, 28, 24, 0.1);
+      --border-med:  rgba(31, 28, 24, 0.18);
+      --font-display:'Cormorant Garamond', Georgia, serif;
+      --font-body:   'DM Sans', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scroll Reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── Typography ────────────────────────────────────── */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    /* ─── Layout Utilities ───────────────────────────────── */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    .rule--med {
+      border-top-color: var(--border-med);
+    }
+
+    /* ─── Chapter Marker ─────────────────────────────────── */
+    .chapter-marker {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .chapter-marker::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════ */
+    /* ─── Sticky compact nav (hidden until scroll) ─── */
+    .nav-sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(247, 244, 239, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-100%);
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 0.3s ease;
+    }
+
+    .nav-sticky.visible {
+      transform: translateY(0);
+      box-shadow: 0 2px 20px rgba(44, 37, 32, 0.06);
+    }
+
+    .nav-sticky__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-sticky__brand {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-sticky__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-sticky__links a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+    .nav-sticky__links a:hover { opacity: 1; }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      background: var(--bg-dark);
+      color: #f0ebe2 !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      opacity: 1 !important;
+      transition: background 0.2s ease, transform 0.15s ease !important;
+    }
+    .btn-nav:hover {
+      background: var(--accent) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ─── Hero header (brand + inline nav) ─── */
+    .hero-header {
+      padding: 32px 0 0;
+      text-align: center;
+    }
+
+    .hero-header__brand {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 58px);
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .hero-header__sub {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .hero-header__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      list-style: none;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-header__nav a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.65;
+      transition: opacity 0.2s ease;
+    }
+    .hero-header__nav a:hover { opacity: 1; }
+
+    .hero-header__nav .nav-divider {
+      width: 1px;
+      height: 14px;
+      background: var(--border-med);
+    }
+
+    /* Hamburger (mobile) */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .nav__hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav__hamburger.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Mobile nav drawer */
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 200;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .nav__mobile.open {
+      display: flex;
+    }
+
+    .nav__mobile a {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav__mobile .btn-nav {
+      margin-top: 12px;
+      font-size: 13px !important;
+    }
+
+    .nav__mobile-close {
+      position: absolute;
+      top: 24px;
+      right: 40px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════ */
+    .hero {
+      padding-top: 32px;
+      padding-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 56px;
+      align-items: start;
+      padding-top: 20px;
+    }
+
+    .hero__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero__eyebrow-line {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero__eyebrow-text {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero__headline {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--muted);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero__headline .period {
+      color: var(--accent);
+    }
+
+    .hero__sub {
+      font-size: 15.5px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text);
+      opacity: 0.78;
+      max-width: 460px;
+      margin-bottom: 28px;
+    }
+
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--bg-dark);
+      color: #f0ebe2;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(140, 107, 58, 0.25);
+    }
+
+    .btn-primary svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .hero__link {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0.6;
+      border-bottom: 1px solid var(--border-med);
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero__link:hover {
+      opacity: 1;
+      border-color: var(--accent);
+    }
+
+    /* Hero right panel */
+    .hero__panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero__frame {
+      border: none;
+      background: transparent;
+      padding: 0;
+      position: relative;
+    }
+
+    .hero__frame::before {
+      display: none;
+    }
+
+    .hero__frame-quote {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    .hero__frame-quote em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero__frame-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero__frame-caption {
+      font-size: 11.5px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero__ornament {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 80px;
+      height: 80px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    /* Glass panels in hero right */
+    .hero__spectrum-label {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero__spectrum-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero__spectrum-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 14px;
+      box-shadow:
+        0 1px 3px rgba(31, 28, 24, 0.04),
+        0 8px 24px rgba(31, 28, 24, 0.06);
+      transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: default;
+    }
+
+    .hero__spectrum-item:hover {
+      background: rgba(255, 255, 255, 0.75);
+      transform: translateY(-3px);
+      box-shadow:
+        0 2px 6px rgba(31, 28, 24, 0.05),
+        0 16px 40px rgba(31, 28, 24, 0.1);
+      border-color: rgba(140, 107, 58, 0.25);
+    }
+
+    .hero__spectrum-num {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--accent);
+      opacity: 0.45;
+      min-width: 18px;
+      transition: opacity 0.2s;
+    }
+    .hero__spectrum-item:hover .hero__spectrum-num {
+      opacity: 0.8;
+    }
+
+    .hero__spectrum-name {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    /* Hero quote at bottom */
+    .hero__quote {
+      margin-top: 16px;
+      padding-top: 0;
+      text-align: center;
+    }
+
+    .hero__quote-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 auto 20px;
+    }
+
+    .hero__quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .hero__quote-text em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero__quote-caption {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TRUST STRIP
+    ═══════════════════════════════════════════════════════ */
+    .trust {
+      background: var(--bg-dark);
+      padding: 56px 0;
+    }
+
+    .trust__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .trust__item {
+      padding: 8px 40px;
+      border-right: 1px solid rgba(247, 244, 239, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .trust__item:first-child {
+      padding-left: 0;
+    }
+
+    .trust__item:last-child {
+      border-right: none;
+    }
+
+    .trust__num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent-light);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .trust__label {
+      font-size: 11.5px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: rgba(247, 244, 239, 0.55);
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════════════════ */
+    .services {
+      padding: 120px 0;
+    }
+
+    .services__header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .services__heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .services__intro {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.72;
+      font-weight: 300;
+      padding-bottom: 4px;
+    }
+
+    /* Service accordion rows */
+    .service-list {
+      border-top: 1px solid var(--border-med);
+    }
+
+    .service-item {
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .service-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.25s ease;
+      transform-origin: bottom;
+    }
+
+    .service-item:hover::before,
+    .service-item.open::before {
+      transform: scaleY(1);
+    }
+
+    .service-item:hover {
+      background: rgba(140, 107, 58, 0.03);
+    }
+
+    .service-item.open {
+      background: rgba(140, 107, 58, 0.04);
+    }
+
+    .service-item__header {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 32px;
+      align-items: center;
+      padding: 28px 32px 28px 24px;
+    }
+
+    .service-item__num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      opacity: 0.55;
+      transition: opacity 0.2s ease;
+    }
+
+    .service-item:hover .service-item__num,
+    .service-item.open .service-item__num {
+      opacity: 1;
+    }
+
+    .service-item__title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    .service-item__tag {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .service-item:hover .service-item__tag,
+    .service-item.open .service-item__tag {
+      opacity: 0.8;
+    }
+
+    .service-item__toggle {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-med);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .service-item:hover .service-item__toggle,
+    .service-item.open .service-item__toggle {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .service-item__toggle svg {
+      width: 10px;
+      height: 10px;
+      color: var(--muted);
+      transition: transform 0.3s ease, color 0.2s ease;
+    }
+
+    .service-item:hover .service-item__toggle svg,
+    .service-item.open .service-item__toggle svg {
+      color: #f0ebe2;
+    }
+
+    .service-item.open .service-item__toggle svg {
+      transform: rotate(45deg);
+    }
+
+    .service-item__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .service-item.open .service-item__body {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .service-item__body-inner {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 32px;
+      padding: 0 32px 32px 24px;
+    }
+
+    .service-item__desc {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--text);
+      opacity: 0.72;
+      font-weight: 300;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════════════════ */
+    .about {
+      background: var(--bg-secondary);
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 100px;
+      align-items: start;
+    }
+
+    .about__text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .about__heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 50px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+
+    .about__body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0.78;
+      font-weight: 300;
+      margin-bottom: 36px;
+    }
+
+    .about__body strong {
+      font-weight: 500;
+      opacity: 1;
+      color: var(--text);
+    }
+
+    .about__pull {
+      border-left: 2px solid var(--accent);
+      padding: 8px 0 8px 28px;
+      margin: 40px 0;
+    }
+
+    .about__pull-text {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .about__detail {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.6;
+      font-weight: 300;
+    }
+
+    /* Portrait column */
+    .about__portrait-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      padding-top: 8px;
+    }
+
+    .about__portrait-frame {
+      aspect-ratio: 3/4;
+      border: 1.5px solid var(--accent);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about__portrait-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(140, 107, 58, 0.03) 20px,
+        rgba(140, 107, 58, 0.03) 40px
+      );
+    }
+
+    .about__portrait-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 1;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .about__portrait-icon {
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--border-med);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(140, 107, 58, 0.07);
+    }
+
+    .about__portrait-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .about__portrait-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .about__credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+
+    .about__credential {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12.5px;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.65;
+    }
+
+    .about__credential-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CTA
+    ═══════════════════════════════════════════════════════ */
+    .cta {
+      background: var(--bg-dark);
+      padding: 100px 0;
+    }
+
+    .cta__inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .cta__heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.5vw, 56px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+      color: #f0ebe2;
+      margin-bottom: 16px;
+    }
+
+    .cta__heading .accent {
+      color: var(--accent-light);
+    }
+
+    .cta__sub {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(240, 235, 226, 0.55);
+      font-weight: 300;
+      max-width: 520px;
+    }
+
+    .cta__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--accent);
+      color: #f0ebe2;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-cta:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(140, 107, 58, 0.35);
+    }
+
+    .cta__email {
+      font-size: 12px;
+      color: rgba(240, 235, 226, 0.35);
+      letter-spacing: 0.04em;
+      text-align: right;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 36px 0;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer__copy {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .footer__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer__links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .footer__links a:hover {
+      color: var(--text);
+    }
+
+    .footer__links li:not(:last-child)::after {
+      content: '·';
+      margin-left: 24px;
+      color: var(--border-med);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 32px;
+      }
+
+      .hero__grid {
+        grid-template-columns: 1fr 340px;
+        gap: 56px;
+      }
+
+      .services__header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .about__grid {
+        grid-template-columns: 1fr 300px;
+        gap: 64px;
+      }
+
+      .cta__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .cta__actions {
+        align-items: flex-start;
+      }
+
+      .cta__email {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .nav__inner {
+        padding: 0 24px;
+      }
+
+      .nav__links {
+        display: none;
+      }
+
+      .nav__hamburger {
+        display: flex;
+      }
+
+      .nav__mobile {
+        padding: 24px 24px 32px;
+      }
+
+      .hero {
+        padding-top: 100px;
+        padding-bottom: 64px;
+      }
+
+      .hero__grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        min-height: auto;
+      }
+
+      .hero__panel {
+        display: none;
+      }
+
+      .trust__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+
+      .trust__item {
+        padding: 24px 24px;
+        border-right: none;
+        border-bottom: 1px solid rgba(247, 244, 239, 0.08);
+      }
+
+      .trust__item:nth-child(odd) {
+        border-right: 1px solid rgba(247, 244, 239, 0.08);
+      }
+
+      .trust__item:last-child,
+      .trust__item:nth-last-child(2) {
+        border-bottom: none;
+      }
+
+      .trust__item:first-child {
+        padding-left: 24px;
+      }
+
+      .services {
+        padding: 80px 0;
+      }
+
+      .service-item__header {
+        grid-template-columns: 48px 1fr auto;
+        gap: 16px;
+        padding: 20px 20px 20px 16px;
+      }
+
+      .service-item__num {
+        font-size: 28px;
+      }
+
+      .service-item__title {
+        font-size: 18px;
+      }
+
+      .service-item__tag {
+        display: none;
+      }
+
+      .service-item__body-inner {
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        padding: 0 20px 24px 16px;
+      }
+
+      .about {
+        padding: 80px 0;
+      }
+
+      .about__grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+
+      .about__portrait-col {
+        order: -1;
+        max-width: 280px;
+      }
+
+      .cta {
+        padding: 72px 0;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .trust__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust__item {
+        border-right: none !important;
+      }
+
+      .trust__item:nth-last-child(2) {
+        border-bottom: 1px solid rgba(247, 244, 239, 0.08) !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════════ -->
+  <!-- Sticky nav (appears on scroll) -->
+  <div class="nav-sticky" id="nav-sticky">
+    <div class="nav-sticky__inner">
+      <a href="#" class="nav-sticky__brand">MLegal Communication</a>
+      <ul class="nav-sticky__links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#ueber-mich">Über mich</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div class="nav__mobile" id="mobile-menu">
+    <button class="nav__mobile-close" id="mobile-close" aria-label="Menü schließen">&times;</button>
+    <a href="#leistungen" class="mobile-link">Leistungen</a>
+    <a href="#ueber-mich" class="mobile-link">Über mich</a>
+    <a href="#kontakt" class="mobile-link">Kontakt</a>
+    <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO (integrated header + content)
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="hero-section">
+    <div class="container">
+
+      <!-- Integrated header -->
+      <div class="hero-header">
+        <h1 class="hero-header__brand">MLegal Communication</h1>
+        <p class="hero-header__sub">Strategische PR für Wirtschaftskanzleien</p>
+        <ul class="hero-header__nav">
+          <li><a href="#leistungen">Leistungen</a></li>
+          <li><span class="nav-divider"></span></li>
+          <li><a href="#ueber-mich">Über mich</a></li>
+          <li><span class="nav-divider"></span></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><span class="nav-divider"></span></li>
+          <li><a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a></li>
+        </ul>
+      </div>
+
+      <div class="hero__grid">
+
+        <!-- Left: Text -->
+        <div class="hero__text">
+          <div class="hero__eyebrow reveal">
+            <span class="hero__eyebrow-line"></span>
+            <span class="hero__eyebrow-text">PR-Beratung · Wirtschaftskanzleien</span>
+          </div>
+
+          <h2 class="hero__headline reveal reveal-delay-2">
+            Kompetenz<br>sichtbar machen<span class="period">.</span>
+          </h2>
+
+          <p class="hero__sub reveal reveal-delay-2">
+            Strategische Kommunikationsberatung für Wirtschaftskanzleien — präzise, wirkungsvoll und auf Augenhöhe mit der Branche.
+          </p>
+
+          <div class="hero__actions reveal reveal-delay-3">
+            <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-primary">
+              Gespräch vereinbaren
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 7h12M8 2l5 5-5 5"/>
+              </svg>
+            </a>
+            <!--  -->
+          </div>
+        </div>
+
+        <!-- Right: Leistungsspektrum -->
+        <div class="hero__panel reveal reveal-delay-2">
+          <div class="hero__frame">
+            <div class="hero__spectrum-label">Leistungsspektrum</div>
+            <ul class="hero__spectrum-list">
+              <li class="hero__spectrum-item">
+                <span class="hero__spectrum-name">Medien &amp; Presse</span>
+              </li>
+              <li class="hero__spectrum-item">
+                <span class="hero__spectrum-name">Digital-PR &amp; LinkedIn</span>
+              </li>
+              <li class="hero__spectrum-item">
+                <span class="hero__spectrum-name">Awards &amp; Rankings</span>
+              </li>
+              <li class="hero__spectrum-item">
+                <span class="hero__spectrum-name">Content-Strategie</span>
+              </li>
+              <li class="hero__spectrum-item">
+                <span class="hero__spectrum-name">Interne Kommunikation</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quote at bottom of hero -->
+      <div class="hero__quote reveal">
+        <div class="hero__quote-rule"></div>
+        <p class="hero__quote-text">
+          "Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —<br>nicht nur intern, sondern im Markt."
+        </p>
+        <p class="hero__quote-caption">Iris Meinking · Freiberufliche PR-Beraterin · D/A/CH</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TRUST STRIP
+  ═══════════════════════════════════════════ -->
+  <section class="trust">
+    <div class="container">
+      <div class="trust__grid">
+
+        <div class="trust__item reveal">
+          <span class="trust__num">15+</span>
+          <span class="trust__label">Jahre Branchen&shy;erfahrung</span>
+        </div>
+
+        <div class="trust__item reveal reveal-delay-1">
+          <span class="trust__num">50+</span>
+          <span class="trust__label">Betreute Kanzleien</span>
+        </div>
+
+        <div class="trust__item reveal reveal-delay-2">
+          <span class="trust__num">200+</span>
+          <span class="trust__label">Ranking-Ein&shy;reichungen</span>
+        </div>
+
+        <div class="trust__item reveal reveal-delay-3">
+          <span class="trust__num">D/A/CH</span>
+          <span class="trust__label">Märkte & Netz&shy;werke</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════ -->
+  <section class="services" id="leistungen">
+    <div class="container">
+
+      <div class="services__header">
+        <div class="reveal">
+          <div class="chapter-marker">Leistungen</div>
+          <h2 class="services__heading">Was ich für<br>Ihre Kanzlei leiste.</h2>
+        </div>
+        <p class="services__intro reveal reveal-delay-1">
+          Ob Medienarbeit, Thought Leadership oder digitale Sichtbarkeit — ich entwickle Kommunikationsstrategien, die Ihre Expertise auf dem richtigen Kanal, zur richtigen Zeit, bei der richtigen Zielgruppe platzieren.
+        </p>
+      </div>
+
+      <div class="service-list reveal">
+
+        <!-- 01 -->
+        <div class="service-item" data-index="0">
+          <div class="service-item__header">
+            <span class="service-item__num">01</span>
+            <div>
+              <span class="service-item__title">Medien &amp; Presse</span>
+            </div>
+            <span class="service-item__tag">Earned Media</span>
+            <div class="service-item__toggle">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 1v8M1 5h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <span></span>
+              <p class="service-item__desc">
+                Gezielte Pressearbeit für Wirtschaftskanzleien: von der Pressemitteilung bis zur redaktionellen Platzierung in Fach- und Wirtschaftsmedien. Ich kenne die Redaktionen, die Formate und die Erwartungen — und übersetze juristische Expertise in nachrichtenwürdige Inhalte.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="service-item" data-index="1">
+          <div class="service-item__header">
+            <span class="service-item__num">02</span>
+            <div>
+              <span class="service-item__title">Digital-PR &amp; LinkedIn</span>
+            </div>
+            <span class="service-item__tag">Digitale Sichtbarkeit</span>
+            <div class="service-item__toggle">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 1v8M1 5h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <span></span>
+              <p class="service-item__desc">
+                LinkedIn ist das wichtigste Netzwerk für Legal Professionals. Ich entwickle persönliche Profile und Kanzleiseiten zu echten Kommunikationsplattformen — mit konsistenter Stimme, relevantem Content und messbarer Reichweite in Ihrer Zielgruppe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="service-item" data-index="2">
+          <div class="service-item__header">
+            <span class="service-item__num">03</span>
+            <div>
+              <span class="service-item__title">Awards &amp; Rankings</span>
+            </div>
+            <span class="service-item__tag">Reputation</span>
+            <div class="service-item__toggle">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 1v8M1 5h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <span></span>
+              <p class="service-item__desc">
+                Juve, Legal 500, Chambers &amp; Partners — ich kenne die Prozesse und Anforderungen der maßgeblichen Kanzlei-Rankings. Mit über 200 begleiteten Einreichungen optimiere ich Ihre Submissions strategisch und textlich für maximale Wirkung.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="service-item" data-index="3">
+          <div class="service-item__header">
+            <span class="service-item__num">04</span>
+            <div>
+              <span class="service-item__title">Content-Strategie</span>
+            </div>
+            <span class="service-item__tag">Redaktion &amp; Konzept</span>
+            <div class="service-item__toggle">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 1v8M1 5h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <span></span>
+              <p class="service-item__desc">
+                Vom Redaktionsplan bis zum fertigen Text: Ich entwickle Content-Strategien, die Ihre Kanzleimarke kohärent kommunizieren — über Website, Newsletter, Fachpublikationen und Social Media. Inhalte, die Mandanten ansprechen und überzeugen.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="service-item" data-index="4">
+          <div class="service-item__header">
+            <span class="service-item__num">05</span>
+            <div>
+              <span class="service-item__title">Interne Kommunikation</span>
+            </div>
+            <span class="service-item__tag">Change &amp; Kultur</span>
+            <div class="service-item__toggle">
+              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M5 1v8M1 5h8"/>
+              </svg>
+            </div>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <span></span>
+              <p class="service-item__desc">
+                Erfolgreiche Kommunikation beginnt im Inneren: Ich unterstütze Kanzleien dabei, Veränderungen, Fusionen oder neue Strategien klar und überzeugend an Partnerschaft und Mitarbeitende zu kommunizieren — verständlich, verbindlich und mit der richtigen Tonalität.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════════ -->
+  <section class="about" id="ueber-mich">
+    <div class="container">
+      <div class="about__grid">
+
+        <!-- Text column -->
+        <div class="about__text-col">
+          <div class="reveal">
+            <div class="chapter-marker">Über mich</div>
+            <h2 class="about__heading">Iris Meinking —<br>Ihre PR-Beraterin<br>für die Rechtswelt.</h2>
+          </div>
+
+          <p class="about__body reveal reveal-delay-1">
+            Ich bin <strong>freiberufliche PR-Beraterin</strong> mit dem Fokus auf Wirtschaftskanzleien — und das seit über 15 Jahren. In dieser Zeit habe ich mehr als 50 Kanzleien in Deutschland, Österreich und der Schweiz dabei begleitet, ihre Kommunikation strategisch weiterzuentwickeln.
+          </p>
+
+          <div class="about__pull reveal reveal-delay-1">
+            <p class="about__pull-text">
+              "Ich spreche die Sprache des Rechts — und übersetze sie in Kommunikation, die wirkt."
+            </p>
+          </div>
+
+          <p class="about__body reveal reveal-delay-2">
+            Was mich von allgemeinen PR-Agenturen unterscheidet: <strong>Ich kenne Ihre Branche</strong>. Ich verstehe die Strukturen großer Sozietäten ebenso wie die Herausforderungen mittelständischer Kanzleien. Ich weiß, wie Ranking-Prozesse funktionieren, welche Journalisten für Legal-Themen relevant sind und wie man Thought Leadership glaubwürdig aufbaut.
+          </p>
+
+          <div class="about__credentials reveal reveal-delay-3">
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              15+ Jahre Erfahrung in der Kanzlei-PR
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Spezialisierung auf Wirtschaftskanzleien
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              D/A/CH — regionaler Fokus, internationale Vernetzung
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              200+ Ranking-Einreichungen (JUVE, Legal 500, Chambers)
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Freiberuflich — flexibel, diskret, verbindlich
+            </div>
+          </div>
+        </div>
+
+        <!-- Portrait column -->
+        <div class="about__portrait-col reveal reveal-delay-2">
+          <div class="about__portrait-frame">
+            <div class="about__portrait-placeholder">
+              <div class="about__portrait-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <span class="about__portrait-label">Iris Meinking</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA
+  ═══════════════════════════════════════════ -->
+  <section class="cta" id="kontakt">
+    <div class="container">
+      <div class="cta__inner reveal">
+
+        <div>
+          <h2 class="cta__heading">
+            Lassen Sie uns<br>
+            <span class="accent">gemeinsam starten.</span>
+          </h2>
+          <p class="cta__sub">
+            Sie möchten die Außenkommunikation Ihrer Kanzlei auf das nächste Level heben? Ich freue mich auf ein erstes unverbindliches Gespräch — persönlich, offen und auf Augenhöhe.
+          </p>
+        </div>
+
+        <div class="cta__actions">
+          <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-cta">
+            Gespräch vereinbaren
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 7h12M8 2l5 5-5 5"/>
+            </svg>
+          </a>
+          <span class="cta__email">iris.meinking@mlegal-communication.de</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">© 2025 Iris Meinking · MLegal Communication</p>
+        <ul class="footer__links">
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       JS
+  ═══════════════════════════════════════════ -->
+  <script>
+    // ── Scroll reveal ──────────────────────────────────
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Sticky nav on scroll ──────────────────────────────
+    const navSticky = document.getElementById('nav-sticky');
+    const heroSection = document.getElementById('hero-section');
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          navSticky.classList.add('visible');
+        } else {
+          navSticky.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0, rootMargin: '-100px 0px 0px 0px' });
+
+    heroObserver.observe(heroSection);
+
+    // ── Mobile menu ─────────────────────────────────────
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+
+    if (mobileClose) {
+      mobileClose.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    }
+
+    // Close on mobile link click
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ── Service accordion ───────────────────────────────
+    const serviceItems = document.querySelectorAll('.service-item');
+
+    serviceItems.forEach(item => {
+      const header = item.querySelector('.service-item__header');
+
+      header.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        serviceItems.forEach(i => i.classList.remove('open'));
+
+        // Toggle current
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    // ── Smooth scroll for anchor links ─────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
