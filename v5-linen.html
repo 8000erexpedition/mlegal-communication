@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MLegal Communication — Iris Meinking</title>
+  <title>Meinking Legal Communications — Iris Meinking</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     /* ─── Reset & Base ──────────────────────────────────── */
     *, *::before, *::after {
@@ -189,37 +190,37 @@
 
     /* ─── Hero header (brand + inline nav) ─── */
     .hero-header {
-      padding: 32px 0 0;
+      padding: 52px 0 0;
       text-align: center;
     }
 
     .hero-header__brand {
       font-family: var(--font-display);
-      font-size: clamp(40px, 5vw, 58px);
+      font-size: clamp(48px, 6vw, 72px);
       font-weight: 500;
       color: var(--text);
       letter-spacing: -0.01em;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .hero-header__sub {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 18px;
+      margin-bottom: 32px;
     }
 
     .hero-header__nav {
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
-      gap: 32px;
+      gap: 36px;
       list-style: none;
-      padding: 16px 0;
+      padding: 18px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
@@ -318,24 +319,48 @@
        HERO
     ═══════════════════════════════════════════════════════ */
     .hero {
-      padding-top: 32px;
-      padding-bottom: 32px;
+      padding-top: 48px;
+      padding-bottom: 80px;
       overflow: hidden;
     }
+
+    /* ─── Rechtsgebiete Hintergrund-Puls ─────────────────── */
+    .rg-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .rg-term {
+      position: fixed;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0;
+      transition: opacity 1.8s ease;
+      white-space: nowrap;
+    }
+
+    /* Fading wird per JS gesteuert */
 
     .hero__grid {
       display: grid;
       grid-template-columns: 1fr 420px;
-      gap: 56px;
+      gap: 72px;
       align-items: start;
-      padding-top: 20px;
+      padding-top: 46px;
     }
 
     .hero__eyebrow {
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
 
     .hero__eyebrow-line {
@@ -354,12 +379,12 @@
 
     .hero__headline {
       font-family: var(--font-display);
-      font-size: clamp(36px, 4.5vw, 56px);
+      font-size: clamp(40px, 5vw, 64px);
       font-style: italic;
       font-weight: 400;
       line-height: 1.05;
       color: var(--muted);
-      margin-bottom: 24px;
+      margin-bottom: 32px;
       letter-spacing: -0.01em;
     }
 
@@ -374,7 +399,7 @@
       color: var(--text);
       opacity: 0.78;
       max-width: 460px;
-      margin-bottom: 28px;
+      margin-bottom: 36px;
     }
 
     .hero__actions {
@@ -417,6 +442,46 @@
       transform: translateX(3px);
     }
 
+    .hero__cta-center {
+      display: flex;
+      justify-content: center;
+      margin-top: 56px;
+    }
+
+    .btn-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 48px;
+      background: var(--bg-dark);
+      color: #f0ebe2;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-hero-cta:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(140, 107, 58, 0.3);
+    }
+
+    .btn-hero-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-hero-cta:hover svg {
+      transform: translateX(4px);
+    }
+
     .hero__link {
       font-size: 13px;
       font-weight: 400;
@@ -435,6 +500,30 @@
     }
 
     /* Hero right panel */
+    .hero-header__brand-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin: 0 auto;
+    }
+
+    .hero-header__globe {
+      width: 115px;
+      height: 115px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -2px;
+      margin-left: -156px;
+    }
+
+    .hero-header__globe canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
     .hero__panel {
       position: relative;
       display: flex;
@@ -556,39 +645,46 @@
       font-weight: 500;
       color: var(--text);
       letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .hero__spectrum-name:hover {
+      color: var(--accent);
     }
 
-    /* Hero quote at bottom */
-    .hero__quote {
-      margin-top: 16px;
-      padding-top: 0;
-      text-align: center;
+    /* Hero quote inline (left column) */
+    .hero__quote-inline {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
     }
 
-    .hero__quote-rule {
-      width: 48px;
+    .hero__quote-inline .hero__quote-rule {
+      width: 32px;
       height: 1px;
       background: var(--accent);
-      margin: 0 auto 20px;
-    }
-
-    .hero__quote-text {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 2.5vw, 26px);
-      font-style: italic;
-      font-weight: 400;
-      line-height: 1.45;
-      color: var(--text);
       margin-bottom: 16px;
     }
 
-    .hero__quote-text em {
-      color: var(--accent);
-      font-style: normal;
+    .hero__quote-inline .hero__quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 2vw, 21px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--text);
+      opacity: 0.75;
+      margin-bottom: 12px;
     }
 
-    .hero__quote-caption {
-      font-size: 12px;
+    .hero__quote-inline .hero__quote-text em {
+      color: var(--accent);
+      font-style: normal;
+      opacity: 1;
+    }
+
+    .hero__quote-inline .hero__quote-caption {
+      font-size: 10.5px;
       font-weight: 600;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -715,10 +811,11 @@
 
     .service-item__header {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
+      grid-template-columns: 1fr auto;
       gap: 32px;
       align-items: center;
       padding: 28px 32px 28px 24px;
+      cursor: default;
     }
 
     .service-item__num {
@@ -751,14 +848,8 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--accent);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .service-item:hover .service-item__tag,
-    .service-item.open .service-item__tag {
       opacity: 0.8;
+      white-space: nowrap;
     }
 
     .service-item__toggle {
@@ -796,22 +887,12 @@
     }
 
     .service-item__body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, opacity 0.3s ease;
-      opacity: 0;
-    }
-
-    .service-item.open .service-item__body {
-      max-height: 300px;
+      overflow: visible;
       opacity: 1;
     }
 
     .service-item__body-inner {
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 32px;
-      padding: 0 32px 32px 24px;
+      padding: 0 32px 28px 24px;
     }
 
     .service-item__desc {
@@ -911,53 +992,11 @@
       justify-content: center;
     }
 
-    .about__portrait-frame::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        rgba(140, 107, 58, 0.03) 20px,
-        rgba(140, 107, 58, 0.03) 40px
-      );
-    }
-
-    .about__portrait-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      z-index: 1;
-      padding: 32px;
-      text-align: center;
-    }
-
-    .about__portrait-icon {
-      width: 56px;
-      height: 56px;
-      border: 1px solid var(--border-med);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(140, 107, 58, 0.07);
-    }
-
-    .about__portrait-icon svg {
-      width: 24px;
-      height: 24px;
-      color: var(--accent);
-      opacity: 0.6;
-    }
-
-    .about__portrait-label {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .about__portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
     }
 
     .about__credentials {
@@ -1284,12 +1323,11 @@
   <!-- Sticky nav (appears on scroll) -->
   <div class="nav-sticky" id="nav-sticky">
     <div class="nav-sticky__inner">
-      <a href="#" class="nav-sticky__brand">MLegal Communication</a>
+      <a href="#" class="nav-sticky__brand">Meinking Legal Communications</a>
       <ul class="nav-sticky__links">
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#ueber-mich">Über mich</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
-        <li><a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a></li>
       </ul>
     </div>
   </div>
@@ -1307,12 +1345,33 @@
   <!-- ═══════════════════════════════════════════
        HERO (integrated header + content)
   ═══════════════════════════════════════════ -->
+  <!-- Rechtsgebiete Hintergrund-Puls (global, fixed) -->
+  <div class="rg-canvas" aria-hidden="true">
+    <!-- Linke Seite -->
+    <span class="rg-term" style="top:10%; left:1.5%; --dur:11s; --delay:0s;   --peak:0.32;">M&amp;A</span>
+    <span class="rg-term" style="top:26%; left:1%;   --dur:13s; --delay:3.1s; --peak:0.28;">Litigation</span>
+    <span class="rg-term" style="top:42%; left:1.5%; --dur:12s; --delay:2.5s; --peak:0.30;">Arbeitsrecht</span>
+    <span class="rg-term" style="top:57%; left:1%;   --dur:14s; --delay:1.0s; --peak:0.28;">IP-Recht</span>
+    <span class="rg-term" style="top:71%; left:1.5%; --dur:10s; --delay:0.3s; --peak:0.30;">Datenschutz</span>
+    <span class="rg-term" style="top:84%; left:1%;   --dur:9s;  --delay:5.0s; --peak:0.28;">Private Equity</span>
+    <!-- Rechte Seite -->
+    <span class="rg-term" style="top:14%; right:1.5%; --dur:9s;  --delay:1.4s; --peak:0.30;">Steuerrecht</span>
+    <span class="rg-term" style="top:28%; right:1%;   --dur:10s; --delay:0.7s; --peak:0.28;">Compliance</span>
+    <span class="rg-term" style="top:42%; right:1.5%; --dur:8s;  --delay:4.2s; --peak:0.30;">Kartellrecht</span>
+    <span class="rg-term" style="top:56%; right:1%;   --dur:11s; --delay:2.0s; --peak:0.28;">Bankrecht</span>
+    <span class="rg-term" style="top:70%; right:1.5%; --dur:13s; --delay:3.7s; --peak:0.28;">Vergaberecht</span>
+    <span class="rg-term" style="top:84%; right:1%;   --dur:12s; --delay:4.8s; --peak:0.30;">Insolvenzrecht</span>
+  </div>
+
   <section class="hero" id="hero-section">
     <div class="container">
 
       <!-- Integrated header -->
       <div class="hero-header">
-        <h1 class="hero-header__brand">MLegal Communication</h1>
+        <div class="hero-header__brand-row">
+          <div class="hero-header__globe" id="globe-container"></div>
+          <h1 class="hero-header__brand">Meinking Legal Communications</h1>
+        </div>
         <p class="hero-header__sub">Strategische PR für Wirtschaftskanzleien</p>
         <ul class="hero-header__nav">
           <li><a href="#leistungen">Leistungen</a></li>
@@ -1320,8 +1379,6 @@
           <li><a href="#ueber-mich">Über mich</a></li>
           <li><span class="nav-divider"></span></li>
           <li><a href="#kontakt">Kontakt</a></li>
-          <li><span class="nav-divider"></span></li>
-          <li><a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a></li>
         </ul>
       </div>
 
@@ -1329,11 +1386,6 @@
 
         <!-- Left: Text -->
         <div class="hero__text">
-          <div class="hero__eyebrow reveal">
-            <span class="hero__eyebrow-line"></span>
-            <span class="hero__eyebrow-text">PR-Beratung · Wirtschaftskanzleien</span>
-          </div>
-
           <h2 class="hero__headline reveal reveal-delay-2">
             Kompetenz<br>sichtbar machen<span class="period">.</span>
           </h2>
@@ -1342,14 +1394,12 @@
             Strategische Kommunikationsberatung für Wirtschaftskanzleien — präzise, wirkungsvoll und auf Augenhöhe mit der Branche.
           </p>
 
-          <div class="hero__actions reveal reveal-delay-3">
-            <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-primary">
-              Gespräch vereinbaren
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 7h12M8 2l5 5-5 5"/>
-              </svg>
-            </a>
-            <!--  -->
+          <div class="hero__quote-inline reveal reveal-delay-4">
+            <p class="hero__quote-text">
+              "Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —
+              nicht nur intern, sondern im Markt."
+            </p>
+            <p class="hero__quote-caption">Iris Meinking · Freiberufliche PR-Beraterin</p>
           </div>
         </div>
 
@@ -1359,19 +1409,19 @@
             <div class="hero__spectrum-label">Leistungsspektrum</div>
             <ul class="hero__spectrum-list">
               <li class="hero__spectrum-item">
-                <span class="hero__spectrum-name">Medien &amp; Presse</span>
+                <a href="#service-medien" class="hero__spectrum-name">Medien &amp; Presse</a>
               </li>
               <li class="hero__spectrum-item">
-                <span class="hero__spectrum-name">Digital-PR &amp; LinkedIn</span>
+                <a href="#service-digital" class="hero__spectrum-name">Digital-PR &amp; LinkedIn</a>
               </li>
               <li class="hero__spectrum-item">
-                <span class="hero__spectrum-name">Awards &amp; Rankings</span>
+                <a href="#service-awards" class="hero__spectrum-name">Awards &amp; Rankings</a>
               </li>
               <li class="hero__spectrum-item">
-                <span class="hero__spectrum-name">Content-Strategie</span>
+                <a href="#service-hr" class="hero__spectrum-name">HR-Communications</a>
               </li>
               <li class="hero__spectrum-item">
-                <span class="hero__spectrum-name">Interne Kommunikation</span>
+                <a href="#service-intern" class="hero__spectrum-name">Interne Kommunikation</a>
               </li>
             </ul>
           </div>
@@ -1379,47 +1429,16 @@
 
       </div>
 
-      <!-- Quote at bottom of hero -->
-      <div class="hero__quote reveal">
-        <div class="hero__quote-rule"></div>
-        <p class="hero__quote-text">
-          "Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —<br>nicht nur intern, sondern im Markt."
-        </p>
-        <p class="hero__quote-caption">Iris Meinking · Freiberufliche PR-Beraterin · D/A/CH</p>
+      <!-- Hero CTA -->
+      <div class="hero__cta-center reveal reveal-delay-3">
+        <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-hero-cta">
+          Gespräch vereinbaren
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 7h12M8 2l5 5-5 5"/>
+          </svg>
+        </a>
       </div>
 
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       TRUST STRIP
-  ═══════════════════════════════════════════ -->
-  <section class="trust">
-    <div class="container">
-      <div class="trust__grid">
-
-        <div class="trust__item reveal">
-          <span class="trust__num">15+</span>
-          <span class="trust__label">Jahre Branchen&shy;erfahrung</span>
-        </div>
-
-        <div class="trust__item reveal reveal-delay-1">
-          <span class="trust__num">50+</span>
-          <span class="trust__label">Betreute Kanzleien</span>
-        </div>
-
-        <div class="trust__item reveal reveal-delay-2">
-          <span class="trust__num">200+</span>
-          <span class="trust__label">Ranking-Ein&shy;reichungen</span>
-        </div>
-
-        <div class="trust__item reveal reveal-delay-3">
-          <span class="trust__num">D/A/CH</span>
-          <span class="trust__label">Märkte & Netz&shy;werke</span>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -1443,22 +1462,15 @@
       <div class="service-list reveal">
 
         <!-- 01 -->
-        <div class="service-item" data-index="0">
+        <div class="service-item" data-index="0" id="service-medien">
           <div class="service-item__header">
-            <span class="service-item__num">01</span>
             <div>
               <span class="service-item__title">Medien &amp; Presse</span>
             </div>
             <span class="service-item__tag">Earned Media</span>
-            <div class="service-item__toggle">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M5 1v8M1 5h8"/>
-              </svg>
-            </div>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <span></span>
               <p class="service-item__desc">
                 Gezielte Pressearbeit für Wirtschaftskanzleien: von der Pressemitteilung bis zur redaktionellen Platzierung in Fach- und Wirtschaftsmedien. Ich kenne die Redaktionen, die Formate und die Erwartungen — und übersetze juristische Expertise in nachrichtenwürdige Inhalte.
               </p>
@@ -1467,22 +1479,15 @@
         </div>
 
         <!-- 02 -->
-        <div class="service-item" data-index="1">
+        <div class="service-item" data-index="1" id="service-digital">
           <div class="service-item__header">
-            <span class="service-item__num">02</span>
             <div>
               <span class="service-item__title">Digital-PR &amp; LinkedIn</span>
             </div>
             <span class="service-item__tag">Digitale Sichtbarkeit</span>
-            <div class="service-item__toggle">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M5 1v8M1 5h8"/>
-              </svg>
-            </div>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <span></span>
               <p class="service-item__desc">
                 LinkedIn ist das wichtigste Netzwerk für Legal Professionals. Ich entwickle persönliche Profile und Kanzleiseiten zu echten Kommunikationsplattformen — mit konsistenter Stimme, relevantem Content und messbarer Reichweite in Ihrer Zielgruppe.
               </p>
@@ -1491,22 +1496,15 @@
         </div>
 
         <!-- 03 -->
-        <div class="service-item" data-index="2">
+        <div class="service-item" data-index="2" id="service-awards">
           <div class="service-item__header">
-            <span class="service-item__num">03</span>
             <div>
               <span class="service-item__title">Awards &amp; Rankings</span>
             </div>
             <span class="service-item__tag">Reputation</span>
-            <div class="service-item__toggle">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M5 1v8M1 5h8"/>
-              </svg>
-            </div>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <span></span>
               <p class="service-item__desc">
                 Juve, Legal 500, Chambers &amp; Partners — ich kenne die Prozesse und Anforderungen der maßgeblichen Kanzlei-Rankings. Mit über 200 begleiteten Einreichungen optimiere ich Ihre Submissions strategisch und textlich für maximale Wirkung.
               </p>
@@ -1515,46 +1513,32 @@
         </div>
 
         <!-- 04 -->
-        <div class="service-item" data-index="3">
+        <div class="service-item" data-index="3" id="service-hr">
           <div class="service-item__header">
-            <span class="service-item__num">04</span>
             <div>
-              <span class="service-item__title">Content-Strategie</span>
+              <span class="service-item__title">HR-Communications</span>
             </div>
-            <span class="service-item__tag">Redaktion &amp; Konzept</span>
-            <div class="service-item__toggle">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M5 1v8M1 5h8"/>
-              </svg>
-            </div>
+            <span class="service-item__tag">Employer Branding &amp; Recruiting</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <span></span>
               <p class="service-item__desc">
-                Vom Redaktionsplan bis zum fertigen Text: Ich entwickle Content-Strategien, die Ihre Kanzleimarke kohärent kommunizieren — über Website, Newsletter, Fachpublikationen und Social Media. Inhalte, die Mandanten ansprechen und überzeugen.
+                Ob Employer Branding, Recruiting-Kampagnen oder interne Kommunikation: Ich positioniere Ihre Kanzlei als attraktiven Arbeitgeber — mit klarer Botschaft für Berufseinsteiger, Lateral Hires und bestehende Teams. Von der Karriereseite bis zur Retention-Strategie.
               </p>
             </div>
           </div>
         </div>
 
         <!-- 05 -->
-        <div class="service-item" data-index="4">
+        <div class="service-item" data-index="4" id="service-intern">
           <div class="service-item__header">
-            <span class="service-item__num">05</span>
             <div>
               <span class="service-item__title">Interne Kommunikation</span>
             </div>
             <span class="service-item__tag">Change &amp; Kultur</span>
-            <div class="service-item__toggle">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                <path d="M5 1v8M1 5h8"/>
-              </svg>
-            </div>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <span></span>
               <p class="service-item__desc">
                 Erfolgreiche Kommunikation beginnt im Inneren: Ich unterstütze Kanzleien dabei, Veränderungen, Fusionen oder neue Strategien klar und überzeugend an Partnerschaft und Mitarbeitende zu kommunizieren — verständlich, verbindlich und mit der richtigen Tonalität.
               </p>
@@ -1582,7 +1566,7 @@
           </div>
 
           <p class="about__body reveal reveal-delay-1">
-            Ich bin <strong>freiberufliche PR-Beraterin</strong> mit dem Fokus auf Wirtschaftskanzleien — und das seit über 15 Jahren. In dieser Zeit habe ich mehr als 50 Kanzleien in Deutschland, Österreich und der Schweiz dabei begleitet, ihre Kommunikation strategisch weiterzuentwickeln.
+            Ich bin <strong>freiberufliche PR-Beraterin</strong> mit dem Fokus auf Wirtschaftskanzleien — mit über 20 Jahren Branchenerfahrung. Mein Ziel: Ihre Kommunikation strategisch weiterzuentwickeln.
           </p>
 
           <div class="about__pull reveal reveal-delay-1">
@@ -1598,15 +1582,11 @@
           <div class="about__credentials reveal reveal-delay-3">
             <div class="about__credential">
               <span class="about__credential-dot"></span>
-              15+ Jahre Erfahrung in der Kanzlei-PR
+              20+ Jahre Erfahrung in der Kanzlei-PR
             </div>
             <div class="about__credential">
               <span class="about__credential-dot"></span>
               Spezialisierung auf Wirtschaftskanzleien
-            </div>
-            <div class="about__credential">
-              <span class="about__credential-dot"></span>
-              D/A/CH — regionaler Fokus, internationale Vernetzung
             </div>
             <div class="about__credential">
               <span class="about__credential-dot"></span>
@@ -1622,15 +1602,7 @@
         <!-- Portrait column -->
         <div class="about__portrait-col reveal reveal-delay-2">
           <div class="about__portrait-frame">
-            <div class="about__portrait-placeholder">
-              <div class="about__portrait-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
-              </div>
-              <span class="about__portrait-label">Iris Meinking</span>
-            </div>
+            <img src="iris-meinking.jpeg" alt="Iris Meinking — Meinking Legal Communications" class="about__portrait-img">
           </div>
         </div>
 
@@ -1642,6 +1614,11 @@
   <!-- ═══════════════════════════════════════════
        CTA
   ═══════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════
+       TRUST STRIP
+  ═══════════════════════════════════════════ -->
+
+
   <section class="cta" id="kontakt">
     <div class="container">
       <div class="cta__inner reveal">
@@ -1677,7 +1654,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
-        <p class="footer__copy">© 2025 Iris Meinking · MLegal Communication</p>
+        <p class="footer__copy">© 2025 Iris Meinking · Meinking Legal Communications</p>
         <ul class="footer__links">
           <li><a href="#">Impressum</a></li>
           <li><a href="#">Datenschutz</a></li>
@@ -1741,24 +1718,6 @@
       });
     });
 
-    // ── Service accordion ───────────────────────────────
-    const serviceItems = document.querySelectorAll('.service-item');
-
-    serviceItems.forEach(item => {
-      const header = item.querySelector('.service-item__header');
-
-      header.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-
-        // Close all
-        serviceItems.forEach(i => i.classList.remove('open'));
-
-        // Toggle current
-        if (!isOpen) {
-          item.classList.add('open');
-        }
-      });
-    });
 
     // ── Smooth scroll for anchor links ─────────────────
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1772,6 +1731,226 @@
         }
       });
     });
+  </script>
+
+  <script>
+    // Rechtsgebiete: JS-gesteuertes Fading mit Mindestabstand und garantierter Sichtbarkeit
+    (function() {
+      var MIN_GAP     = 15;   // Mindestabstand in % zwischen sichtbaren/reservierten Begriffen (~135px bei 900px Viewport)
+      var MIN_VISIBLE = 2;    // Minimum sichtbare Begriffe pro Seite
+      var FADE_MS     = 1800; // Dauer der opacity-Transition
+
+      var allTerms   = Array.from(document.querySelectorAll('.rg-term'));
+      var leftTerms  = allTerms.filter(function(el) { return el.style.right === ''; });
+      var rightTerms = allTerms.filter(function(el) { return el.style.right !== ''; });
+
+      // Reservierungs-Map: Element → reservierte top-Position (in %)
+      // Verhindert Race-Conditions bei gleichzeitigem Einblenden
+      var reservedLeft  = new Map();
+      var reservedRight = new Map();
+
+      function getReserved(group) {
+        return group === leftTerms ? reservedLeft : reservedRight;
+      }
+
+      function reservedTops(group, self) {
+        var reserved = getReserved(group);
+        var tops = [];
+        reserved.forEach(function(val, key) {
+          if (key !== self) tops.push(val);
+        });
+        return tops;
+      }
+
+      function pickTop(group, self) {
+        var others = reservedTops(group, self);
+        // Versuch 1: zufällige Position mit Mindestabstand
+        for (var i = 0; i < 50; i++) {
+          var t = Math.random() * 75 + 8;
+          if (others.every(function(o) { return Math.abs(o - t) >= MIN_GAP; }))
+            return t;
+        }
+        // Fallback: Position mit maximalem Mindestabstand
+        var bestT = 50, bestDist = 0;
+        for (var k = 8; k <= 83; k += 3) {
+          var minDist = others.length === 0 ? 100 : 100;
+          others.forEach(function(o) { minDist = Math.min(minDist, Math.abs(o - k)); });
+          if (minDist > bestDist) { bestDist = minDist; bestT = k; }
+        }
+        return bestT;
+      }
+
+      function activeCount(group) {
+        var reserved = getReserved(group);
+        return reserved.size;
+      }
+
+      function scheduleTerm(el, group) {
+        var peak      = parseFloat(el.style.getPropertyValue('--peak')) || 0.3;
+        var totalMs   = (parseFloat(el.style.getPropertyValue('--dur'))   || 10) * 1000;
+        var delayMs   = (parseFloat(el.style.getPropertyValue('--delay')) ||  0) * 1000;
+        var visibleMs = totalMs * 0.68;
+        var offMs     = totalMs * 0.18;
+        var reserved  = getReserved(group);
+
+        function show() {
+          // Position reservieren VOR dem Einblenden
+          var top = pickTop(group, el);
+          reserved.set(el, top);
+
+          el.style.transition = 'none';
+          el.style.top = top.toFixed(1) + '%';
+          el.offsetHeight; // reflow
+          el.style.transition = 'opacity ' + (FADE_MS / 1000) + 's ease';
+          el.style.opacity = peak;
+          setTimeout(tryHide, visibleMs);
+        }
+
+        function tryHide() {
+          if (activeCount(group) > MIN_VISIBLE) {
+            el.style.opacity = 0;
+            // Reservierung erst nach Fade-Out freigeben
+            setTimeout(function() {
+              reserved.delete(el);
+              setTimeout(show, offMs);
+            }, FADE_MS);
+          } else {
+            setTimeout(tryHide, 1500);
+          }
+        }
+
+        setTimeout(show, delayMs);
+      }
+
+      leftTerms.forEach(function(el)  { scheduleTerm(el, leftTerms);  });
+      rightTerms.forEach(function(el) { scheduleTerm(el, rightTerms); });
+    })();
+  </script>
+
+  <!-- 3D Globe -->
+  <script>
+  (function() {
+    var container = document.getElementById('globe-container');
+    if (!container || typeof THREE === 'undefined') return;
+
+    var w = 200, h = 200;
+
+    var scene = new THREE.Scene();
+    scene.background = null;
+
+    var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 0, 5.8);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    // Letter texture
+    var c = document.createElement('canvas');
+    c.width = 2048; c.height = 1024;
+    var ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, 2048, 1024);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '300 240px "Cormorant Garamond", "Georgia", serif';
+
+    var letters = [
+      { ch: 'M', x: 340,  y: 512 },
+      { ch: 'L', x: 1024, y: 512 },
+      { ch: 'C', x: 1708, y: 512 },
+    ];
+    letters.forEach(function(l) {
+      ctx.fillStyle = 'rgba(30, 20, 5, 0.5)';
+      ctx.fillText(l.ch, l.x + 3, l.y + 4);
+      ctx.fillStyle = 'rgba(255, 248, 220, 0.4)';
+      ctx.fillText(l.ch, l.x - 1, l.y - 2);
+      ctx.fillStyle = 'rgba(40, 28, 8, 0.75)';
+      ctx.fillText(l.ch, l.x, l.y);
+    });
+    [682, 1366].forEach(function(x) {
+      ctx.beginPath();
+      ctx.arc(x, 512, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(40, 28, 8, 0.4)';
+      ctx.fill();
+    });
+    var letterTex = new THREE.CanvasTexture(c);
+    letterTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+    // Gold shader
+    var sphereGeo = new THREE.SphereGeometry(1.3, 128, 128);
+    var sphereMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uLetters:       { value: letterTex },
+        uLightDir1:     { value: new THREE.Vector3(3, 4, 5).normalize() },
+        uLightDir2:     { value: new THREE.Vector3(-4, 1, 3).normalize() },
+        uGoldDark:      { value: new THREE.Color(0xb0a08a) },
+        uGoldMid:       { value: new THREE.Color(0xd8ccb8) },
+        uGoldLight:     { value: new THREE.Color(0xeae0d0) },
+        uGoldHighlight: { value: new THREE.Color(0xfff8ee) },
+      },
+      vertexShader: [
+        'varying vec3 vNormal;',
+        'varying vec3 vViewDir;',
+        'varying vec2 vUv;',
+        'void main() {',
+        '  vUv = uv;',
+        '  vNormal = normalize(normalMatrix * normal);',
+        '  vec4 mvPos = modelViewMatrix * vec4(position, 1.0);',
+        '  vViewDir = normalize(-mvPos.xyz);',
+        '  gl_Position = projectionMatrix * mvPos;',
+        '}'
+      ].join('\n'),
+      fragmentShader: [
+        'uniform sampler2D uLetters;',
+        'uniform vec3 uLightDir1, uLightDir2;',
+        'uniform vec3 uGoldDark, uGoldMid, uGoldLight, uGoldHighlight;',
+        'varying vec3 vNormal, vViewDir;',
+        'varying vec2 vUv;',
+        'void main() {',
+        '  vec3 N = normalize(vNormal);',
+        '  vec3 V = normalize(vViewDir);',
+        '  float diff1 = max(dot(N, normalize(uLightDir1)), 0.0);',
+        '  float diff2 = max(dot(N, normalize(uLightDir2)), 0.0) * 0.5;',
+        '  float diffuse = diff1 + diff2;',
+        '  vec3 goldColor;',
+        '  if (diffuse < 0.35) { goldColor = mix(uGoldDark, uGoldMid, diffuse / 0.35); }',
+        '  else if (diffuse < 0.7) { goldColor = mix(uGoldMid, uGoldLight, (diffuse - 0.35) / 0.35); }',
+        '  else { goldColor = mix(uGoldLight, uGoldHighlight, (diffuse - 0.7) / 0.3); }',
+        '  vec3 H1 = normalize(normalize(uLightDir1) + V);',
+        '  float spec1 = pow(max(dot(N, H1), 0.0), 200.0) * 0.2;',
+        '  vec3 H2 = normalize(normalize(uLightDir2) + V);',
+        '  float spec2 = pow(max(dot(N, H2), 0.0), 150.0) * 0.08;',
+        '  float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0);',
+        '  vec3 rimColor = uGoldHighlight * fresnel * 0.15;',
+        '  vec3 color = goldColor + vec3(spec1 + spec2) * uGoldHighlight + rimColor;',
+        '  vec4 ls = texture2D(uLetters, vUv);',
+        '  color = mix(color, color * 0.35, ls.a * 0.9);',
+        '  float lb = dot(ls.rgb, vec3(0.3, 0.3, 0.3));',
+        '  color += vec3(lb * ls.a * 0.3);',
+        '  float noise = fract(sin(dot(vUv * 200.0, vec2(12.9898, 78.233))) * 43758.5453);',
+        '  color += (noise - 0.5) * 0.015;',
+        '  gl_FragColor = vec4(color, 1.0);',
+        '}'
+      ].join('\n'),
+    });
+
+    var sphere = new THREE.Mesh(sphereGeo, sphereMat);
+    scene.add(sphere);
+
+    // No shadow at this small size
+
+    var time = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.003;
+      sphere.rotation.y = -time * 3.06;
+      sphere.rotation.x = Math.sin(time * 0.5) * 0.04;
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
   </script>
 
 </body>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLegal Globe</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    body { background: #f0ebe2; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+
+(function() {
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xf0ebe2);
+
+  const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 0.15, 6);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  document.body.appendChild(renderer.domElement);
+
+  // ── Letter Texture ──────────────────────────────────────
+  function createLetterTexture() {
+    const c = document.createElement('canvas');
+    c.width = 2048; c.height = 1024;
+    const ctx = c.getContext('2d');
+
+    // Transparent base
+    ctx.clearRect(0, 0, 2048, 1024);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = '300 240px "Cormorant Garamond", "Georgia", serif';
+
+    const letters = [
+      { char: 'M', x: 340,  y: 512 },
+      { char: 'L', x: 1024, y: 512 },
+      { char: 'C', x: 1708, y: 512 },
+    ];
+
+    letters.forEach(l => {
+      // Shadow for depth
+      ctx.fillStyle = 'rgba(30, 20, 5, 0.5)';
+      ctx.fillText(l.char, l.x + 3, l.y + 4);
+      // Highlight
+      ctx.fillStyle = 'rgba(255, 248, 220, 0.4)';
+      ctx.fillText(l.char, l.x - 1, l.y - 2);
+      // Main — strong
+      ctx.fillStyle = 'rgba(40, 28, 8, 0.75)';
+      ctx.fillText(l.char, l.x, l.y);
+    });
+
+    // Dot separators
+    [682, 1366].forEach(x => {
+      ctx.beginPath();
+      ctx.arc(x, 512, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(50, 35, 12, 0.3)';
+      ctx.fill();
+    });
+
+    const tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return tex;
+  }
+
+  // ── Custom Gold Shader ──────────────────────────────────
+  const letterTex = createLetterTexture();
+
+  const goldVertexShader = `
+    varying vec3 vNormal;
+    varying vec3 vViewDir;
+    varying vec2 vUv;
+
+    void main() {
+      vUv = uv;
+      vNormal = normalize(normalMatrix * normal);
+      vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+      vViewDir = normalize(-mvPos.xyz);
+      gl_Position = projectionMatrix * mvPos;
+    }
+  `;
+
+  const goldFragmentShader = `
+    uniform sampler2D uLetters;
+    uniform vec3 uLightDir1;
+    uniform vec3 uLightDir2;
+    uniform vec3 uGoldDark;
+    uniform vec3 uGoldMid;
+    uniform vec3 uGoldLight;
+    uniform vec3 uGoldHighlight;
+
+    varying vec3 vNormal;
+    varying vec3 vViewDir;
+    varying vec2 vUv;
+
+    void main() {
+      vec3 N = normalize(vNormal);
+      vec3 V = normalize(vViewDir);
+
+      // ── Diffuse lighting (two lights) ───────────────
+      float diff1 = max(dot(N, normalize(uLightDir1)), 0.0);
+      float diff2 = max(dot(N, normalize(uLightDir2)), 0.0) * 0.5;
+      float diffuse = diff1 + diff2;
+
+      // ── Gold gradient based on diffuse ──────────────
+      vec3 goldColor;
+      if (diffuse < 0.35) {
+        goldColor = mix(uGoldDark, uGoldMid, diffuse / 0.35);
+      } else if (diffuse < 0.7) {
+        goldColor = mix(uGoldMid, uGoldLight, (diffuse - 0.35) / 0.35);
+      } else {
+        goldColor = mix(uGoldLight, uGoldHighlight, (diffuse - 0.7) / 0.3);
+      }
+
+      // ── Specular highlights ─────────────────────────
+      vec3 H1 = normalize(normalize(uLightDir1) + V);
+      float spec1 = pow(max(dot(N, H1), 0.0), 200.0) * 0.2;
+
+      vec3 H2 = normalize(normalize(uLightDir2) + V);
+      float spec2 = pow(max(dot(N, H2), 0.0), 150.0) * 0.08;
+
+      // ── Fresnel rim ─────────────────────────────────
+      float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0);
+      vec3 rimColor = uGoldHighlight * fresnel * 0.15;
+
+      // ── Combine ─────────────────────────────────────
+      vec3 color = goldColor + vec3(spec1 + spec2) * uGoldHighlight + rimColor;
+
+      // ── Letter overlay ──────────────────────────────
+      vec4 letterSample = texture2D(uLetters, vUv);
+      // Letters: darken strongly for contrast against pearl surface
+      color = mix(color, color * 0.35, letterSample.a * 0.9);
+      // Subtle highlight edge
+      float letterBright = dot(letterSample.rgb, vec3(0.3, 0.3, 0.3));
+      color += vec3(letterBright * letterSample.a * 0.3);
+
+      // ── Subtle color variation (brushed metal feel) ─
+      float noise = fract(sin(dot(vUv * 200.0, vec2(12.9898, 78.233))) * 43758.5453);
+      color += (noise - 0.5) * 0.015;
+
+      gl_FragColor = vec4(color, 1.0);
+    }
+  `;
+
+  const sphereGeo = new THREE.SphereGeometry(1.3, 128, 128);
+  const sphereMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uLetters:       { value: letterTex },
+      uLightDir1:     { value: new THREE.Vector3(3, 4, 5).normalize() },
+      uLightDir2:     { value: new THREE.Vector3(-4, 1, 3).normalize() },
+      uGoldDark:      { value: new THREE.Color(0xb0a08a) },
+      uGoldMid:       { value: new THREE.Color(0xd8ccb8) },
+      uGoldLight:     { value: new THREE.Color(0xeae0d0) },
+      uGoldHighlight: { value: new THREE.Color(0xfff8ee) },
+    },
+    vertexShader: goldVertexShader,
+    fragmentShader: goldFragmentShader,
+  });
+
+  const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+  scene.add(sphere);
+
+  // ── Subtle Shadow ───────────────────────────────────────
+  const shadowGeo = new THREE.CircleGeometry(1.5, 64);
+  const shadowMat = new THREE.MeshBasicMaterial({
+    color: 0x2c2520, transparent: true, opacity: 0.07,
+  });
+  const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.y = -1.55;
+  scene.add(shadow);
+
+  // ── Animation ───────────────────────────────────────────
+  let time = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    time += 0.003;
+    sphere.rotation.y = -time * 0.8;
+    sphere.rotation.x = Math.sin(time * 0.5) * 0.04;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // ── Resize ──────────────────────────────────────────────
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rechnung — Meinking Legal Communications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset & Base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #f7f4ef;
+      --text:       #1f1c18;
+      --muted:      rgba(31, 28, 24, 0.50);
+      --accent:     #8c6b3a;
+      --border:     rgba(31, 28, 24, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      background: #e8e4dd;
+      font-family: var(--font-body);
+      font-size: 10pt;
+      line-height: 1.55;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Page Container ───────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: white;
+      padding: 0;
+      position: relative;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        width: 210mm;
+        min-height: 297mm;
+      }
+    }
+
+    /* ─── Top Accent Line ──────────────────────── */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--accent) 20%,
+        var(--accent) 80%,
+        transparent 100%
+      );
+      opacity: 0.4;
+    }
+
+    /* ─── Header ───────────────────────────────── */
+    .header {
+      padding: 28mm 25mm 10mm 25mm;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* 2D Globe Logo — pearl gradient adaptation */
+    .logo-globe {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at 38% 35%,
+        #fff8ee 0%,
+        #eae0d0 25%,
+        #d8ccb8 50%,
+        #c4b8a4 70%,
+        #b0a08a 100%
+      );
+      box-shadow:
+        0 2px 8px rgba(140, 107, 58, 0.15),
+        inset 0 -2px 4px rgba(176, 160, 138, 0.3),
+        inset 0 2px 6px rgba(255, 248, 238, 0.6);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* Subtle M·L·C on globe */
+    .logo-globe::after {
+      content: 'M \00B7 L \00B7 C';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: 500;
+      color: rgba(40, 28, 8, 0.55);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 18pt;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── Divider ──────────────────────────────── */
+    .divider {
+      margin: 0 25mm;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .divider--light {
+      opacity: 0.6;
+    }
+
+    /* ─── Address Window (DIN 5008) ────────────── */
+    .address-window {
+      padding: 12mm 25mm 0 25mm;
+    }
+
+    .sender-line {
+      font-size: 6.5pt;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      padding-bottom: 2mm;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 3mm;
+    }
+
+    .recipient {
+      font-size: 10pt;
+      line-height: 1.5;
+      min-height: 27.3mm;
+    }
+
+    .recipient .placeholder {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ─── Info Block (Date, Invoice Nr) ─────────── */
+    .info-block {
+      padding: 8mm 25mm 0 25mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .info-left {
+      font-size: 10pt;
+    }
+
+    .info-right {
+      text-align: right;
+      font-size: 9pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .info-right strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .invoice-title {
+      font-family: var(--font-display);
+      font-size: 16pt;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 2mm;
+    }
+
+    /* ─── Body / Content ───────────────────────── */
+    .body {
+      padding: 6mm 25mm 0 25mm;
+    }
+
+    .body p {
+      margin-bottom: 4mm;
+    }
+
+    .body .greeting {
+      margin-bottom: 6mm;
+    }
+
+    /* ─── Invoice Table ────────────────────────── */
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6mm 0 8mm 0;
+      font-size: 9.5pt;
+    }
+
+    .invoice-table thead th {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 3mm 2mm;
+      border-bottom: 1.5px solid rgba(31, 28, 24, 0.2);
+    }
+
+    .invoice-table thead th:last-child,
+    .invoice-table thead th:nth-child(3) {
+      text-align: right;
+    }
+
+    .invoice-table tbody td {
+      padding: 3mm 2mm;
+      border-bottom: 0.5px solid var(--border);
+      vertical-align: top;
+    }
+
+    .invoice-table tbody td:last-child,
+    .invoice-table tbody td:nth-child(3) {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .invoice-table tbody td.desc-detail {
+      font-size: 8.5pt;
+      color: var(--muted);
+      padding-top: 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    /* Totals */
+    .invoice-totals {
+      width: 100%;
+      margin-top: 2mm;
+    }
+
+    .invoice-totals td {
+      padding: 1.5mm 2mm;
+      font-size: 9.5pt;
+    }
+
+    .invoice-totals td:first-child {
+      text-align: right;
+      color: var(--muted);
+      font-size: 8.5pt;
+      letter-spacing: 0.02em;
+    }
+
+    .invoice-totals td:last-child {
+      text-align: right;
+      width: 100px;
+    }
+
+    .invoice-totals .total-row td {
+      padding-top: 3mm;
+      border-top: 1.5px solid rgba(31, 28, 24, 0.2);
+      font-weight: 500;
+      font-size: 10.5pt;
+    }
+
+    .invoice-totals .total-row td:first-child {
+      color: var(--text);
+      font-size: 10.5pt;
+    }
+
+    /* ─── Payment Info ─────────────────────────── */
+    .payment-info {
+      padding: 6mm 25mm 0 25mm;
+      font-size: 9pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .payment-info strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1mm 4mm;
+      margin-top: 2mm;
+    }
+
+    .payment-grid dt {
+      font-size: 8pt;
+      color: var(--muted);
+    }
+
+    .payment-grid dd {
+      font-size: 9pt;
+      color: var(--text);
+    }
+
+    /* ─── Footer ───────────────────────────────── */
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 25mm 15mm 25mm;
+    }
+
+    .footer-line {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 4mm;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      font-size: 7.5pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .footer-grid strong {
+      font-weight: 500;
+      color: rgba(31, 28, 24, 0.6);
+      display: block;
+      font-size: 6.5pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    /* ─── Utilities ────────────────────────────── */
+    .placeholder {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .editable:focus {
+      outline: 2px solid rgba(140, 107, 58, 0.3);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Address Window -->
+  <div class="address-window">
+    <div class="sender-line">Iris Meinking · Mainzer-Tor-Anlage 29 · 61169 Friedberg</div>
+    <div class="recipient" contenteditable="true">
+      <span class="placeholder">Firmenname<br>Ansprechpartner<br>Straße Nr.<br>PLZ Ort</span>
+    </div>
+  </div>
+
+  <!-- Info Block -->
+  <div class="info-block">
+    <div class="info-left">
+      <div class="invoice-title">Rechnung</div>
+    </div>
+    <div class="info-right">
+      <strong>Rechnungsnummer:</strong> <span contenteditable="true">2026-001</span><br>
+      <strong>Datum:</strong> <span contenteditable="true">15. April 2026</span><br>
+      <strong>Leistungszeitraum:</strong> <span contenteditable="true">März 2026</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+    <p class="greeting" contenteditable="true">Sehr geehrte Damen und Herren,</p>
+    <p contenteditable="true">für die im oben genannten Zeitraum erbrachten Leistungen erlaube ich mir, wie folgt abzurechnen:</p>
+  </div>
+
+  <!-- Invoice Table -->
+  <div class="body">
+    <table class="invoice-table">
+      <thead>
+        <tr>
+          <th style="width: 40px;">Pos.</th>
+          <th>Beschreibung</th>
+          <th>Betrag</th>
+        </tr>
+      </thead>
+      <tbody contenteditable="true">
+        <tr>
+          <td>1</td>
+          <td>Strategische PR-Beratung — Monatspauschale</td>
+          <td>0.000,00 &euro;</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Ranking-Einreichung JUVE Awards 2026 — Textentwicklung &amp; Einreichung</td>
+          <td>0.000,00 &euro;</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>LinkedIn-Profiloptimierung — 2 Partnerprofile</td>
+          <td>0.000,00 &euro;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Totals -->
+    <table class="invoice-totals">
+      <tr>
+        <td>Zwischensumme (netto)</td>
+        <td contenteditable="true">0.000,00 &euro;</td>
+      </tr>
+      <tr>
+        <td>Umsatzsteuer (19 %)</td>
+        <td contenteditable="true">000,00 &euro;</td>
+      </tr>
+      <tr class="total-row">
+        <td>Rechnungsbetrag</td>
+        <td contenteditable="true">0.000,00 &euro;</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Payment Info -->
+  <div class="payment-info">
+    <p>Bitte überweisen Sie den Rechnungsbetrag innerhalb von 14 Tagen auf das unten genannte Konto.</p>
+    <dl class="payment-grid">
+      <dt>Bank</dt>
+      <dd contenteditable="true">Bankname</dd>
+      <dt>IBAN</dt>
+      <dd contenteditable="true">DE00 0000 0000 0000 0000 00</dd>
+      <dt>BIC</dt>
+      <dd contenteditable="true">ABCDEFGH</dd>
+    </dl>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <hr class="footer-line">
+    <div class="footer-grid">
+      <div>
+        <strong>Kontakt</strong>
+        Iris Meinking<br>
+        Mainzer-Tor-Anlage 29<br>
+        61169 Friedberg
+      </div>
+      <div>
+        <strong>Kommunikation</strong>
+        iris.meinking@mlegal-communication.de<br>
+        +49 (0) 000 000 000 0<br>
+        linkedin.com/in/irismeinking
+      </div>
+      <div>
+        <strong>Steuer</strong>
+        Steuernummer: 00/000/00000<br>
+        USt-IdNr.: DE000000000
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
