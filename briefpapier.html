@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Briefpapier — Meinking Legal Communications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:       #1f1c18;
+      --muted:      rgba(31, 28, 24, 0.50);
+      --accent:     #8c6b3a;
+      --border:     rgba(31, 28, 24, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      background: #e0ddd8;
+      font-family: var(--font-body);
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Page ─────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: white;
+      position: relative;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        min-height: 297mm;
+      }
+      .no-print { display: none !important; }
+    }
+
+    /* ─── Top Accent ───────────────────────────── */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+      opacity: 0.35;
+    }
+
+    /* ─── Header ───────────────────────────────── */
+    .header {
+      padding: 22mm 25mm 8mm 25mm;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-globe {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at 38% 35%,
+        #fff8ee 0%, #eae0d0 25%, #d8ccb8 50%, #c4b8a4 70%, #b0a08a 100%
+      );
+      box-shadow:
+        0 2px 8px rgba(140, 107, 58, 0.15),
+        inset 0 -2px 4px rgba(176, 160, 138, 0.3),
+        inset 0 2px 6px rgba(255, 248, 238, 0.6);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .logo-globe::after {
+      content: 'M \00B7 L \00B7 C';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: 500;
+      color: rgba(40, 28, 8, 0.55);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 18pt;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── Divider ──────────────────────────────── */
+    .divider {
+      margin: 0 25mm;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── Content Area ─────────────────────────── */
+    .content {
+      padding: 12mm 25mm;
+      min-height: 180mm;
+      font-size: 10.5pt;
+      line-height: 1.7;
+    }
+
+    .content:focus {
+      outline: none;
+    }
+
+    .content p {
+      margin-bottom: 4mm;
+    }
+
+    .content .placeholder-hint {
+      color: var(--muted);
+      font-style: italic;
+      font-size: 9.5pt;
+    }
+
+    /* ─── Footer ───────────────────────────────── */
+    .footer {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 25mm 12mm 25mm;
+    }
+
+    .footer-line {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-bottom: 4mm;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      font-size: 7.5pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .footer-grid strong {
+      font-weight: 500;
+      color: rgba(31, 28, 24, 0.6);
+      display: block;
+      font-size: 6.5pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    /* ─── Print Button ─────────────────────────── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(44, 37, 32, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .print-bar__text {
+      color: rgba(255,255,255,0.7);
+      font-family: var(--font-body);
+      font-size: 13px;
+    }
+
+    .print-bar__btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      transition: background 0.2s;
+    }
+    .print-bar__btn:hover { background: #a07d48; }
+
+    /* Editable styling */
+    [contenteditable="true"]:focus {
+      outline: 2px solid rgba(140, 107, 58, 0.2);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Print toolbar -->
+<div class="print-bar no-print">
+  <span class="print-bar__text">Klicken Sie in den Textbereich zum Schreiben. Dann:</span>
+  <button class="print-bar__btn" onclick="window.print()">Als PDF speichern (Strg+P)</button>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div class="content" contenteditable="true">
+    <p class="placeholder-hint">Hier klicken und Text eingeben...</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-grid">
+      <div>
+        <strong>Kontakt</strong>
+        Iris Meinking<br>
+        Mainzer-Tor-Anlage 29<br>
+        61169 Friedberg
+      </div>
+      <div>
+        <strong>Kommunikation</strong>
+        info@meinkinglegal.com<br>
+        +49 (0) 000 000 000 0<br>
+        linkedin.com/in/irismeinking
+      </div>
+      <div>
+        <strong>Steuer</strong>
+        Steuernummer: 00/000/00000<br>
+        USt-IdNr.: DE000000000
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Remove placeholder on first click
+  document.querySelector('.content').addEventListener('focus', function() {
+    var hint = this.querySelector('.placeholder-hint');
+    if (hint) {
+      hint.remove();
+    }
+  }, { once: true });
+</script>
+
+</body>
+</html>

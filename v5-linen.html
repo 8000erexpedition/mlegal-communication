@@ -8,6 +8,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 
+  <!-- Google Analytics — wird erst nach Cookie-Consent geladen -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    // GA wird NICHT sofort geladen — erst nach Opt-in im Cookie-Banner
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     /* ─── Reset & Base ──────────────────────────────────── */
@@ -1338,7 +1345,7 @@
     <a href="#leistungen" class="mobile-link">Leistungen</a>
     <a href="#ueber-mich" class="mobile-link">Über mich</a>
     <a href="#kontakt" class="mobile-link">Kontakt</a>
-    <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-nav">Gespräch vereinbaren</a>
+    <a href="mailto:info@meinkinglegal.com" class="btn-nav">Gespräch vereinbaren</a>
   </div>
 
 
@@ -1431,7 +1438,7 @@
 
       <!-- Hero CTA -->
       <div class="hero__cta-center reveal reveal-delay-3">
-        <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-hero-cta">
+        <a href="mailto:info@meinkinglegal.com" class="btn-hero-cta">
           Gespräch vereinbaren
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M1 7h12M8 2l5 5-5 5"/>
@@ -1634,13 +1641,13 @@
         </div>
 
         <div class="cta__actions">
-          <a href="mailto:iris.meinking@mlegal-communication.de" class="btn-cta">
+          <a href="mailto:info@meinkinglegal.com" class="btn-cta">
             Gespräch vereinbaren
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M1 7h12M8 2l5 5-5 5"/>
             </svg>
           </a>
-          <span class="cta__email">iris.meinking@mlegal-communication.de</span>
+          <span class="cta__email">info@meinkinglegal.com</span>
         </div>
 
       </div>
@@ -1654,10 +1661,10 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
-        <p class="footer__copy">© 2025 Iris Meinking · Meinking Legal Communications</p>
+        <p class="footer__copy">© 2026 Iris Meinking · Meinking Legal Communications</p>
         <ul class="footer__links">
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
         </ul>
       </div>
     </div>
@@ -1951,6 +1958,126 @@
     }
     animate();
   })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       COOKIE CONSENT BANNER (DSGVO-konform)
+  ═══════════════════════════════════════════ -->
+  <style>
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      background: rgba(44, 37, 32, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 24px 32px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.12);
+    }
+    .cookie-banner.active { display: flex; }
+    .cookie-banner__text {
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 640px;
+    }
+    .cookie-banner__text a {
+      color: rgba(255,248,220,0.9);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .cookie-banner__buttons {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .cookie-btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cookie-btn--accept {
+      background: var(--accent);
+      color: white;
+    }
+    .cookie-btn--accept:hover { background: var(--accent-light); }
+    .cookie-btn--decline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .cookie-btn--decline:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.4);
+    }
+  </style>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-banner__text">
+      Diese Website verwendet Cookies und Google Analytics, um die Nutzung zu analysieren und das Angebot zu verbessern.
+      Weitere Informationen finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.
+    </p>
+    <div class="cookie-banner__buttons">
+      <button class="cookie-btn cookie-btn--decline" onclick="cookieDecline()">Nur essenzielle</button>
+      <button class="cookie-btn cookie-btn--accept" onclick="cookieAccept()">Alle akzeptieren</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Cookie Consent Logic ──────────────────────────────
+    // GA Measurement-ID — HIER EIGENE ID EINTRAGEN:
+    var GA_ID = 'G-XXXXXXXXXX';
+
+    function getCookieConsent() {
+      return localStorage.getItem('mlc_cookie_consent');
+    }
+
+    function cookieAccept() {
+      localStorage.setItem('mlc_cookie_consent', 'accepted');
+      document.getElementById('cookieBanner').classList.remove('active');
+      loadGoogleAnalytics();
+    }
+
+    function cookieDecline() {
+      localStorage.setItem('mlc_cookie_consent', 'declined');
+      document.getElementById('cookieBanner').classList.remove('active');
+    }
+
+    function loadGoogleAnalytics() {
+      if (GA_ID === 'G-XXXXXXXXXX') return; // Platzhalter — noch nicht konfiguriert
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(script);
+      script.onload = function() {
+        gtag('js', new Date());
+        gtag('config', GA_ID, { anonymize_ip: true });
+      };
+    }
+
+    // Beim Laden: Banner zeigen oder GA laden
+    (function() {
+      var consent = getCookieConsent();
+      if (consent === 'accepted') {
+        loadGoogleAnalytics();
+      } else if (!consent) {
+        document.getElementById('cookieBanner').classList.add('active');
+      }
+    })();
   </script>
 
 </body>
