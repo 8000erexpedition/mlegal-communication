@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Plan — Meinking Legal Communications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:       #1f1c18;
+      --muted:      rgba(31, 28, 24, 0.50);
+      --accent:     #8c6b3a;
+      --border:     rgba(31, 28, 24, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    @page {
+      size: A4;
+      margin: 20mm 25mm 22mm 25mm;
+    }
+
+    body {
+      background: #e0ddd8;
+      font-family: var(--font-body);
+      font-size: 10pt;
+      line-height: 1.65;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media print {
+      body { background: white; }
+      .page { margin: 0; box-shadow: none; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+    }
+
+    /* ─── Page ─────────────────────────────────── */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      background: white;
+      position: relative;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* ─── Top Accent ───────────────────────────── */
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+      opacity: 0.35;
+    }
+
+    /* ─── Header ───────────────────────────────── */
+    .header {
+      padding: 22mm 25mm 6mm 25mm;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-globe {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 38% 35%, #fff8ee 0%, #eae0d0 25%, #d8ccb8 50%, #c4b8a4 70%, #b0a08a 100%);
+      box-shadow: 0 2px 8px rgba(140, 107, 58, 0.15), inset 0 -2px 4px rgba(176, 160, 138, 0.3), inset 0 2px 6px rgba(255, 248, 238, 0.6);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .logo-globe::after {
+      content: 'M \00B7 L \00B7 C';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: 500;
+      color: rgba(40, 28, 8, 0.55);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 18pt;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── Content ──────────────────────────────── */
+    .content {
+      padding: 8mm 25mm 15mm 25mm;
+    }
+
+    /* ─── Deckblatt ─────────────────────────────── */
+    .deckblatt {
+      padding: 40mm 25mm 25mm 25mm;
+      display: flex;
+      flex-direction: column;
+      min-height: 220mm;
+    }
+
+    .deckblatt__title-small {
+      font-family: var(--font-body);
+      font-size: 9pt;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6mm;
+    }
+
+    .deckblatt__title {
+      font-family: var(--font-display);
+      font-size: 32pt;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 3mm;
+    }
+
+    .deckblatt__tagline {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 20mm;
+    }
+
+    .deckblatt__info {
+      margin-top: auto;
+    }
+
+    .deckblatt__info-table {
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      line-height: 1.7;
+    }
+
+    .deckblatt__info-table td {
+      padding: 1mm 0;
+      vertical-align: top;
+    }
+
+    .deckblatt__info-table td:first-child {
+      color: var(--muted);
+      font-size: 8.5pt;
+      letter-spacing: 0.02em;
+      padding-right: 8mm;
+      white-space: nowrap;
+    }
+
+    /* ─── Typography ───────────────────────────── */
+    .chapter-title {
+      font-family: var(--font-display);
+      font-size: 22pt;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8mm;
+      line-height: 1.2;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 14pt;
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 8mm;
+      margin-bottom: 4mm;
+    }
+
+    .subsection-title {
+      font-family: var(--font-body);
+      font-size: 10pt;
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 5mm;
+      margin-bottom: 2mm;
+    }
+
+    p {
+      margin-bottom: 3mm;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    /* ─── TOC ──────────────────────────────────── */
+    .toc-title {
+      font-family: var(--font-display);
+      font-size: 22pt;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 10mm;
+    }
+
+    .toc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt;
+    }
+
+    .toc-table td {
+      padding: 2.5mm 0;
+      vertical-align: top;
+      border-bottom: 0.5px solid rgba(31, 28, 24, 0.06);
+    }
+
+    .toc-table td:first-child {
+      color: var(--text);
+    }
+
+    .toc-table td:last-child {
+      text-align: right;
+      color: var(--muted);
+      font-size: 9pt;
+      white-space: nowrap;
+      padding-left: 6mm;
+    }
+
+    /* ─── Leistungsfelder Grid ─────────────────── */
+    .leistungen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm 8mm;
+      margin: 5mm 0 6mm 0;
+    }
+
+    .leistung-card {
+      background: rgba(31, 28, 24, 0.025);
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      padding: 4mm 5mm;
+    }
+
+    .leistung-card__title {
+      font-family: var(--font-body);
+      font-size: 8.5pt;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      margin-bottom: 1.5mm;
+    }
+
+    .leistung-card__items {
+      font-size: 8.5pt;
+      color: rgba(31, 28, 24, 0.7);
+      line-height: 1.5;
+    }
+
+    .leistung-card__items span {
+      display: block;
+    }
+
+    .leistung-card__items span::before {
+      content: '\2013\00a0\00a0';
+      color: var(--border);
+    }
+
+    /* ─── Footer ───────────────────────────────── */
+    .footer {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 25mm 12mm 25mm;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      font-size: 7.5pt;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .footer-grid strong {
+      font-weight: 500;
+      color: rgba(31, 28, 24, 0.6);
+      display: block;
+      font-size: 6.5pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    /* ─── Print Bar ────────────────────────────── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(44, 37, 32, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .print-bar__text { color: rgba(255,255,255,0.7); font-family: var(--font-body); font-size: 13px; }
+    .print-bar__btn {
+      font-family: var(--font-body); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 20px;
+      border: none; border-radius: 4px; cursor: pointer;
+      background: var(--accent); color: white; transition: background 0.2s;
+    }
+    .print-bar__btn:hover { background: #a07d48; }
+  </style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <span class="print-bar__text">Business Plan — Meinking Legal Communications</span>
+  <button class="print-bar__btn" onclick="window.print()">Als PDF speichern (Strg+P)</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 1: DECKBLATT
+     ═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="deckblatt">
+    <div class="deckblatt__title-small">Business Plan</div>
+    <div class="deckblatt__title">Meinking Legal<br>Communications</div>
+    <div class="deckblatt__tagline">Kanzleikommunikation. Sichtbar.</div>
+
+    <div class="deckblatt__info">
+      <table class="deckblatt__info-table">
+        <tr><td>Adresse:</td><td>Mainzer-Tor-Anlage 29<br>61169 Friedberg/Hessen</td></tr>
+        <tr><td>Telefon:</td><td><em style="color: var(--muted);">in Arbeit</em></td></tr>
+        <tr><td>E-Mail:</td><td><em style="color: var(--muted);">in Arbeit</em></td></tr>
+        <tr><td>Website:</td><td><em style="color: var(--muted);">in Arbeit</em></td></tr>
+        <tr><td>Rechtsform:</td><td>Einzelunternehmen</td></tr>
+        <tr><td>Gr&uuml;ndungsdatum:</td><td>01.09.2026 (alternativ 01.10.2026)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 2: INHALTSVERZEICHNIS
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="toc-title">Inhaltsverzeichnis</div>
+
+    <table class="toc-table">
+      <tr><td>Auf einen Blick</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Gesch&auml;ftsidee</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Profil der Gr&uuml;nderin</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Markteinsch&auml;tzung und Wettbewerbssituation</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Marketing und Vertrieb</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Unternehmensorganisation</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Standort / B&uuml;ror&auml;ume</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Chancen und Risiken</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Finanzen (Lebenshaltungskosten, Liquidit&auml;tsplan, Rentabilit&auml;tsplan)</td><td><em>in Arbeit</em></td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 3: AUF EINEN BLICK
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Auf einen Blick</div>
+
+    <p>Ich gr&uuml;nde Meinking Legal Communications als Einzelunternehmen mit Sitz in Friedberg in der Rhein-Main-Region. Ich biete Kommunikationsleistungen f&uuml;r Gro&szlig;- und mittelst&auml;ndische Wirtschaftskanzleien in Deutschland an und plane den Start zum 01.09.2026, alternativ zum 01.10.2026.</p>
+
+    <p>Mein Angebot ist ganzheitlich aufgebaut: Es umfasst strategische Beratung und operative Umsetzung in der Kanzleikommunikation &ndash; von klassischer Presse- und Medienarbeit &uuml;ber Marke und Positionierung, digitale Kan&auml;le und Inhalte bis hin zu interner Kommunikation sowie HR- und Karrierekommunikation. Mein Schwerpunkt liegt auf Marke, digitaler Kommunikation und Arbeitgeberkommunikation (Arbeitgeberprofil), erg&auml;nzt um PR, Reputation sowie Kommunikation bei Ver&auml;nderungen. Ziel ist es, die Kompetenz und das Profil der Kanzlei nach au&szlig;en sichtbar zu machen, in relevanten Medien und Kan&auml;len wirksam zu platzieren und gleichzeitig als Arbeitgeber attraktiv und glaubw&uuml;rdig zu kommunizieren. Ich arbeite &uuml;berwiegend ortsunabh&auml;ngig und erg&auml;nze die Zusammenarbeit bei Bedarf durch Vor-Ort-Termine in Deutschland.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 4: GESCHÄFTSIDEE
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Gesch&auml;ftsidee</div>
+
+    <p>Mit Meinking Legal Communications setze ich dort an, wo ich im Kanzleimarkt einen konkreten Bedarf nach professioneller und zugleich pragmatisch umsetzbarer Kommunikation sehe. Wirtschaftskanzleien m&uuml;ssen ihre Position im Markt sch&auml;rfen, ihre Expertise mediengerecht sichtbar machen und gleichzeitig im Wettbewerb um Talente &uuml;berzeugen. H&auml;ufig sind Kommunikationsaufgaben jedoch auf mehrere Bereiche verteilt, interne Ressourcen sind begrenzt und Abstimmungs- sowie Compliance-Anforderungen sind hoch. Genau hier setze ich an: Ich verbinde Beratung und Umsetzung so, dass aus strategischen &Uuml;berlegungen zeitnah konkrete Ergebnisse werden, die im Kanzleialltag funktionieren.</p>
+
+    <p>Neben Leistungen zu Marke, digitaler Kommunikation und Arbeitgeberkommunikation biete ich klassische Presse- und Medienarbeit als zentralen Baustein an. Ich identifiziere und entwickle Themen, bereite komplexe juristische Inhalte mediengerecht auf, spreche relevante Journalistinnen und Journalisten an und steuere Pressetermine, Pressgespr&auml;che und Interviews. Dazu verfasse ich Pressemitteilungen, Gast- und Fachbeitr&auml;ge, Interviewtexte sowie Texte f&uuml;r Newsletter. Ebenso schreibe ich Reden, Gru&szlig;worte und Briefings, damit Sprecherinnen und Sprecher der Kanzlei konsistent und sicher auftreten. Erg&auml;nzend konzipiere und texte ich Einreichungen f&uuml;r Kanzlei-Awards und Rankings und unterst&uuml;tze Kanzleien bei der inhaltlichen Abstimmung und Prozesssteuerung. Dar&uuml;ber hinaus begleite ich Ver&auml;nderungs- und Wachstumssituationen &ndash; etwa die Er&ouml;ffnung neuer B&uuml;ros, Markteintritte oder organisatorische Ver&auml;nderungen &ndash; sowie Sondersituationen und Krisen, in denen Kommunikationslinien, Botschaften und Ma&szlig;nahmen schnell, abgestimmt und verl&auml;sslich umgesetzt werden m&uuml;ssen.</p>
+
+    <p>Ein weiterer Bestandteil meines Leistungsportfolios ist die interne Kommunikation. Ich unterst&uuml;tze Kanzleien mit internen Newslettern, Reden und Gru&szlig;worten sowie Texten, die Orientierung geben, Ver&auml;nderungen erkl&auml;ren und die Kultur der Kanzlei st&auml;rken. Einen besonderen Schwerpunkt lege ich dabei auf HR-Kommunikation und Karriere- bzw. Nachwuchsthemen: Ich helfe Kanzleien, ihr Arbeitgeberprofil glaubw&uuml;rdig zu sch&auml;rfen, Karriereangebote verst&auml;ndlich zu kommunizieren und Zielgruppen wie Nachwuchsjuristinnen und -juristen sowie erfahrene Berufstr&auml;ger &uuml;berzeugend anzusprechen.</p>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 5: LEISTUNGSFELDER
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="section-title">Leistungsfelder</div>
+
+    <div class="leistungen-grid">
+      <div class="leistung-card">
+        <div class="leistung-card__title">Marke und Positionierung</div>
+        <div class="leistung-card__items">
+          <span>Profil und Botschaften der Kanzlei</span>
+          <span>Themen- und Leistungsprofilierung</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Digitale Kommunikation</div>
+        <div class="leistung-card__items">
+          <span>Website- und Karriereseiten (Text/Inhalt)</span>
+          <span>Inhalte f&uuml;r soziale Netzwerke (z.&thinsp;B. LinkedIn)</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Arbeitgeberkommunikation / Karriere</div>
+        <div class="leistung-card__items">
+          <span>Arbeitgeberprofil und Karrierethemen</span>
+          <span>Kommunikation f&uuml;r Recruiting und Nachwuchs</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Pressearbeit</div>
+        <div class="leistung-card__items">
+          <span>Themenfindung und Ansprache von Medien</span>
+          <span>Pressemitteilungen, Interviews, Pressetermine</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Reputation und Fachbeitr&auml;ge</div>
+        <div class="leistung-card__items">
+          <span>Fach- und Gastbeitr&auml;ge, Newsletter</span>
+          <span>Reden, Gru&szlig;worte, Gespr&auml;chsvorbereitung</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Kommunikation bei Ver&auml;nderungen</div>
+        <div class="leistung-card__items">
+          <span>Neue Standorte/B&uuml;ros, Markteintritt</span>
+          <span>Kommunikation bei organisatorischen Ver&auml;nderungen</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Interne Kommunikation</div>
+        <div class="leistung-card__items">
+          <span>Interne Newsletter</span>
+          <span>Begleitung von Ver&auml;nderungsprozessen</span>
+        </div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-card__title">Sondersituationen und Krisen</div>
+        <div class="leistung-card__items">
+          <span>Botschaften und Vorgehen</span>
+          <span>Abstimmung und kurzfristige Umsetzung</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 6: PROFIL DER GRÜNDERIN
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Profil der Gr&uuml;nderin</div>
+
+    <p>Ich bringe langj&auml;hrige Erfahrung in der strategischen und operativen Kommunikation im Umfeld internationaler Wirtschaftskanzleien mit. &Uuml;ber rund zwei Jahrzehnte war ich von 2007 bis 2026 in der Kommunikation einer internationalen Gro&szlig;kanzlei als Senior Managerin Kommunikation t&auml;tig und habe dort klassische Presse- und Medienarbeit, Themen- und Themensetzung sowie die Betreuung von Presseterminen, Pressgespr&auml;chen und Interviews verantwortet. Ich verfasse und redigiere Kommunikationsinhalte in deutscher und englischer Sprache, darunter Pressemitteilungen, Fach- und Gastbeitr&auml;ge, Interviewtexte, Newslettertexte sowie Reden und Gru&szlig;worte. Zus&auml;tzlich habe ich umfassende Erfahrung in der Konzeption und Koordination von Awards- und Ranking-Einreichungen. Neben der externen Kommunikation habe ich &uuml;ber viele Jahre interne Kommunikation verantwortet und HR-Kommunikation sowie Themen der Arbeitgeberkommunikation begleitet, insbesondere im Bereich Karriere und Nachwuchs. Zudem bin ich vertraut mit Abstimmungen in internationalen Strukturen und mit Kommunikationsarbeit unter Compliance-Vorgaben.</p>
+
+    <p>Erg&auml;nzend zu meiner Kanzleierfahrung bringe ich eine langj&auml;hrige journalistische Expertise mit: Vor meiner T&auml;tigkeit in der Wirtschaftskanzlei war ich von 2001 bis 2007 als Redakteurin/Analystin in der F.A.Z.-Verlagsgruppe t&auml;tig und habe dort schwerpunktm&auml;&szlig;ig die Themenfelder Recht und Steuern betreut. In dieser Rolle habe ich eng mit Wirtschaftsanw&auml;ltinnen und -anw&auml;lten zusammengearbeitet, Inhalte f&uuml;r unterschiedliche Formate entwickelt und redaktionell umgesetzt, darunter Fachartikel, Newsletter, Kunden- und Mitarbeitermagazine sowie Interviewformate und moderierte Gespr&auml;chsrunden. Diese journalistische Pr&auml;gung hilft mir heute, komplexe rechtliche Inhalte schnell zu erfassen, mediengerecht zu strukturieren und so aufzubereiten, dass sie sowohl fachlich pr&auml;zise als auch f&uuml;r die jeweilige Zielgruppe verst&auml;ndlich und relevant sind.</p>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 7: PROFIL DER GRÜNDERIN (Forts.)
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Profil der Gr&uuml;nderin <span style="font-size: 14pt; color: var(--muted); font-weight: 300;">(Fortsetzung)</span></div>
+
+    <p>Dar&uuml;ber hinaus bin ich Diplom-Kauffrau und habe an der Goethe-Universit&auml;t Frankfurt am Main Betriebswirtschaftslehre mit Schwerpunkt u.&thinsp;a. Steuerrecht, betriebswirtschaftliche Steuerlehre und internationale Rechnungslegung studiert; meinen Abschluss habe ich mit Pr&auml;dikat erworben. Dieses betriebswirtschaftliche Fundament ist im Kanzleiumfeld besonders wertvoll, weil es mir erm&ouml;glicht, juristische Themen auch aus Mandanten- und Managementperspektive zu verstehen und Kommunikationsinhalte st&auml;rker an wirtschaftlichen Fragestellungen auszurichten. Gleichzeitig hilft mir diese Ausbildung, Kommunikationsma&szlig;nahmen nicht nur qualitativ, sondern auch hinsichtlich Zielsetzung, Nutzenargumentation und Erfolgskriterien zu planen und zu steuern &ndash; etwa bei Positionierungsthemen, beim Aufbereiten komplexer steuer- und transaktionsnaher Inhalte oder bei der Kommunikation von Wachstum, Markteintritt und strategischen Ver&auml;nderungen.</p>
+
+    <p>F&uuml;r den Kanzleimarkt ist besonders relevant, dass ich sowohl die journalistische Medienlogik als auch die internen Abl&auml;ufe, Erwartungshaltungen und Freigabeprozesse in Kanzleien aus der Praxis kenne. Dadurch kann ich Kommunikationsma&szlig;nahmen so aufsetzen, dass sie effizient umsetzbar sind, Diskretion und Tonalit&auml;t wahren und gleichzeitig die Sichtbarkeit und Positionierung der Kanzlei nach au&szlig;en sowie die Kommunikation nach innen (inkl. HR-/Karrierekommunikation) wirksam unterst&uuml;tzen. Ich bin regional im Rhein-Main-Gebiet verankert und arbeite deutschlandweit &ndash; durch digitale Zusammenarbeit und bei Bedarf mit Kundenterminen vor Ort.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 8: MARKTEINSCHÄTZUNG
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Markteinsch&auml;tzung und<br>Wettbewerbssituation</div>
+
+    <p>Ich richte mich an wirtschaftsberatende Gro&szlig;- und mittelst&auml;ndische Wirtschaftskanzleien in Deutschland, die ihre Position im Markt sch&auml;rfen, ihre Expertise sichtbar machen und gleichzeitig als Arbeitgeber &uuml;berzeugen m&ouml;chten. Treiber dieses Bedarfs sind aus meiner Sicht vor allem der Wettbewerb um Talente, die wachsende Bedeutung digitaler Kan&auml;le f&uuml;r Reputation und Mandatsanbahnung sowie die Relevanz von Medienpr&auml;senz, Rankings, Studien und &ouml;ffentlicher Sichtbarkeit.</p>
+
+    <p>Das Wettbewerbsumfeld l&auml;sst sich in drei Gruppen einteilen: Kanzleimarketing-Agenturen mit Schwerpunkt auf Marke, digitaler Kommunikation und Arbeitgeberkommunikation, PR- und Kommunikationsberater mit Kanzlei-Fokus sowie Anbieter f&uuml;r Litigation-PR und Krisenkommunikation. Ich positioniere Meinking Legal Communications als Anbieterin, die Senior-Beratung mit operativer Umsetzung verbindet und dabei sowohl den klassischen PR-Bereich als auch digitale Kan&auml;le, interne Kommunikation und HR-/Karrierekommunikation aus einer Hand anbieten kann. Durch die Praxisn&auml;he in Kanzleistrukturen und die F&auml;higkeit, komplexe Inhalte mediengerecht zu &uuml;bersetzen und in Abstimmungsprozessen effizient zu steuern, schlie&szlig;e ich eine L&uuml;cke zwischen reinem Marketing-Output und rein strategischer Beratung.</p>
+
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 9: MARKETING UND VERTRIEB
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-globe"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Marketing und Vertrieb</div>
+
+    <p>Ich setze im Marketing und Vertrieb auf eine Kombination aus pers&ouml;nlichem Netzwerk, fachlicher Sichtbarkeit und einem klaren Ablauf, der Kanzleien den Einstieg erleichtert. Ein zentraler Hebel sind Empfehlungen und Kontakte aus meinem Kanzlei- und Kommunikationsumfeld sowie meine Pr&auml;senz in relevanten Branchennetzwerken und bei Veranstaltungen der Kanzleibranche. Parallel baue ich meine Sichtbarkeit &uuml;ber LinkedIn und meine Website auf, indem ich regelm&auml;&szlig;ig Inhalte zur Kanzleikommunikation ver&ouml;ffentliche, insbesondere zu Karriere- und Nachwuchsthemen, zur verst&auml;ndlichen Aufbereitung komplexer juristischer Inhalte und zu guter Pressearbeit in Wirtschaftskanzleien.</p>
+
+    <p>Unmittelbar nach der Gr&uuml;ndung von Meinking Legal Communications starte ich zus&auml;tzlich eine gezielte Aktion auf LinkedIn gemeinsam mit einem Partner, der mich und mein Leistungsangebot im Markt vorstellt. Diese Aktion beginnt erst, wenn das Unternehmen gegr&uuml;ndet ist, wird dann aber zeitnah in den ersten Wochen umgesetzt. Ziel ist es, meine Bekanntheit in der Zielgruppe zu erh&ouml;hen und fr&uuml;hzeitig neue Kontakte und Gespr&auml;che anzu-sto&szlig;en.</p>
+
+    <p>Im Vertrieb starte ich mit einem kurzen Erstgespr&auml;ch, in dem ich Ziele, Ausgangslage und Priorit&auml;ten kl&auml;re. Anschlie&szlig;end schlage ich &ndash; je nach Bedarf &ndash; eine kurze Analyse oder ein Arbeitsgespr&auml;ch vor, um die Situation strukturiert zu erfassen und konkrete n&auml;chste Schritte abzuleiten. Darauf aufbauend erstelle ich ein passgenaues Angebot, das Umfang, Zeitplan und Verantwortlichkeiten transparent beschreibt. Die Zusammenarbeit beginne ich mit einem Auftakttermin, in dem ich Rollen, Freigabewege, Zeitplan und die n&auml;chsten Arbeitsschritte festlege, damit die Umsetzung verl&auml;sslich und effizient l&auml;uft.</p>
+
+    <p>Durch meine rund 20-j&auml;hrige Erfahrung in einer internationalen Gro&szlig;kanzlei und meine journalistische T&auml;tigkeit davor kenne ich die Arbeitsweise und die Sprache von Anw&auml;ltinnen und Anw&auml;lten sowie von Entscheidungstr&auml;gern in Wirtschaftskanzleien sehr gut. Das erleichtert die Zusammenarbeit, weil ich Themen schnell einordnen, Inhalte pr&auml;zise formulieren und Abstimmungen so steuern kann, dass Entscheidungen z&uuml;gig getroffen werden und Ergebnisse entstehen, die fachlich korrekt und zugleich gut verst&auml;ndlich sind.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
