@@ -12,9 +12,7 @@
 
 set -euo pipefail
 
-HOST="82.198.227.110"
-PORT="65002"
-USER="u477290815"
+SSH_HOST="hostinger-mlegal"  # siehe ~/.ssh/config
 REMOTE_DIR="/home/u477290815/domains/before-7.com/public_html/meinkinglegal"
 
 VARIANT="${1:-v5}"
@@ -43,14 +41,13 @@ echo "Staging-Inhalt ($STAGING):"
 ls -la "$STAGING"
 
 echo ""
-echo "Deploye nach $USER@$HOST:$REMOTE_DIR ..."
+echo "Deploye nach $SSH_HOST:$REMOTE_DIR ..."
 
 rsync -avz \
-  -e "ssh -p $PORT" \
   --exclude='.htaccess' \
   --exclude='.htpasswd' \
   "$STAGING/" \
-  "$USER@$HOST:$REMOTE_DIR/"
+  "$SSH_HOST:$REMOTE_DIR/"
 
 echo ""
 echo "Fertig. Teste: https://meinkinglegal.before-7.com/"
