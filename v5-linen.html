@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meinking Legal Communications — Iris Meinking</title>
@@ -15,7 +16,6 @@
     // GA wird NICHT sofort geladen — erst nach Opt-in im Cookie-Banner
   </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     /* ─── Reset & Base ──────────────────────────────────── */
     *, *::before, *::after {
@@ -515,19 +515,12 @@
       margin: 0 auto;
     }
 
-    .hero-header__globe {
-      width: 72px;
-      height: 72px;
+    .hero-header__mark {
+      width: 92px;
+      height: 92px;
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: -2px;
-    }
-
-    .hero-header__globe canvas {
-      width: 100% !important;
-      height: 100% !important;
+      color: var(--text);
+      display: block;
     }
 
     .hero__panel {
@@ -1099,11 +1092,30 @@
       box-shadow: 0 10px 32px rgba(140, 107, 58, 0.35);
     }
 
-    .cta__email {
+    .cta__sub--small {
+      font-size: 13px;
+      opacity: 0.55;
+      margin-top: 12px;
+    }
+
+    .cta__contact {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .cta__contact-line {
       font-size: 12px;
-      color: rgba(240, 235, 226, 0.35);
+      color: rgba(240, 235, 226, 0.45);
       letter-spacing: 0.04em;
       text-align: right;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .cta__contact-line:hover {
+      color: rgba(240, 235, 226, 0.85);
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -1187,7 +1199,11 @@
         align-items: flex-start;
       }
 
-      .cta__email {
+      .cta__contact {
+        align-items: flex-start;
+      }
+
+      .cta__contact-line {
         text-align: left;
       }
     }
@@ -1216,6 +1232,25 @@
       .hero {
         padding-top: 100px;
         padding-bottom: 64px;
+      }
+
+      .rg-term {
+        display: none;
+      }
+
+      .hero-header__brand-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hero-header__brand {
+        font-size: clamp(32px, 9vw, 44px);
+        text-align: center;
+      }
+
+      .hero-header__mark {
+        width: 72px;
+        height: 72px;
       }
 
       .hero__grid {
@@ -1344,7 +1379,7 @@
     <a href="#leistungen" class="mobile-link">Leistungen</a>
     <a href="#ueber-mich" class="mobile-link">Über mich</a>
     <a href="#kontakt" class="mobile-link">Kontakt</a>
-    <a href="mailto:info@meinkinglegal.com" class="btn-nav">Gespräch vereinbaren</a>
+    <a href="mailto:iris.meinking@meinkinglegal.com" class="btn-nav">Gespräch vereinbaren</a>
   </div>
 
 
@@ -1375,7 +1410,13 @@
       <!-- Integrated header -->
       <div class="hero-header">
         <div class="hero-header__brand-row">
-          <div class="hero-header__globe" id="globe-container"></div>
+          <svg class="hero-header__mark" viewBox="0 0 72 72" aria-label="Meinking Legal Communications — Monogramm">
+            <circle cx="36" cy="36" r="34" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.35"/>
+            <text x="36" y="37.5" text-anchor="middle" dominant-baseline="central"
+                  font-family="'Cormorant Garamond', Georgia, serif"
+                  font-size="22" font-weight="400" letter-spacing="1.2"
+                  fill="currentColor">MLC</text>
+          </svg>
           <h1 class="hero-header__brand">Meinking Legal Communications</h1>
         </div>
         <p class="hero-header__sub">Strategische PR für Wirtschaftskanzleien</p>
@@ -1397,15 +1438,15 @@
           </h2>
 
           <p class="hero__sub reveal reveal-delay-2">
-            Strategische Kommunikationsberatung für Wirtschaftskanzleien — präzise, wirkungsvoll und auf Augenhöhe mit der Branche.
+            Achtzehn Jahre Senior-PR für eine internationale Wirtschaftskanzlei in Deutschland — Medienarbeit, Rankings, Partnerkommunikation. Jetzt selbständig.
           </p>
 
           <div class="hero__quote-inline reveal reveal-delay-4">
             <p class="hero__quote-text">
-              "Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —
+              „Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —
               nicht nur intern, sondern im Markt."
             </p>
-            <p class="hero__quote-caption">Iris Meinking · Freiberufliche PR-Beraterin</p>
+            <p class="hero__quote-caption">Iris Meinking · 18 Jahre Kanzleikommunikation</p>
           </div>
         </div>
 
@@ -1415,19 +1456,22 @@
             <div class="hero__spectrum-label">Leistungsspektrum</div>
             <ul class="hero__spectrum-list">
               <li class="hero__spectrum-item">
-                <a href="#service-medien" class="hero__spectrum-name">Medien &amp; Presse</a>
+                <a href="#service-presse" class="hero__spectrum-name">Presse- und Medienarbeit</a>
               </li>
               <li class="hero__spectrum-item">
-                <a href="#service-digital" class="hero__spectrum-name">Digital-PR &amp; LinkedIn</a>
+                <a href="#service-marke" class="hero__spectrum-name">Marke und Positionierung</a>
               </li>
               <li class="hero__spectrum-item">
-                <a href="#service-awards" class="hero__spectrum-name">Awards &amp; Rankings</a>
+                <a href="#service-digital" class="hero__spectrum-name">Digitale Kommunikation</a>
               </li>
               <li class="hero__spectrum-item">
-                <a href="#service-hr" class="hero__spectrum-name">HR-Communications</a>
+                <a href="#service-rankings" class="hero__spectrum-name">Awards, Rankings und Fachbeiträge</a>
               </li>
               <li class="hero__spectrum-item">
-                <a href="#service-intern" class="hero__spectrum-name">Interne Kommunikation</a>
+                <a href="#service-karriere" class="hero__spectrum-name">Arbeitgeber- und Karrierekommunikation</a>
+              </li>
+              <li class="hero__spectrum-item">
+                <a href="#service-intern" class="hero__spectrum-name">Interne Kommunikation und Veränderung</a>
               </li>
             </ul>
           </div>
@@ -1437,7 +1481,7 @@
 
       <!-- Hero CTA -->
       <div class="hero__cta-center reveal reveal-delay-3">
-        <a href="mailto:info@meinkinglegal.com" class="btn-hero-cta">
+        <a href="mailto:iris.meinking@meinkinglegal.com" class="btn-hero-cta">
           Gespräch vereinbaren
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M1 7h12M8 2l5 5-5 5"/>
@@ -1445,6 +1489,82 @@
         </a>
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT
+  ═══════════════════════════════════════════ -->
+  <section class="about" id="ueber-mich">
+    <div class="container">
+      <div class="about__grid">
+
+        <!-- Text column -->
+        <div class="about__text-col">
+          <div class="reveal">
+            <div class="chapter-marker">Über mich</div>
+            <h2 class="about__heading">Iris Meinking —<br>achtzehn Jahre Kanzleikommunikation.<br>Davor Redakteurin.</h2>
+          </div>
+
+          <p class="about__body reveal reveal-delay-1">
+            Achtzehn Jahre habe ich die Kommunikation einer internationalen Großkanzlei in Deutschland als <strong>Senior Managerin</strong> verantwortet — Presse- und Medienarbeit, Rankings, Fachbeiträge, Karriere- und interne Kommunikation. In direkter Abstimmung mit dem Managing Partner, in deutscher und englischer Sprache, unter Compliance-Anforderungen.
+          </p>
+
+          <div class="about__pull reveal reveal-delay-1">
+            <p class="about__pull-text">
+              „Ich spreche die Sprache des Rechts — und übersetze sie in Kommunikation, die wirkt."
+            </p>
+          </div>
+
+          <p class="about__body reveal reveal-delay-2">
+            Davor: sechs Jahre in der <strong>F.A.Z.-Verlagsgruppe</strong>, Redakteurin für Recht und Steuern. Diese journalistische Prägung hilft mir bis heute, komplexe juristische Inhalte schnell zu erfassen und mediengerecht aufzubereiten — für die Redaktionen, die ich seit zwei Jahrzehnten kenne.
+          </p>
+
+          <p class="about__body reveal reveal-delay-2">
+            Diplom-Kauffrau, Goethe-Universität Frankfurt, Schwerpunkt Steuerrecht und internationale Rechnungslegung. Das betriebswirtschaftliche Fundament hilft, juristische Themen auch aus Mandanten- und Managementperspektive zu verstehen.
+          </p>
+
+          <div class="about__credentials reveal reveal-delay-3">
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              18 Jahre Senior Managerin Kommunikation, internationale Wirtschaftskanzlei (2007&ndash;2026)
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Zuvor 6 Jahre Redakteurin F.A.Z.-Verlagsgruppe (Recht &amp; Steuern)
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Platzierungen in FAZ, Handelsblatt, Börsen-Zeitung
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Ranking-Submissions: JUVE, Azur
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Diplom-Kauffrau, Goethe-Universität Frankfurt (Prädikat)
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Deutsch und Englisch
+            </div>
+            <div class="about__credential">
+              <span class="about__credential-dot"></span>
+              Referenzen auf Anfrage
+            </div>
+          </div>
+        </div>
+
+        <!-- Portrait column -->
+        <div class="about__portrait-col reveal reveal-delay-2">
+          <div class="about__portrait-frame">
+            <img src="iris-meinking.jpeg" alt="Iris Meinking — Meinking Legal Communications" class="about__portrait-img">
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1461,92 +1581,109 @@
           <h2 class="services__heading">Was ich für<br>Ihre Kanzlei leiste.</h2>
         </div>
         <p class="services__intro reveal reveal-delay-1">
-          Ob Medienarbeit, Thought Leadership oder digitale Sichtbarkeit — ich entwickle Kommunikationsstrategien, die Ihre Expertise auf dem richtigen Kanal, zur richtigen Zeit, bei der richtigen Zielgruppe platzieren.
+          Sechs Arbeitsfelder — aus der Praxis einer internationalen Großkanzlei. Beratung und operative Umsetzung aus einer Hand, in deutscher und englischer Sprache.
         </p>
       </div>
 
       <div class="service-list reveal">
 
         <!-- 01 -->
-        <div class="service-item" data-index="0" id="service-medien">
+        <div class="service-item" data-index="0" id="service-presse">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Medien &amp; Presse</span>
+              <span class="service-item__title">Presse- und Medienarbeit</span>
             </div>
             <span class="service-item__tag">Earned Media</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                Gezielte Pressearbeit für Wirtschaftskanzleien: von der Pressemitteilung bis zur redaktionellen Platzierung in Fach- und Wirtschaftsmedien. Ich kenne die Redaktionen, die Formate und die Erwartungen — und übersetze juristische Expertise in nachrichtenwürdige Inhalte.
+                Themen setzen, Pressemitteilungen, Interviews und Gastbeiträge in Wirtschafts- und Fachmedien — FAZ, Handelsblatt, Börsen-Zeitung. Ich kenne die Redaktionen seit zwei Jahrzehnten und übersetze juristische Inhalte in nachrichtenwürdige Formate. Pressetermine und Interviews werden vorbereitet und gesteuert, Sprecherinnen und Sprecher erhalten Briefings und Reden.
               </p>
             </div>
           </div>
         </div>
 
         <!-- 02 -->
-        <div class="service-item" data-index="1" id="service-digital">
+        <div class="service-item" data-index="1" id="service-marke">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Digital-PR &amp; LinkedIn</span>
+              <span class="service-item__title">Marke und Positionierung</span>
             </div>
-            <span class="service-item__tag">Digitale Sichtbarkeit</span>
+            <span class="service-item__tag">Profilierung</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                LinkedIn ist das wichtigste Netzwerk für Legal Professionals. Ich entwickle persönliche Profile und Kanzleiseiten zu echten Kommunikationsplattformen — mit konsistenter Stimme, relevantem Content und messbarer Reichweite in Ihrer Zielgruppe.
+                Profil und Botschaften der Kanzlei — was zeichnet Sie aus, und wie wird das im Markt hörbar? Positionierung für Beratungsgebiete, Mandatsbereiche und Nachwuchs. Aus 18 Jahren interner Kanzleipraxis weiß ich, wie Positionierung an internationale Strukturen und Compliance-Vorgaben anschlussfähig bleibt.
               </p>
             </div>
           </div>
         </div>
 
         <!-- 03 -->
-        <div class="service-item" data-index="2" id="service-awards">
+        <div class="service-item" data-index="2" id="service-digital">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Awards &amp; Rankings</span>
+              <span class="service-item__title">Digitale Kommunikation</span>
             </div>
-            <span class="service-item__tag">Reputation</span>
+            <span class="service-item__tag">LinkedIn &amp; Web</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                Juve, Legal 500, Chambers &amp; Partners — ich kenne die Prozesse und Anforderungen der maßgeblichen Kanzlei-Rankings. Ich optimiere Ihre Submissions strategisch und textlich für maximale Wirkung.
+                Website- und Karriereseitentexte, LinkedIn-Profile für Partner und Counsel, Content-Strategien für die Plattformen, auf denen Ihre Zielgruppen wirklich sind. Inhalte werden nicht nur gepostet, sondern so gebaut, dass sie auf Mandantenansprache, Rekrutierung und Rankings einzahlen.
               </p>
             </div>
           </div>
         </div>
 
         <!-- 04 -->
-        <div class="service-item" data-index="3" id="service-hr">
+        <div class="service-item" data-index="3" id="service-rankings">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">HR-Communications</span>
+              <span class="service-item__title">Awards, Rankings und Fachbeiträge</span>
             </div>
-            <span class="service-item__tag">Employer Branding &amp; Recruiting</span>
+            <span class="service-item__tag">Reputation</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                Ob Employer Branding, Recruiting-Kampagnen oder interne Kommunikation: Ich positioniere Ihre Kanzlei als attraktiven Arbeitgeber — mit klarer Botschaft für Berufseinsteiger, Lateral Hires und bestehende Teams. Von der Karriereseite bis zur Retention-Strategie.
+                Submissions für JUVE und Azur — strategisch aufgesetzt, textlich geschärft, prozessual verlässlich begleitet. Dazu Gast- und Fachbeiträge, Reden, Grußworte und Gesprächsvorbereitung für Partner. Ich habe diese Einreichungen über viele Zyklen verantwortet und kenne die Anforderungen der Verlage.
               </p>
             </div>
           </div>
         </div>
 
         <!-- 05 -->
-        <div class="service-item" data-index="4" id="service-intern">
+        <div class="service-item" data-index="4" id="service-karriere">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Interne Kommunikation</span>
+              <span class="service-item__title">Arbeitgeber- und Karrierekommunikation</span>
             </div>
-            <span class="service-item__tag">Change &amp; Kultur</span>
+            <span class="service-item__tag">Recruiting &amp; Nachwuchs</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                Erfolgreiche Kommunikation beginnt im Inneren: Ich unterstütze Kanzleien dabei, Veränderungen, Fusionen oder neue Strategien klar und überzeugend an Partnerschaft und Mitarbeitende zu kommunizieren — verständlich, verbindlich und mit der richtigen Tonalität.
+                Arbeitgeberprofil und Karrierethemen glaubwürdig geschärft — für Nachwuchsjuristinnen und -juristen ebenso wie für Lateral Hires und bestehende Teams. Recruiting-Botschaften, Karriereseiten, Content für Employer Branding. Aus langjähriger Zusammenarbeit mit HR und Personalentwicklung in einer internationalen Sozietät.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="service-item" data-index="5" id="service-intern">
+          <div class="service-item__header">
+            <div>
+              <span class="service-item__title">Interne Kommunikation und Veränderung</span>
+            </div>
+            <span class="service-item__tag">Change &amp; Sondersituationen</span>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <p class="service-item__desc">
+                Interne Newsletter, Texte und Begleitung bei Fusionen, Markteintritten, Bürokonsolidierungen oder organisatorischen Veränderungen. In Sondersituationen und Krisen stehen Botschaften, Linien und Abstimmungswege kurzfristig — abgestimmt mit Partnerschaft, HR und gegebenenfalls internationaler Zentrale.
               </p>
             </div>
           </div>
@@ -1557,64 +1694,7 @@
   </section>
 
 
-  <!-- ═══════════════════════════════════════════
-       ABOUT
-  ═══════════════════════════════════════════ -->
-  <section class="about" id="ueber-mich">
-    <div class="container">
-      <div class="about__grid">
 
-        <!-- Text column -->
-        <div class="about__text-col">
-          <div class="reveal">
-            <div class="chapter-marker">Über mich</div>
-            <h2 class="about__heading">Iris Meinking —<br>Ihre PR-Beraterin<br>für die Rechtswelt.</h2>
-          </div>
-
-          <p class="about__body reveal reveal-delay-1">
-            Ich bin <strong>freiberufliche PR-Beraterin</strong> mit dem Fokus auf Wirtschaftskanzleien — mit über 15 Jahren Branchenerfahrung. Mein Ziel: Ihre Kommunikation strategisch weiterzuentwickeln.
-          </p>
-
-          <div class="about__pull reveal reveal-delay-1">
-            <p class="about__pull-text">
-              "Ich spreche die Sprache des Rechts — und übersetze sie in Kommunikation, die wirkt."
-            </p>
-          </div>
-
-          <p class="about__body reveal reveal-delay-2">
-            Was mich von allgemeinen PR-Agenturen unterscheidet: <strong>Ich kenne Ihre Branche</strong>. Ich verstehe die Strukturen großer Sozietäten ebenso wie die Herausforderungen mittelständischer Kanzleien. Ich weiß, wie Ranking-Prozesse funktionieren, welche Journalisten für Legal-Themen relevant sind und wie man Thought Leadership glaubwürdig aufbaut.
-          </p>
-
-          <div class="about__credentials reveal reveal-delay-3">
-            <div class="about__credential">
-              <span class="about__credential-dot"></span>
-              15+ Jahre Erfahrung in der Kanzlei-PR
-            </div>
-            <div class="about__credential">
-              <span class="about__credential-dot"></span>
-              Spezialisierung auf Wirtschaftskanzleien
-            </div>
-            <div class="about__credential">
-              <span class="about__credential-dot"></span>
-              Ranking-Einreichungen (JUVE, Legal 500, Chambers)
-            </div>
-            <div class="about__credential">
-              <span class="about__credential-dot"></span>
-              Freiberuflich — flexibel, diskret, verbindlich
-            </div>
-          </div>
-        </div>
-
-        <!-- Portrait column -->
-        <div class="about__portrait-col reveal reveal-delay-2">
-          <div class="about__portrait-frame">
-            <img src="iris-meinking.jpeg" alt="Iris Meinking — Meinking Legal Communications" class="about__portrait-img">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
 
   <!-- ═══════════════════════════════════════════
@@ -1635,18 +1715,24 @@
             <span class="accent">gemeinsam starten.</span>
           </h2>
           <p class="cta__sub">
-            Sie möchten die Außenkommunikation Ihrer Kanzlei auf das nächste Level heben? Ich freue mich auf ein erstes unverbindliches Gespräch — persönlich, offen und auf Augenhöhe.
+            Ein erstes Gespräch kostet eine halbe Stunde — unverbindlich, vertraulich, ohne Angebotspflicht. Ich melde mich in der Regel innerhalb eines Werktages zurück.
+          </p>
+          <p class="cta__sub cta__sub--small">
+            Rhein-Main und bundesweit per Video.
           </p>
         </div>
 
         <div class="cta__actions">
-          <a href="mailto:info@meinkinglegal.com" class="btn-cta">
+          <a href="mailto:iris.meinking@meinkinglegal.com?subject=Erstgespr%C3%A4ch%20Kanzleikommunikation" class="btn-cta">
             Gespräch vereinbaren
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M1 7h12M8 2l5 5-5 5"/>
             </svg>
           </a>
-          <span class="cta__email">info@meinkinglegal.com</span>
+          <div class="cta__contact">
+            <a href="mailto:iris.meinking@meinkinglegal.com" class="cta__contact-line">iris.meinking@meinkinglegal.com</a>
+            <a href="tel:+4960310000000" class="cta__contact-line">+49 6031 000 000 0</a>
+          </div>
         </div>
 
       </div>
@@ -1831,132 +1917,6 @@
       leftTerms.forEach(function(el)  { scheduleTerm(el, leftTerms);  });
       rightTerms.forEach(function(el) { scheduleTerm(el, rightTerms); });
     })();
-  </script>
-
-  <!-- 3D Globe -->
-  <script>
-  (function() {
-    var container = document.getElementById('globe-container');
-    if (!container || typeof THREE === 'undefined') return;
-
-    var w = 200, h = 200;
-
-    var scene = new THREE.Scene();
-    scene.background = null;
-
-    var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-    camera.position.set(0, 0, 5.8);
-
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(w, h);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    container.appendChild(renderer.domElement);
-
-    // Letter texture
-    var c = document.createElement('canvas');
-    c.width = 2048; c.height = 1024;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, 2048, 1024);
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.font = '300 240px "Cormorant Garamond", "Georgia", serif';
-
-    var letters = [
-      { ch: 'M', x: 340,  y: 512 },
-      { ch: 'L', x: 1024, y: 512 },
-      { ch: 'C', x: 1708, y: 512 },
-    ];
-    letters.forEach(function(l) {
-      ctx.fillStyle = 'rgba(30, 20, 5, 0.5)';
-      ctx.fillText(l.ch, l.x + 3, l.y + 4);
-      ctx.fillStyle = 'rgba(255, 248, 220, 0.4)';
-      ctx.fillText(l.ch, l.x - 1, l.y - 2);
-      ctx.fillStyle = 'rgba(40, 28, 8, 0.75)';
-      ctx.fillText(l.ch, l.x, l.y);
-    });
-    [682, 1366].forEach(function(x) {
-      ctx.beginPath();
-      ctx.arc(x, 512, 7, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(40, 28, 8, 0.4)';
-      ctx.fill();
-    });
-    var letterTex = new THREE.CanvasTexture(c);
-    letterTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-
-    // Gold shader
-    var sphereGeo = new THREE.SphereGeometry(1.3, 128, 128);
-    var sphereMat = new THREE.ShaderMaterial({
-      uniforms: {
-        uLetters:       { value: letterTex },
-        uLightDir1:     { value: new THREE.Vector3(3, 4, 5).normalize() },
-        uLightDir2:     { value: new THREE.Vector3(-4, 1, 3).normalize() },
-        uGoldDark:      { value: new THREE.Color(0xb0a08a) },
-        uGoldMid:       { value: new THREE.Color(0xd8ccb8) },
-        uGoldLight:     { value: new THREE.Color(0xeae0d0) },
-        uGoldHighlight: { value: new THREE.Color(0xfff8ee) },
-      },
-      vertexShader: [
-        'varying vec3 vNormal;',
-        'varying vec3 vViewDir;',
-        'varying vec2 vUv;',
-        'void main() {',
-        '  vUv = uv;',
-        '  vNormal = normalize(normalMatrix * normal);',
-        '  vec4 mvPos = modelViewMatrix * vec4(position, 1.0);',
-        '  vViewDir = normalize(-mvPos.xyz);',
-        '  gl_Position = projectionMatrix * mvPos;',
-        '}'
-      ].join('\n'),
-      fragmentShader: [
-        'uniform sampler2D uLetters;',
-        'uniform vec3 uLightDir1, uLightDir2;',
-        'uniform vec3 uGoldDark, uGoldMid, uGoldLight, uGoldHighlight;',
-        'varying vec3 vNormal, vViewDir;',
-        'varying vec2 vUv;',
-        'void main() {',
-        '  vec3 N = normalize(vNormal);',
-        '  vec3 V = normalize(vViewDir);',
-        '  float diff1 = max(dot(N, normalize(uLightDir1)), 0.0);',
-        '  float diff2 = max(dot(N, normalize(uLightDir2)), 0.0) * 0.5;',
-        '  float diffuse = diff1 + diff2;',
-        '  vec3 goldColor;',
-        '  if (diffuse < 0.35) { goldColor = mix(uGoldDark, uGoldMid, diffuse / 0.35); }',
-        '  else if (diffuse < 0.7) { goldColor = mix(uGoldMid, uGoldLight, (diffuse - 0.35) / 0.35); }',
-        '  else { goldColor = mix(uGoldLight, uGoldHighlight, (diffuse - 0.7) / 0.3); }',
-        '  vec3 H1 = normalize(normalize(uLightDir1) + V);',
-        '  float spec1 = pow(max(dot(N, H1), 0.0), 200.0) * 0.2;',
-        '  vec3 H2 = normalize(normalize(uLightDir2) + V);',
-        '  float spec2 = pow(max(dot(N, H2), 0.0), 150.0) * 0.08;',
-        '  float fresnel = pow(1.0 - max(dot(N, V), 0.0), 3.0);',
-        '  vec3 rimColor = uGoldHighlight * fresnel * 0.15;',
-        '  vec3 color = goldColor + vec3(spec1 + spec2) * uGoldHighlight + rimColor;',
-        '  vec4 ls = texture2D(uLetters, vUv);',
-        '  color = mix(color, color * 0.35, ls.a * 0.9);',
-        '  float lb = dot(ls.rgb, vec3(0.3, 0.3, 0.3));',
-        '  color += vec3(lb * ls.a * 0.3);',
-        '  float noise = fract(sin(dot(vUv * 200.0, vec2(12.9898, 78.233))) * 43758.5453);',
-        '  color += (noise - 0.5) * 0.015;',
-        '  gl_FragColor = vec4(color, 1.0);',
-        '}'
-      ].join('\n'),
-    });
-
-    var sphere = new THREE.Mesh(sphereGeo, sphereMat);
-    scene.add(sphere);
-
-    // No shadow at this small size
-
-    var time = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      time += 0.003;
-      sphere.rotation.y = -time * 3.06;
-      sphere.rotation.x = Math.sin(time * 0.5) * 0.04;
-      renderer.render(scene, camera);
-    }
-    animate();
-  })();
   </script>
 
   <!-- ═══════════════════════════════════════════
