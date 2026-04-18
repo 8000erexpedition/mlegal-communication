@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploy zur Subdomain meinkinglegal.before-7.com via SSH/SFTP.
+# Deploy zur Subdomain demo.before-7.com via SSH/SFTP.
 # Ersetzt nur die Website-Dateien — .htaccess und .htpasswd bleiben unberuehrt.
 #
 # Nutzung:
@@ -13,7 +13,7 @@
 set -euo pipefail
 
 SSH_HOST="hostinger-mlegal"  # siehe ~/.ssh/config
-REMOTE_DIR="/home/u477290815/domains/before-7.com/public_html/meinkinglegal"
+REMOTE_DIR="/home/u477290815/domains/before-7.com/public_html/demo"
 
 VARIANT="${1:-v5}"
 case "$VARIANT" in
@@ -50,4 +50,4 @@ rsync -avz \
   "$SSH_HOST:$REMOTE_DIR/"
 
 echo ""
-echo "Fertig. Teste: https://meinkinglegal.before-7.com/"
+echo "Fertig. Teste: https://demo.before-7.com/"
