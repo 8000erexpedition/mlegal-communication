@@ -25,15 +25,15 @@
     }
 
     :root {
-      --bg:          #f7f4ef;
-      --bg-secondary:#ede8df;
+      --bg:          #e0ddd8;
+      --bg-secondary:#d6d2cb;
       --bg-dark:     #2c2520;
       --accent:      #8c6b3a;
       --accent-light:#b8924a;
       --text:        #1f1c18;
-      --muted:       rgba(31, 28, 24, 0.45);
-      --border:      rgba(31, 28, 24, 0.1);
-      --border-med:  rgba(31, 28, 24, 0.18);
+      --muted:       rgba(31, 28, 24, 0.50);
+      --border:      rgba(31, 28, 24, 0.12);
+      --border-med:  rgba(31, 28, 24, 0.20);
       --font-display:'Cormorant Garamond', Georgia, serif;
       --font-body:   'DM Sans', system-ui, sans-serif;
     }
@@ -658,10 +658,10 @@
       align-items: center;
       gap: 16px;
       padding: 16px 22px;
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(247, 244, 239, 0.75);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(247, 244, 239, 0.85);
       border-radius: 14px;
       box-shadow:
         0 1px 3px rgba(31, 28, 24, 0.04),
@@ -671,7 +671,7 @@
     }
 
     .hero__spectrum-item:hover {
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(247, 244, 239, 0.92);
       transform: translateY(-3px);
       box-shadow:
         0 2px 6px rgba(31, 28, 24, 0.05),
@@ -954,6 +954,34 @@
       color: var(--text);
       opacity: 0.72;
       font-weight: 300;
+    }
+
+    .service-item__points {
+      list-style: none;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text);
+      opacity: 0.78;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .service-item__points li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .service-item__points li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 10px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.7;
     }
 
     /* ═══════════════════════════════════════════════════════
@@ -1648,110 +1676,152 @@
           <h2 class="services__heading">Was ich für<br>Ihre Kanzlei leiste.</h2>
         </div>
         <p class="services__intro reveal reveal-delay-1">
-          Sechs Arbeitsfelder — aus der Praxis einer internationalen Großkanzlei. Beratung und operative Umsetzung aus einer Hand, in deutscher und englischer Sprache.
+          Acht Arbeitsfelder — aus der Praxis einer internationalen Großkanzlei. Beratung und operative Umsetzung aus einer Hand, in deutscher und englischer Sprache.
         </p>
       </div>
 
       <div class="service-list reveal">
 
         <!-- 01 -->
-        <div class="service-item" data-index="0" id="service-presse">
+        <div class="service-item" data-index="0" id="service-brand">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Presse- und Medienarbeit</span>
-            </div>
-            <span class="service-item__tag">Earned Media</span>
-          </div>
-          <div class="service-item__body">
-            <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Themen setzen, Pressemitteilungen, Interviews und Gastbeiträge in Wirtschafts- und Fachmedien — FAZ, Handelsblatt, Börsen-Zeitung. Ich kenne die Redaktionen seit zwei Jahrzehnten und übersetze juristische Inhalte in nachrichtenwürdige Formate. Pressetermine und Interviews werden vorbereitet und gesteuert, Sprecherinnen und Sprecher erhalten Briefings und Reden.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 02 -->
-        <div class="service-item" data-index="1" id="service-marke">
-          <div class="service-item__header">
-            <div>
-              <span class="service-item__title">Marke und Positionierung</span>
+              <span class="service-item__title">Brand &amp; Positioning</span>
             </div>
             <span class="service-item__tag">Profilierung</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Profil und Botschaften der Kanzlei — was zeichnet Sie aus, und wie wird das im Markt hörbar? Positionierung für Beratungsgebiete, Mandatsbereiche und Nachwuchs. Aus 19 Jahren interner Kanzleipraxis weiß ich, wie Positionierung an internationale Strukturen und Compliance-Vorgaben anschlussfähig bleibt.
-              </p>
+              <ul class="service-item__points">
+                <li>Profil und Kernbotschaften der Kanzlei</li>
+                <li>Themen- und Leistungsprofilierung</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="service-item" data-index="1" id="service-digital">
+          <div class="service-item__header">
+            <div>
+              <span class="service-item__title">Digital Communication</span>
+            </div>
+            <span class="service-item__tag">Web &amp; Social</span>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <ul class="service-item__points">
+                <li>Website- und Karriereseiten (Content)</li>
+                <li>Inhalte für Social Media (z. B. LinkedIn)</li>
+              </ul>
             </div>
           </div>
         </div>
 
         <!-- 03 -->
-        <div class="service-item" data-index="2" id="service-digital">
+        <div class="service-item" data-index="2" id="service-employer">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Digitale Kommunikation</span>
+              <span class="service-item__title">Employer Branding &amp; Talent Communication</span>
             </div>
-            <span class="service-item__tag">LinkedIn &amp; Web</span>
+            <span class="service-item__tag">Recruiting</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Website- und Karriereseitentexte, LinkedIn-Profile für Partner und Counsel, Content-Strategien für die Plattformen, auf denen Ihre Zielgruppen wirklich sind. Inhalte werden nicht nur gepostet, sondern so gebaut, dass sie auf Mandantenansprache, Rekrutierung und Rankings einzahlen.
-              </p>
+              <ul class="service-item__points">
+                <li>Arbeitgeberprofil und Karrierethemen</li>
+                <li>Kommunikation für Recruiting und Nachwuchs</li>
+              </ul>
             </div>
           </div>
         </div>
 
         <!-- 04 -->
-        <div class="service-item" data-index="3" id="service-rankings">
+        <div class="service-item" data-index="3" id="service-pr">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Awards, Rankings und Fachbeiträge</span>
+              <span class="service-item__title">Public Relations</span>
             </div>
-            <span class="service-item__tag">Reputation</span>
+            <span class="service-item__tag">Earned Media</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Submissions für JUVE und Azur — strategisch aufgesetzt, textlich geschärft, prozessual verlässlich begleitet. Dazu Gast- und Fachbeiträge, Reden, Grußworte und Gesprächsvorbereitung für Partner. Ich habe diese Einreichungen über viele Zyklen verantwortet und kenne die Anforderungen der Verlage.
-              </p>
+              <ul class="service-item__points">
+                <li>Themenfindung und Medienansprache</li>
+                <li>Pressemitteilungen, Interviews, Pressetermine</li>
+              </ul>
             </div>
           </div>
         </div>
 
         <!-- 05 -->
-        <div class="service-item" data-index="4" id="service-karriere">
+        <div class="service-item" data-index="4" id="service-thought">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Arbeitgeber- und Karrierekommunikation</span>
+              <span class="service-item__title">Reputation &amp; Thought Leadership</span>
             </div>
-            <span class="service-item__tag">Recruiting &amp; Nachwuchs</span>
+            <span class="service-item__tag">Reputation</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Arbeitgeberprofil und Karrierethemen glaubwürdig geschärft — für Nachwuchsjuristinnen und -juristen ebenso wie für Lateral Hires und bestehende Teams. Recruiting-Botschaften, Karriereseiten, Content für Employer Branding. Aus langjähriger Zusammenarbeit mit HR und Personalentwicklung in einer internationalen Sozietät.
-              </p>
+              <ul class="service-item__points">
+                <li>Fach- und Gastbeiträge, Newsletter</li>
+                <li>Reden, Grußworte, Gesprächsvorbereitung</li>
+              </ul>
             </div>
           </div>
         </div>
 
         <!-- 06 -->
-        <div class="service-item" data-index="5" id="service-intern">
+        <div class="service-item" data-index="5" id="service-internal">
           <div class="service-item__header">
             <div>
-              <span class="service-item__title">Interne Kommunikation und Veränderung</span>
+              <span class="service-item__title">Internal Communications</span>
             </div>
-            <span class="service-item__tag">Change &amp; Sondersituationen</span>
+            <span class="service-item__tag">Intern</span>
           </div>
           <div class="service-item__body">
             <div class="service-item__body-inner">
-              <p class="service-item__desc">
-                Interne Newsletter, Texte und Begleitung bei Fusionen, Markteintritten, Bürokonsolidierungen oder organisatorischen Veränderungen. In Sondersituationen und Krisen stehen Botschaften, Linien und Abstimmungswege kurzfristig — abgestimmt mit Partnerschaft, HR und gegebenenfalls internationaler Zentrale.
-              </p>
+              <ul class="service-item__points">
+                <li>Interne Newsletter und Management-Kommunikation</li>
+                <li>Begleitung interner Veränderungen (Mitarbeiterkommunikation)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="service-item" data-index="6" id="service-change">
+          <div class="service-item__header">
+            <div>
+              <span class="service-item__title">Change &amp; Transformation Communication</span>
+            </div>
+            <span class="service-item__tag">Wandel</span>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <ul class="service-item__points">
+                <li>Kommunikation bei strategischen Veränderungen (z. B. Wachstum, neue Standorte, Markteintritt)</li>
+                <li>Kommunikation bei organisatorischen Veränderungen nach außen</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="service-item" data-index="7" id="service-crisis">
+          <div class="service-item__header">
+            <div>
+              <span class="service-item__title">Crisis &amp; Special Situations Communication</span>
+            </div>
+            <span class="service-item__tag">Sondersituationen</span>
+          </div>
+          <div class="service-item__body">
+            <div class="service-item__body-inner">
+              <ul class="service-item__points">
+                <li>Botschaften und Kommunikationslinie in sensiblen Situationen</li>
+                <li>Abstimmung und kurzfristige Umsetzung</li>
+              </ul>
             </div>
           </div>
         </div>
