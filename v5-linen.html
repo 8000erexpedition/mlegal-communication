@@ -449,10 +449,64 @@
       transform: translateX(3px);
     }
 
-    .hero__cta-center {
+    .hero__contact {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
       display: flex;
-      justify-content: center;
-      margin-top: 56px;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero__contact-label {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .hero__contact-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.3;
+      width: fit-content;
+      transition: color 0.2s ease;
+    }
+
+    .hero__contact-line svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      opacity: 0.45;
+      flex-shrink: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero__contact-line span {
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease;
+    }
+
+    .hero__contact-line:hover {
+      color: var(--accent);
+    }
+
+    .hero__contact-line:hover svg {
+      opacity: 1;
+    }
+
+    .hero__contact-line:hover span {
+      border-bottom-color: var(--accent);
     }
 
     .btn-hero-cta {
@@ -1438,7 +1492,7 @@
           </h2>
 
           <p class="hero__sub reveal reveal-delay-2">
-            Achtzehn Jahre Senior-PR für eine internationale Wirtschaftskanzlei in Deutschland — Medienarbeit, Rankings, Partnerkommunikation. Jetzt selbständig.
+            Neunzehn Jahre Senior-PR für eine internationale Wirtschaftskanzlei in Deutschland — Medienarbeit, Rankings, Partnerkommunikation. Jetzt selbständig.
           </p>
 
           <div class="hero__quote-inline reveal reveal-delay-4">
@@ -1446,7 +1500,24 @@
               „Rechtliche Exzellenz braucht <em>sichtbare Sprache</em> —
               nicht nur intern, sondern im Markt."
             </p>
-            <p class="hero__quote-caption">Iris Meinking · 18 Jahre Kanzleikommunikation</p>
+            <p class="hero__quote-caption">Iris Meinking · 19 Jahre Kanzleikommunikation</p>
+          </div>
+
+          <div class="hero__contact reveal reveal-delay-4">
+            <span class="hero__contact-label">Gespräch vereinbaren.</span>
+            <a href="mailto:iris.meinking@meinkinglegal.com?subject=Erstgespr%C3%A4ch%20Kanzleikommunikation" class="hero__contact-line">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="1.5" y="3" width="13" height="10" rx="0.5"/>
+                <path d="M1.5 4l6.5 5 6.5-5"/>
+              </svg>
+              <span>iris.meinking@meinkinglegal.com</span>
+            </a>
+            <a href="tel:+4960310000000" class="hero__contact-line">
+              <svg viewBox="0 0 16 16" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 2.5a1 1 0 0 1 1-1h2l1.5 3-1.5 1a9 9 0 0 0 4 4l1-1.5 3 1.5v2a1 1 0 0 1-1 1A11 11 0 0 1 3 2.5Z"/>
+              </svg>
+              <span>+49 6031 000 000 0</span>
+            </a>
           </div>
         </div>
 
@@ -1479,16 +1550,6 @@
 
       </div>
 
-      <!-- Hero CTA -->
-      <div class="hero__cta-center reveal reveal-delay-3">
-        <a href="mailto:iris.meinking@meinkinglegal.com" class="btn-hero-cta">
-          Gespräch vereinbaren
-          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 7h12M8 2l5 5-5 5"/>
-          </svg>
-        </a>
-      </div>
-
     </div>
   </section>
 
@@ -1504,11 +1565,11 @@
         <div class="about__text-col">
           <div class="reveal">
             <div class="chapter-marker">Über mich</div>
-            <h2 class="about__heading">Iris Meinking —<br>achtzehn Jahre Kanzleikommunikation.<br>Davor Redakteurin.</h2>
+            <h2 class="about__heading">Iris Meinking —<br>neunzehn Jahre Kanzleikommunikation.<br>Davor Redakteurin.</h2>
           </div>
 
           <p class="about__body reveal reveal-delay-1">
-            Achtzehn Jahre habe ich die Kommunikation einer internationalen Großkanzlei in Deutschland als <strong>Senior Managerin</strong> verantwortet — Presse- und Medienarbeit, Rankings, Fachbeiträge, Karriere- und interne Kommunikation. In direkter Abstimmung mit dem Managing Partner, in deutscher und englischer Sprache, unter Compliance-Anforderungen.
+            Neunzehn Jahre habe ich die Kommunikation einer internationalen Großkanzlei in Deutschland als <strong>Senior Managerin</strong> verantwortet — Presse- und Medienarbeit, Rankings, Fachbeiträge, Karriere- und interne Kommunikation. In direkter Abstimmung mit dem Managing Partner, in deutscher und englischer Sprache, unter Compliance-Anforderungen.
           </p>
 
           <div class="about__pull reveal reveal-delay-1">
@@ -1528,7 +1589,7 @@
           <div class="about__credentials reveal reveal-delay-3">
             <div class="about__credential">
               <span class="about__credential-dot"></span>
-              18 Jahre Senior Managerin Kommunikation, internationale Wirtschaftskanzlei (2007&ndash;2026)
+              19 Jahre Senior Managerin Kommunikation, internationale Wirtschaftskanzlei (2007&ndash;2026)
             </div>
             <div class="about__credential">
               <span class="about__credential-dot"></span>
@@ -1615,7 +1676,7 @@
           <div class="service-item__body">
             <div class="service-item__body-inner">
               <p class="service-item__desc">
-                Profil und Botschaften der Kanzlei — was zeichnet Sie aus, und wie wird das im Markt hörbar? Positionierung für Beratungsgebiete, Mandatsbereiche und Nachwuchs. Aus 18 Jahren interner Kanzleipraxis weiß ich, wie Positionierung an internationale Strukturen und Compliance-Vorgaben anschlussfähig bleibt.
+                Profil und Botschaften der Kanzlei — was zeichnet Sie aus, und wie wird das im Markt hörbar? Positionierung für Beratungsgebiete, Mandatsbereiche und Nachwuchs. Aus 19 Jahren interner Kanzleipraxis weiß ich, wie Positionierung an internationale Strukturen und Compliance-Vorgaben anschlussfähig bleibt.
               </p>
             </div>
           </div>
@@ -1715,10 +1776,7 @@
             <span class="accent">gemeinsam starten.</span>
           </h2>
           <p class="cta__sub">
-            Ein erstes Gespräch kostet eine halbe Stunde — unverbindlich, vertraulich, ohne Angebotspflicht. Ich melde mich in der Regel innerhalb eines Werktages zurück.
-          </p>
-          <p class="cta__sub cta__sub--small">
-            Rhein-Main und bundesweit per Video.
+            Investieren Sie 45 Minuten für den Erfolg Ihrer Kanzlei.
           </p>
         </div>
 
