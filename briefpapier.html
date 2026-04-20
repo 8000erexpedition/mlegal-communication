@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Briefpapier — Meinking Legal Communications</title>
@@ -72,33 +73,25 @@
       gap: 14px;
     }
 
-    .logo-globe {
-      width: 42px;
-      height: 42px;
+    .logo-mark {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: radial-gradient(
-        ellipse at 38% 35%,
-        #fff8ee 0%, #eae0d0 25%, #d8ccb8 50%, #c4b8a4 70%, #b0a08a 100%
-      );
-      box-shadow:
-        0 2px 8px rgba(140, 107, 58, 0.15),
-        inset 0 -2px 4px rgba(176, 160, 138, 0.3),
-        inset 0 2px 6px rgba(255, 248, 238, 0.6);
+      border: 0.5px solid rgba(31, 28, 24, 0.4);
       flex-shrink: 0;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .logo-globe::after {
-      content: 'M \00B7 L \00B7 C';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+    .logo-mark::after {
+      content: 'MLC';
       font-family: var(--font-display);
-      font-size: 8px;
-      font-weight: 500;
-      color: rgba(40, 28, 8, 0.55);
-      letter-spacing: 1px;
-      white-space: nowrap;
+      font-size: 13pt;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 1.2px;
     }
 
     .header-text {
@@ -243,7 +236,7 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="logo-globe"></div>
+    <div class="logo-mark"></div>
     <div class="header-text">
       <div class="brand-name">Meinking Legal Communications</div>
       <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
@@ -266,7 +259,7 @@
       </div>
       <div>
         <strong>Kommunikation</strong>
-        info@meinkinglegal.com<br>
+        iris.meinking@meinkinglegal.com<br>
         +49 (0) 000 000 000 0<br>
         linkedin.com/in/irismeinking
       </div>
