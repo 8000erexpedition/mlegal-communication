@@ -34,7 +34,6 @@ cp businessplan.html       "$STAGING/"
 cp impressum.html          "$STAGING/"
 cp datenschutz.html        "$STAGING/"
 cp iris-meinking.jpeg      "$STAGING/"
-cp logo-globe-2d.png       "$STAGING/"
 printf "User-agent: *\nDisallow: /\n" > "$STAGING/robots.txt"
 
 echo "Staging-Inhalt ($STAGING):"
