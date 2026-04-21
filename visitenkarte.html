@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitenkarte — Meinking Legal Communications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:       #1f1c18;
+      --muted:      rgba(31, 28, 24, 0.50);
+      --accent:     #8c6b3a;
+      --border:     rgba(31, 28, 24, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    /* Standard-Visitenkarte 85 × 55 mm */
+    @page {
+      size: 85mm 55mm;
+      margin: 0;
+    }
+
+    body {
+      background: #e0ddd8;
+      font-family: var(--font-body);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      padding: 80px 0 30px 0;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .card { margin: 0; box-shadow: none; page-break-after: always; }
+      .card:last-child { page-break-after: auto; }
+      .no-print { display: none !important; }
+    }
+
+    /* ─── Karte ─────────────────────────────────── */
+    .card {
+      width: 85mm;
+      height: 55mm;
+      margin: 12px auto;
+      background: white;
+      position: relative;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* dezente Akzentlinie oben */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1.2px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+      opacity: 0.4;
+    }
+
+    /* ─── VORDERSEITE ───────────────────────────── */
+    .card--front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7mm;
+    }
+
+    .front__mark {
+      width: 14mm;
+      height: 14mm;
+      border-radius: 50%;
+      border: 0.4px solid rgba(31, 28, 24, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4mm;
+    }
+
+    .front__mark-text {
+      font-family: var(--font-display);
+      font-size: 10.5pt;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--text);
+    }
+
+    .front__brand {
+      font-family: var(--font-display);
+      font-size: 15pt;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 2.5mm;
+    }
+
+    .front__rule {
+      width: 12mm;
+      height: 0.5px;
+      background: var(--accent);
+      opacity: 0.55;
+      margin-bottom: 2.5mm;
+    }
+
+    .front__claim {
+      font-family: var(--font-display);
+      font-size: 10.5pt;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.75;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── RÜCKSEITE ─────────────────────────────── */
+    .card--back {
+      padding: 7mm 8mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      gap: 0;
+    }
+
+    .back__name-block {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    .back__name {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.15;
+    }
+
+    .back__role {
+      font-family: var(--font-body);
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 1.2mm;
+    }
+
+    .back__mark {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      width: 9mm;
+      height: 9mm;
+      border-radius: 50%;
+      border: 0.4px solid rgba(31, 28, 24, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+    }
+
+    .back__mark-text {
+      font-family: var(--font-display);
+      font-size: 7pt;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+
+    .back__contact {
+      grid-column: 1 / 3;
+      grid-row: 3 / 4;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1mm 4mm;
+      font-family: var(--font-body);
+      font-size: 7.5pt;
+      line-height: 1.45;
+      color: var(--text);
+      align-content: end;
+    }
+
+    .back__contact dt {
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 6.5pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding-top: 0.5mm;
+    }
+
+    .back__contact dd {
+      color: var(--text);
+    }
+
+    .back__contact dd a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .back__contact .placeholder {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ─── Print Bar (nur Bildschirm) ────────────── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(44, 37, 32, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    }
+    .print-bar__text {
+      color: rgba(255, 255, 255, 0.7);
+      font-family: var(--font-body);
+      font-size: 13px;
+    }
+    .print-bar__btn {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      transition: background 0.2s;
+    }
+    .print-bar__btn:hover { background: #a07d48; }
+
+    /* Hinweis zwischen den Karten (nur Bildschirm) */
+    .label {
+      max-width: 85mm;
+      margin: 0 auto 4px auto;
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(31, 28, 24, 0.5);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <span class="print-bar__text">Visitenkarte — 85 × 55 mm, Vorder- und Rückseite</span>
+  <button class="print-bar__btn" onclick="window.print()">Als PDF speichern (Strg+P)</button>
+</div>
+
+<div class="label no-print">Vorderseite</div>
+<div class="card card--front">
+  <div class="front__mark"><span class="front__mark-text">MLC</span></div>
+  <div class="front__brand">Meinking Legal<br>Communications</div>
+  <div class="front__rule"></div>
+  <div class="front__claim">Kanzleikommunikation. Sichtbar.</div>
+</div>
+
+<div class="label no-print">Rückseite</div>
+<div class="card card--back">
+  <div class="back__name-block">
+    <div class="back__name">Iris Meinking</div>
+    <div class="back__role">Strategische PR für Wirtschaftskanzleien</div>
+  </div>
+  <div class="back__mark"><span class="back__mark-text">MLC</span></div>
+
+  <dl class="back__contact">
+    <dt>Anschrift</dt>
+    <dd>Mainzer-Tor-Anlage 29<br>61169 Friedberg/Hessen</dd>
+
+    <dt>Telefon</dt>
+    <dd><span class="placeholder">in Arbeit</span></dd>
+
+    <dt>E-Mail</dt>
+    <dd><a href="mailto:info@meinkinglegal.com">info@meinkinglegal.com</a></dd>
+
+    <dt>Web</dt>
+    <dd><a href="https://meinkinglegal.com">meinkinglegal.com</a></dd>
+  </dl>
+</div>
+
+</body>
+</html>
