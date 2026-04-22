@@ -392,6 +392,9 @@
     .finanz-table--monthly .neg,
     .finanz-table--monthly tr.total-row td.neg,
     .finanz-table--monthly tr.sum-row td.neg { color: #a23a2a; }
+    /* USt-Saldo: Zahlung an FA = rot, Erstattung = grün */
+    .finanz-table--monthly .zahlung { color: #a23a2a; }
+    .finanz-table--monthly .erstattung { color: #3a7a3a; }
 
     /* ─── Footer ───────────────────────────────── */
     .footer {
@@ -726,7 +729,82 @@
 
     <p style="margin-bottom: 6mm; color: var(--muted);">Die folgende Matrix zeigt die Positionierung von Meinking Legal Communications gegen&uuml;ber anderen Anbietern im Kanzleikommunikationsmarkt:</p>
 
-    <img src="wettbewerbsmatrix.png" alt="Wettbewerbspositionierung im Kanzleikommunikationsmarkt" style="width: 100%; max-width: 160mm; height: auto; display: block; margin: 0 auto;">
+    <svg viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wettbewerbspositionierung im Kanzleikommunikationsmarkt" style="width: 100%; max-width: 160mm; height: auto; display: block; margin: 0 auto;">
+      <!-- Titel -->
+      <text x="450" y="32" font-family="'Cormorant Garamond', Georgia, serif" font-size="22" fill="#1f1c18" text-anchor="middle" font-weight="500">Wettbewerbspositionierung im Kanzleikommunikationsmarkt</text>
+
+      <!-- Chart-Rahmen -->
+      <rect x="120" y="70" width="720" height="490" fill="none" stroke="rgba(31,28,24,0.18)" stroke-width="0.5"/>
+
+      <!-- Quadrant II (MLegal-Bereich) hervorgehoben -->
+      <rect x="480" y="70" width="360" height="245" fill="rgba(140,107,58,0.08)" stroke="rgba(140,107,58,0.4)" stroke-width="0.8"/>
+
+      <!-- Quadranten-Teiler (Fadenkreuz) -->
+      <line x1="480" y1="70"  x2="480" y2="560" stroke="rgba(31,28,24,0.35)" stroke-width="0.5" stroke-dasharray="4 3"/>
+      <line x1="120" y1="315" x2="840" y2="315" stroke="rgba(31,28,24,0.35)" stroke-width="0.5" stroke-dasharray="4 3"/>
+
+      <!-- Y-Achse mit Pfeil -->
+      <line x1="120" y1="560" x2="120" y2="60" stroke="#1f1c18" stroke-width="1"/>
+      <polygon points="116,66 124,66 120,54" fill="#1f1c18"/>
+
+      <!-- X-Achse mit Pfeil -->
+      <line x1="120" y1="560" x2="852" y2="560" stroke="#1f1c18" stroke-width="1"/>
+      <polygon points="846,556 846,564 858,560" fill="#1f1c18"/>
+
+      <!-- Y-Achsen-Beschriftung (vertikal) -->
+      <text x="80" y="315" font-family="'DM Sans', system-ui, sans-serif" font-size="13" fill="#1f1c18" text-anchor="middle" transform="rotate(-90, 80, 315)" font-weight="500">Leistungsumfang</text>
+
+      <!-- X-Achsen-Beschriftung -->
+      <text x="480" y="608" font-family="'DM Sans', system-ui, sans-serif" font-size="13" fill="#1f1c18" text-anchor="middle" font-weight="500">Spezialisierung auf Wirtschaftskanzleien</text>
+
+      <!-- Y-Achsen-Skalenwerte -->
+      <text x="112" y="90"  font-family="'DM Sans', system-ui, sans-serif" font-size="10" fill="rgba(31,28,24,0.6)" text-anchor="end">Beratung + Umsetzung</text>
+      <text x="112" y="552" font-family="'DM Sans', system-ui, sans-serif" font-size="10" fill="rgba(31,28,24,0.6)" text-anchor="end">nur Teilbereiche</text>
+
+      <!-- X-Achsen-Skalenwerte -->
+      <text x="145" y="582" font-family="'DM Sans', system-ui, sans-serif" font-size="10" fill="rgba(31,28,24,0.6)" text-anchor="start">generalistisch</text>
+      <text x="830" y="582" font-family="'DM Sans', system-ui, sans-serif" font-size="10" fill="rgba(31,28,24,0.6)" text-anchor="end">spezialisiert</text>
+
+      <!-- Quadranten-Labels -->
+      <g font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.4)">
+        <text x="140" y="88">Quadrant I</text>
+        <text x="820" y="88" text-anchor="end">Quadrant II</text>
+        <text x="140" y="333">Quadrant III</text>
+        <text x="820" y="333" text-anchor="end">Quadrant IV</text>
+      </g>
+
+      <!-- Meinking Legal Communications (Highlight) -->
+      <text x="660" y="142" font-family="'Cormorant Garamond', Georgia, serif" font-size="17" fill="#8c6b3a" text-anchor="middle" font-weight="600">Meinking Legal</text>
+      <text x="660" y="160" font-family="'Cormorant Garamond', Georgia, serif" font-size="17" fill="#8c6b3a" text-anchor="middle" font-weight="600">Communications</text>
+      <circle cx="660" cy="205" r="28" fill="#2c2520" stroke="#8c6b3a" stroke-width="1.8"/>
+      <text x="660" y="211" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="500" letter-spacing="1.4">MLC</text>
+
+      <!-- Kommunikationsberater (rechts oben) -->
+      <text x="780" y="215" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Kommunikations-</text>
+      <text x="780" y="231" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">berater</text>
+      <circle cx="780" cy="258" r="15" fill="rgba(31,28,24,0.22)" stroke="rgba(31,28,24,0.5)" stroke-width="0.8"/>
+      <text x="780" y="290" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">meist strategisch,</text>
+      <text x="780" y="304" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">ohne Umsetzung</text>
+
+      <!-- Kanzleimarketing-Agenturen (mittig) -->
+      <text x="560" y="238" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Kanzleimarketing-</text>
+      <text x="560" y="254" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Agenturen</text>
+      <circle cx="560" cy="282" r="15" fill="rgba(31,28,24,0.22)" stroke="rgba(31,28,24,0.5)" stroke-width="0.8"/>
+
+      <!-- Generalistische PR-Agenturen (Quadrant III) -->
+      <circle cx="240" cy="410" r="15" fill="rgba(31,28,24,0.22)" stroke="rgba(31,28,24,0.5)" stroke-width="0.8"/>
+      <text x="240" y="448" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Generalistische</text>
+      <text x="240" y="464" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">PR-Agenturen</text>
+      <text x="240" y="486" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">breites Portfolio,</text>
+      <text x="240" y="500" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">Preisdruck im Mittelstand</text>
+
+      <!-- Litigation-PR & Krisenkommunikation (Quadrant IV) -->
+      <circle cx="740" cy="410" r="15" fill="rgba(31,28,24,0.22)" stroke="rgba(31,28,24,0.5)" stroke-width="0.8"/>
+      <text x="740" y="448" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Litigation-PR &amp;</text>
+      <text x="740" y="464" font-family="'Cormorant Garamond', Georgia, serif" font-size="14" fill="#1f1c18" text-anchor="middle" font-weight="500">Krisenkommunikation</text>
+      <text x="740" y="486" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">eng fokussiert auf</text>
+      <text x="740" y="500" font-family="'Cormorant Garamond', Georgia, serif" font-size="11" font-style="italic" fill="rgba(31,28,24,0.55)" text-anchor="middle">Sondersituationen</text>
+    </svg>
   </div>
 
 </div>
@@ -1059,7 +1137,7 @@
         <tr class="indent"><td>Websiteerstellung (einmalig)</td><td>2.000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2.000</td></tr>
         <tr class="indent"><td>Visitenkarten (einmalig)</td><td>150</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>150</td></tr>
         <tr class="sum-row"><td>Gesamtausgaben</td><td>6.148</td><td>498</td><td>498</td><td>648</td><td>648</td><td>648</td><td>698</td><td>798</td><td>798</td><td>898</td><td>898</td><td>898</td><td>14.076</td></tr>
-        <tr><td>USt-Saldo Finanzamt (Vormonat); + = Zahlung, &minus; = VSt-Erstattung</td><td>0</td><td>&minus;1.154</td><td>&minus;80</td><td>&minus;80</td><td>&minus;109</td><td>176</td><td>176</td><td>1.117</td><td>1.383</td><td>1.383</td><td>1.364</td><td>1.364</td><td>5.537</td></tr>
+        <tr><td>USt-Saldo Finanzamt (Vormonat); + = Zahlung, &minus; = VSt-Erstattung</td><td>0</td><td class="erstattung">&minus;1.154</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;109</td><td class="zahlung">176</td><td class="zahlung">176</td><td class="zahlung">1.117</td><td class="zahlung">1.383</td><td class="zahlung">1.383</td><td class="zahlung">1.364</td><td class="zahlung">1.364</td><td class="zahlung">5.537</td></tr>
         <tr><td>Liquidit&auml;tssaldo (Monat) — Einnahmen inkl. USt &minus; Ausgaben</td><td class="neg">&minus;6.148</td><td>656</td><td class="neg">&minus;418</td><td class="neg">&minus;568</td><td>1.246</td><td>961</td><td>6.861</td><td>7.605</td><td>7.339</td><td>7.239</td><td>7.258</td><td>7.258</td><td>39.292</td></tr>
         <tr class="total-row"><td>ENDBESTAND (kumuliert)</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td>2.590</td><td>10.196</td><td>17.535</td><td>24.775</td><td>32.033</td><td>39.292</td><td>39.292</td></tr>
       </tbody>
