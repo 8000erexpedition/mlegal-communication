@@ -356,13 +356,40 @@
       font-style: italic;
     }
 
-    /* Horizontal bar chart */
-    .bar-chart { display: flex; flex-direction: column; gap: 2mm; margin: 3mm 0; }
-    .bar-row { display: grid; grid-template-columns: 55mm 1fr 18mm; gap: 3mm; align-items: center; font-size: 9pt; }
-    .bar-row__label { color: var(--text); }
-    .bar-row__track { height: 4mm; background: rgba(31,28,24, 0.06); border-radius: 1px; position: relative; overflow: hidden; }
-    .bar-row__fill { height: 100%; background: var(--accent); opacity: 0.7; }
-    .bar-row__value { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+    /* Querformatseite für breite Monats-Tabelle */
+    @page landscape-finanz {
+      size: A4 landscape;
+      margin: 15mm 16mm 15mm 16mm;
+    }
+    .page.landscape {
+      page: landscape-finanz;
+      width: 297mm;
+      min-height: 210mm;
+    }
+    .page.landscape .header { padding: 14mm 18mm 5mm 18mm; }
+    .page.landscape .content { padding: 4mm 18mm 8mm 18mm; }
+
+    /* Kompakte Monatstabelle (13 Spalten + Label) */
+    .finanz-table--monthly {
+      font-size: 7.8pt;
+      width: 100%;
+      table-layout: fixed;
+    }
+    .finanz-table--monthly th,
+    .finanz-table--monthly td {
+      padding: 1mm 1mm;
+    }
+    .finanz-table--monthly th:first-child,
+    .finanz-table--monthly td:first-child {
+      width: 56mm;
+      text-align: left;
+    }
+    .finanz-table--monthly th:last-child,
+    .finanz-table--monthly td:last-child {
+      font-weight: 500;
+      background: rgba(31,28,24, 0.04);
+    }
+    .finanz-table--monthly .neg { color: #a23a2a; }
 
     /* ─── Footer ───────────────────────────────── */
     .footer {
@@ -745,9 +772,84 @@
 
     <p>Im Vertrieb starte ich mit einem kurzen Erstgespr&auml;ch, in dem ich Ziele, Ausgangslage und Priorit&auml;ten kl&auml;re. Anschlie&szlig;end schlage ich, je nach Bedarf, eine kurze Analyse oder ein Arbeitsgespr&auml;ch vor, um die Situation strukturiert zu erfassen und konkrete n&auml;chste Schritte abzuleiten. Darauf aufbauend erstelle ich ein passgenaues Angebot, das Umfang, Zeitplan und Verantwortlichkeiten transparent beschreibt. Die Zusammenarbeit beginne ich mit einem Auftakttermin, in dem ich die zust&auml;ndigen Ansprechpartner in der Kanzlei, die Freigabewege, den Zeitplan und die n&auml;chsten Arbeitsschritte festlege, damit die Umsetzung verl&auml;sslich und effizient l&auml;uft.</p>
 
-    <p style="margin-top: 6mm; margin-bottom: 4mm; color: var(--muted);">Der Vertriebsprozess im &Uuml;berblick:</p>
+    <div style="margin-top: 6mm;">
+      <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vertriebsprozess im Überblick" style="width: 100%; max-width: 160mm; height: auto; display: block; margin: 0 auto;">
+        <!-- Titel -->
+        <text x="450" y="34" font-family="'Cormorant Garamond', Georgia, serif" font-size="22" fill="#1f1c18" text-anchor="middle" font-weight="500">Der Vertriebsprozess im &#220;berblick</text>
 
-    <img src="vertriebsprozess.png" alt="Vertriebsprozess im Überblick" style="width: 100%; max-width: 160mm; height: auto; display: block; margin: 0 auto;">
+        <!-- Pfeile zwischen den Kreisen -->
+        <g stroke="#8c6b3a" stroke-width="1.2" fill="none" opacity="0.45">
+          <line x1="210" y1="140" x2="295" y2="140"/>
+          <line x1="410" y1="140" x2="495" y2="140"/>
+          <line x1="610" y1="140" x2="695" y2="140"/>
+        </g>
+        <g fill="#8c6b3a" opacity="0.45">
+          <polygon points="295,134 295,146 307,140"/>
+          <polygon points="495,134 495,146 507,140"/>
+          <polygon points="695,134 695,146 707,140"/>
+        </g>
+
+        <!-- Kreis 1 -->
+        <circle cx="150" cy="140" r="45" fill="#8c6b3a"/>
+        <text x="150" y="157" font-family="'Cormorant Garamond', Georgia, serif" font-size="42" fill="#ffffff" text-anchor="middle" font-weight="400">1</text>
+
+        <!-- Kreis 2 -->
+        <circle cx="350" cy="140" r="45" fill="#8c6b3a"/>
+        <text x="350" y="157" font-family="'Cormorant Garamond', Georgia, serif" font-size="42" fill="#ffffff" text-anchor="middle" font-weight="400">2</text>
+
+        <!-- Kreis 3 -->
+        <circle cx="550" cy="140" r="45" fill="#8c6b3a"/>
+        <text x="550" y="157" font-family="'Cormorant Garamond', Georgia, serif" font-size="42" fill="#ffffff" text-anchor="middle" font-weight="400">3</text>
+
+        <!-- Kreis 4 — dunkler, signalisiert Zusammenarbeit -->
+        <circle cx="750" cy="140" r="45" fill="#2c2520"/>
+        <text x="750" y="157" font-family="'Cormorant Garamond', Georgia, serif" font-size="42" fill="#ffffff" text-anchor="middle" font-weight="400">4</text>
+
+        <!-- Labels -->
+        <g font-family="'Cormorant Garamond', Georgia, serif" font-size="19" fill="#1f1c18" font-weight="500" text-anchor="middle">
+          <text x="150" y="220">Erstgespr&#228;ch</text>
+          <text x="350" y="220">Analyse</text>
+          <text x="550" y="220">Angebot</text>
+          <text x="750" y="220">Auftakttermin</text>
+        </g>
+
+        <!-- Beschreibungen -->
+        <g font-family="'DM Sans', system-ui, sans-serif" font-size="11" fill="rgba(31,28,24,0.65)" text-anchor="middle">
+          <text x="150" y="250">Ziele, Ausgangslage</text>
+          <text x="150" y="265">und Priorit&#228;ten</text>
+          <text x="150" y="280">kl&#228;ren</text>
+
+          <text x="350" y="250">Situation strukturiert</text>
+          <text x="350" y="265">erfassen, n&#228;chste</text>
+          <text x="350" y="280">Schritte ableiten</text>
+
+          <text x="550" y="250">Passgenaues Angebot:</text>
+          <text x="550" y="265">Umfang, Zeitplan,</text>
+          <text x="550" y="280">Verantwortlichkeiten</text>
+
+          <text x="750" y="250">Ansprechpartner,</text>
+          <text x="750" y="265">Freigabewege und</text>
+          <text x="750" y="280">Zeitplan festlegen</text>
+        </g>
+
+        <!-- Status (italic) -->
+        <g font-family="'Cormorant Garamond', Georgia, serif" font-size="13" font-style="italic" text-anchor="middle">
+          <text x="150" y="312" fill="rgba(140,107,58,0.85)">ca. 30&ndash;45 Min.</text>
+          <text x="350" y="312" fill="rgba(140,107,58,0.85)">je nach Bedarf</text>
+          <text x="550" y="312" fill="rgba(140,107,58,0.85)">transparent</text>
+          <text x="750" y="312" fill="rgba(31,28,24,0.75)">Start der Zusammenarbeit</text>
+        </g>
+
+        <!-- Trennlinie und Phasen -->
+        <line x1="60" y1="358" x2="840" y2="358" stroke="rgba(31,28,24,0.25)" stroke-width="0.6"/>
+        <line x1="450" y1="351" x2="450" y2="365" stroke="rgba(31,28,24,0.4)" stroke-width="0.5" stroke-dasharray="2 2"/>
+
+        <g font-family="'DM Sans', system-ui, sans-serif" font-size="10" fill="rgba(31,28,24,0.55)" text-anchor="middle" letter-spacing="2">
+          <text x="250" y="390">KENNENLERNEN &#38; VERSTEHEN</text>
+          <text x="650" y="390">VEREINBAREN &#38; STARTEN</text>
+        </g>
+      </svg>
+    </div>
   </div>
 
 </div>
@@ -850,84 +952,64 @@
     <div class="chapter-title">Finanzen</div>
     <div class="section-title" style="margin-top: 0;">Lebenshaltungskosten</div>
 
-    <p>Die folgende &Uuml;bersicht zeigt meine privaten Lebenshaltungskosten nach Kategorie. Sie bilden die Grundlage f&uuml;r den <strong>Mindestgewinn</strong>, den das Unternehmen erwirtschaften muss, um meinen Lebensunterhalt zu sichern.</p>
+    <p style="font-size: 9pt; margin-bottom: 4mm;">Auflistung der privaten Lebenshaltungskosten als Grundlage f&uuml;r den Mindestgewinn. Alle Betr&auml;ge in Euro.</p>
 
-    <div class="bar-chart" style="margin: 6mm 0 4mm 0;">
-      <!-- Max = 779 (Wohnkosten) → Fill-Prozent relativ dazu -->
-      <div class="bar-row">
-        <div class="bar-row__label">Wohnkosten</div>
-        <div class="bar-row__track"><div class="bar-row__fill" style="width: 100%;"></div></div>
-        <div class="bar-row__value">779 &euro;</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row__label">Lebensunterhalt</div>
-        <div class="bar-row__track"><div class="bar-row__fill" style="width: 77%;"></div></div>
-        <div class="bar-row__value">600 &euro;</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row__label">R&uuml;cklagen &amp; Sohn</div>
-        <div class="bar-row__track"><div class="bar-row__fill" style="width: 63.5%;"></div></div>
-        <div class="bar-row__value">495 &euro;</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row__label">Soziale Absicherung</div>
-        <div class="bar-row__track"><div class="bar-row__fill" style="width: 52.9%;"></div></div>
-        <div class="bar-row__value">412 &euro;</div>
-      </div>
-      <div class="bar-row">
-        <div class="bar-row__label">Mobilit&auml;t</div>
-        <div class="bar-row__track"><div class="bar-row__fill" style="width: 27%;"></div></div>
-        <div class="bar-row__value">210 &euro;</div>
-      </div>
-    </div>
-    <div class="chart-caption">Monatliche Aufwendungen nach Kategorie (in Euro)</div>
-
-    <table class="finanz-table" style="margin-top: 6mm;">
+    <table class="finanz-table">
       <thead>
         <tr>
           <th>Position</th>
-          <th>pro Monat</th>
-          <th>pro Jahr</th>
+          <th>im Monat</th>
+          <th>im Jahr</th>
         </tr>
       </thead>
       <tbody>
         <tr class="section-row"><td colspan="3">Wohnkosten</td></tr>
-        <tr class="indent"><td>Miete (privat)</td><td>560 &euro;</td><td>6.720 &euro;</td></tr>
-        <tr class="indent"><td>Strom, Wasser, Gas</td><td>164 &euro;</td><td>1.968 &euro;</td></tr>
-        <tr class="indent"><td>Telefon, Internet, GEZ</td><td>55 &euro;</td><td>660 &euro;</td></tr>
+        <tr class="indent"><td>Miete (privat)</td><td>560,00</td><td>6.720,00</td></tr>
+        <tr class="indent"><td>Strom, Wasser, Gas</td><td>164,00</td><td>1.968,00</td></tr>
+        <tr class="indent"><td>Telefon</td><td>10,00</td><td>120,00</td></tr>
+        <tr class="indent"><td>Internet</td><td>25,00</td><td>300,00</td></tr>
+        <tr class="indent"><td>GEZ (Rundfunkbeitrag)</td><td>20,00</td><td>240,00</td></tr>
 
         <tr class="section-row"><td colspan="3">Soziale Absicherung</td></tr>
-        <tr class="indent"><td>Krankenversicherung (GKV freiwillig)</td><td>213 &euro;</td><td>2.556 &euro;</td></tr>
-        <tr class="indent"><td>Rentenversicherung / Altersvorsorge</td><td>105 &euro;</td><td>1.260 &euro;</td></tr>
-        <tr class="indent"><td>Freiwillige Arbeitslosenversicherung</td><td>52 &euro;</td><td>624 &euro;</td></tr>
-        <tr class="indent"><td>Pflegeversicherung</td><td>42 &euro;</td><td>504 &euro;</td></tr>
+        <tr class="indent"><td>Krankenversicherung</td><td>213,00</td><td>2.556,00</td></tr>
+        <tr class="indent"><td>Rentenversicherung / Altersvorsorge</td><td>105,00</td><td>1.260,00</td></tr>
+        <tr class="indent"><td>Freiwillige Arbeitslosenversicherung</td><td>52,00</td><td>624,00</td></tr>
+        <tr class="indent"><td>Pflegeversicherung</td><td>42,00</td><td>504,00</td></tr>
 
-        <tr class="section-row"><td colspan="3">Mobilit&auml;t</td></tr>
-        <tr class="indent"><td>Kfz-Steuer, Leasing, Benzin</td><td>210 &euro;</td><td>2.520 &euro;</td></tr>
+        <tr class="section-row"><td colspan="3">Sonstige Verpflichtungen</td></tr>
+        <tr class="indent"><td>Private Kredite</td><td>0,00</td><td>0,00</td></tr>
+        <tr class="indent"><td>Bausparvertr&auml;ge</td><td>0,00</td><td>0,00</td></tr>
+
+        <tr class="section-row"><td colspan="3">Mobilit&auml;tskosten</td></tr>
+        <tr class="indent"><td>Kfz-Steuer</td><td>10,00</td><td>120,00</td></tr>
+        <tr class="indent"><td>Kfz-Leasing</td><td>100,00</td><td>1.200,00</td></tr>
+        <tr class="indent"><td>Benzin, Reparatur, Pflege</td><td>100,00</td><td>1.200,00</td></tr>
 
         <tr class="section-row"><td colspan="3">Lebensunterhalt</td></tr>
-        <tr class="indent"><td>Lebensmittel, Kleidung, Freizeit</td><td>500 &euro;</td><td>6.000 &euro;</td></tr>
-        <tr class="indent"><td>Hausrat, Bildung, Unterhaltung</td><td>100 &euro;</td><td>1.200 &euro;</td></tr>
+        <tr class="indent"><td>Lebensmittel, Kleidung, Freizeit</td><td>500,00</td><td>6.000,00</td></tr>
+        <tr class="indent"><td>Hausrat, Reparaturen</td><td>50,00</td><td>600,00</td></tr>
+        <tr class="indent"><td>Bildung / Unterhaltung</td><td>50,00</td><td>600,00</td></tr>
 
         <tr class="section-row"><td colspan="3">R&uuml;cklagen &amp; Sohn</td></tr>
-        <tr class="indent"><td>R&uuml;cklagen (Urlaub, Krankheit)</td><td>300 &euro;</td><td>3.600 &euro;</td></tr>
-        <tr class="indent"><td>Sohn (PKV, Pflegezusatz, Sport)</td><td>195 &euro;</td><td>2.340 &euro;</td></tr>
+        <tr class="indent"><td>R&uuml;cklagen (Urlaub, Krankheit etc.)</td><td>300,00</td><td>3.600,00</td></tr>
+        <tr class="indent"><td>Aufwendungen f&uuml;r Sohn (PKV und Pflegezusatz)</td><td>145,00</td><td>1.740,00</td></tr>
+        <tr class="indent"><td>Aufwendungen f&uuml;r Sohn (Sport)</td><td>50,00</td><td>600,00</td></tr>
 
-        <tr class="sum-row"><td>Summe private Ausgaben</td><td>2.496 &euro;</td><td>29.952 &euro;</td></tr>
-        <tr><td>+ Einkommensteuer (Pauschale 19 %)</td><td>474 &euro;</td><td>5.691 &euro;</td></tr>
-        <tr class="total-row"><td>Mindestgewinn</td><td>2.970 &euro;</td><td>35.643 &euro;</td></tr>
+        <tr class="sum-row"><td>Summe private Ausgaben</td><td>2.496,00</td><td>29.952,00</td></tr>
+        <tr><td>plus Einkommensteuer (Pauschalsch&auml;tzung 19 %)</td><td>474,24</td><td>5.690,88</td></tr>
+        <tr class="total-row"><td>Gesamtsumme = Mindestgewinn</td><td>2.970,24</td><td>35.642,88</td></tr>
       </tbody>
     </table>
 
-    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Hinweis: Die Einkommensteuer ist hier als Pauschale von 19 % angesetzt. Die tats&auml;chliche Steuer ergibt sich aus der Zusammenveranlagung (Splittingtarif) und wird im Rentabilit&auml;tsplan berechnet. Annahme f&uuml;r die Sozialversicherung: GKV freiwillig mit Mindestbeitrag, freiwillige Altersvorsorge &uuml;ber DRV.</em></p>
+    <p style="font-size: 7.5pt; color: var(--muted); margin-top: 3mm;"><em>Hinweis: Die Einkommensteuer ist hier als Pauschale von 19 % angesetzt. Die tats&auml;chliche Steuer ergibt sich aus der Zusammenveranlagung (Splittingtarif) und wird im Rentabilit&auml;tsplan berechnet.</em></p>
   </div>
 
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     SEITE 14: FINANZEN — LIQUIDITÄTSPLAN
+     SEITE 14: FINANZEN — LIQUIDITÄTSPLAN (Querformat)
      ═══════════════════════════════════════════════ -->
-<div class="page page-break">
+<div class="page page-break landscape">
   <div class="header">
     <div class="logo-mark"></div>
     <div class="header-text">
@@ -940,86 +1022,46 @@
     <div class="chapter-title">Finanzen <span style="font-size: 14pt; color: var(--muted); font-weight: 300;">(Fortsetzung)</span></div>
     <div class="section-title" style="margin-top: 0;">Liquidit&auml;tsplan (Sep 2026 &ndash; Aug 2027)</div>
 
-    <p>Der Liquidit&auml;tsplan zeigt die monatliche Entwicklung des Kontostands w&auml;hrend der Gr&uuml;ndungsphase. Nach anf&auml;nglichen Setup-Kosten und Vorlaufzeit bis zum ersten Zahlungseingang wird das Konto ab M&auml;rz 2027 durchg&auml;ngig positiv und w&auml;chst bis August 2027 auf knapp 40.000 &euro; an.</p>
+    <p style="font-size: 8.5pt; margin-bottom: 3mm;">Monatliche Einzahlungen, Auszahlungen, Umsatzsteuer-Saldo und Endbestand. Alle Betr&auml;ge in Euro. Zahlungsziel 30 Tage.</p>
 
-    <div class="chart-container" style="margin: 4mm 0 2mm 0;">
-      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Endbestand-Kurve monatlich">
-        <!-- Gitter und Achsen -->
-        <line x1="60" y1="20"  x2="60"  y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
-        <line x1="60" y1="240" x2="625" y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
-
-        <!-- Nulllinie -->
-        <line x1="60" y1="204.8" x2="625" y2="204.8" stroke="rgba(31,28,24,0.4)" stroke-width="0.5" stroke-dasharray="2 2"/>
-        <text x="55" y="207.5" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">0</text>
-
-        <!-- Y-Achsen-Labels -->
-        <text x="55" y="24"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">42 k&euro;</text>
-        <text x="55" y="67"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">30 k&euro;</text>
-        <text x="55" y="109"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">20 k&euro;</text>
-        <text x="55" y="151.6" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">10 k&euro;</text>
-
-        <!-- Fläche unter Kurve (nur positiver Teil) -->
-        <path d="M 60,204.8 L 60,231.85 L 110,228.96 L 161,230.80 L 211,233.30 L 262,227.82 L 312,223.59 L 363,193.40 L 413,159.94 L 464,127.65 L 514,95.79 L 565,63.85 L 615,31.92 L 615,240 L 60,240 Z"
-              fill="rgba(140,107,58,0.12)"/>
-
-        <!-- Linie -->
-        <polyline points="60,231.85 110,228.96 161,230.80 211,233.30 262,227.82 312,223.59 363,193.40 413,159.94 464,127.65 514,95.79 565,63.85 615,31.92"
-                  fill="none" stroke="#8c6b3a" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-
-        <!-- Datenpunkte -->
-        <circle cx="60"  cy="231.85" r="2.5" fill="#8c6b3a"/>
-        <circle cx="110" cy="228.96" r="2.5" fill="#8c6b3a"/>
-        <circle cx="161" cy="230.80" r="2.5" fill="#8c6b3a"/>
-        <circle cx="211" cy="233.30" r="2.5" fill="#8c6b3a"/>
-        <circle cx="262" cy="227.82" r="2.5" fill="#8c6b3a"/>
-        <circle cx="312" cy="223.59" r="2.5" fill="#8c6b3a"/>
-        <circle cx="363" cy="193.40" r="2.5" fill="#8c6b3a"/>
-        <circle cx="413" cy="159.94" r="2.5" fill="#8c6b3a"/>
-        <circle cx="464" cy="127.65" r="2.5" fill="#8c6b3a"/>
-        <circle cx="514" cy="95.79"  r="2.5" fill="#8c6b3a"/>
-        <circle cx="565" cy="63.85"  r="2.5" fill="#8c6b3a"/>
-        <circle cx="615" cy="31.92"  r="2.5" fill="#8c6b3a"/>
-
-        <!-- X-Achsen-Labels -->
-        <text x="60"  y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Sep</text>
-        <text x="110" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Okt</text>
-        <text x="161" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Nov</text>
-        <text x="211" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Dez</text>
-        <text x="262" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jan</text>
-        <text x="312" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Feb</text>
-        <text x="363" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">M&#228;r</text>
-        <text x="413" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Apr</text>
-        <text x="464" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Mai</text>
-        <text x="514" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jun</text>
-        <text x="565" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jul</text>
-        <text x="615" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Aug</text>
-
-        <!-- Wertbeschriftung am Ende -->
-        <text x="615" y="25" font-family="Cormorant Garamond" font-size="10" font-weight="500" fill="#8c6b3a" text-anchor="end">+39.292 &euro;</text>
-        <text x="60"  y="248" font-family="Cormorant Garamond" font-size="9" fill="rgba(31,28,24,0.55)" text-anchor="start" dy="-10">&minus;6.148 &euro;</text>
-      </svg>
-    </div>
-    <div class="chart-caption">Kontostand kumuliert &ndash; Endbestand jeweils zum Monatsende (in Euro)</div>
-
-    <table class="finanz-table" style="margin-top: 6mm;">
+    <table class="finanz-table finanz-table--monthly">
       <thead>
         <tr>
-          <th>Kennzahl (Jahr 1)</th>
-          <th>Betrag</th>
+          <th>Position</th>
+          <th>Sep 26</th><th>Okt 26</th><th>Nov 26</th><th>Dez 26</th><th>Jan 27</th><th>Feb 27</th><th>Mrz 27</th><th>Apr 27</th><th>Mai 27</th><th>Jun 27</th><th>Jul 27</th><th>Aug 27</th>
+          <th>Gesamt</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Geplanter Umsatz (Leistung, netto)</td><td>57.500 &euro;</td></tr>
-        <tr><td>Zahlungseing&auml;nge brutto (inkl. USt, 30 Tage Ziel)</td><td>58.905 &euro;</td></tr>
-        <tr><td>Gesamtauszahlungen (Betriebskosten + Setup)</td><td>14.076 &euro;</td></tr>
-        <tr><td>USt-Saldo an das Finanzamt (per Saldo)</td><td>5.537 &euro;</td></tr>
-        <tr class="sum-row"><td>Liquidit&auml;tssaldo Jahr 1</td><td>39.292 &euro;</td></tr>
-        <tr><td>Tiefststand Kontostand (Dez 2026)</td><td>&minus;6.477 &euro;</td></tr>
-        <tr><td>Break-even Kontostand (ab M&auml;rz 2027)</td><td>+2.590 &euro;</td></tr>
+        <tr><td>Anfangsbestand (Startbudget)</td><td>0</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td>2.590</td><td>10.196</td><td>17.535</td><td>24.775</td><td>32.033</td><td>&mdash;</td></tr>
+        <tr class="section-row"><td colspan="14">UMSATZ (informativ — wann die Leistung erbracht wird)</td></tr>
+        <tr class="indent"><td>Umsatz (geplant, netto)</td><td>0</td><td>0</td><td>0</td><td>1.500</td><td>1.500</td><td>6.500</td><td>8.000</td><td>8.000</td><td>8.000</td><td>8.000</td><td>8.000</td><td>8.000</td><td>57.500</td></tr>
+        <tr class="section-row"><td colspan="14">EINNAHMEN (Zahlungseing&auml;nge — tats&auml;chliche Liquidit&auml;t)</td></tr>
+        <tr class="indent"><td>Zahlungseingang netto (30 Tage verz&ouml;gert)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1.500</td><td>1.500</td><td>6.500</td><td>8.000</td><td>8.000</td><td>8.000</td><td>8.000</td><td>8.000</td><td>49.500</td></tr>
+        <tr class="indent"><td>Eingenommene Umsatzsteuer (19 %)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>285</td><td>285</td><td>1.235</td><td>1.520</td><td>1.520</td><td>1.520</td><td>1.520</td><td>1.520</td><td>9.405</td></tr>
+        <tr class="indent"><td>Darlehen</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr class="indent"><td>Sonstige Einzahlungen</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr class="sum-row"><td>Gesamteinzahlungen</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1.785</td><td>1.785</td><td>7.735</td><td>9.520</td><td>9.520</td><td>9.520</td><td>9.520</td><td>9.520</td><td>58.905</td></tr>
+        <tr class="section-row"><td colspan="14">AUSGABEN (Betriebskosten)</td></tr>
+        <tr class="indent"><td>Miete (einschl. Nebenkosten)</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr class="indent"><td>Telefon</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td><td>120</td></tr>
+        <tr class="indent"><td>Marketing (laufend)</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>1.200</td></tr>
+        <tr class="indent"><td>Deutschland Ticket</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>63</td><td>756</td></tr>
+        <tr class="indent"><td>Reisekosten</td><td>0</td><td>0</td><td>0</td><td>150</td><td>150</td><td>150</td><td>200</td><td>300</td><td>300</td><td>400</td><td>400</td><td>400</td><td>2.450</td></tr>
+        <tr class="indent"><td>Betriebs- / Verm&ouml;gensschadenshaftpflicht</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>35</td><td>420</td></tr>
+        <tr class="indent"><td>Steuerberaterkosten</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>160</td><td>1.920</td></tr>
+        <tr class="indent"><td>Software / Tools / Cloud / KI</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>30</td><td>360</td></tr>
+        <tr class="indent"><td>Website / Hosting / Domain</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td><td>1.200</td></tr>
+        <tr class="indent"><td>Fotoshooting Website (einmalig)</td><td>2.000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2.000</td></tr>
+        <tr class="indent"><td>LinkedIn-Kampagne (j&auml;hrlich)</td><td>1.500</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1.500</td></tr>
+        <tr class="indent"><td>Websiteerstellung (einmalig)</td><td>2.000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2.000</td></tr>
+        <tr class="indent"><td>Visitenkarten (einmalig)</td><td>150</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>150</td></tr>
+        <tr class="sum-row"><td>Gesamtauszahlungen</td><td>6.148</td><td>498</td><td>498</td><td>648</td><td>648</td><td>648</td><td>698</td><td>798</td><td>798</td><td>898</td><td>898</td><td>898</td><td>14.076</td></tr>
+        <tr><td>USt-Saldo Finanzamt (Vormonat); + = Zahlung, &minus; = VSt-Erstattung</td><td>0</td><td class="neg">&minus;1.154</td><td class="neg">&minus;80</td><td class="neg">&minus;80</td><td class="neg">&minus;109</td><td>176</td><td>176</td><td>1.117</td><td>1.383</td><td>1.383</td><td>1.364</td><td>1.364</td><td>5.537</td></tr>
+        <tr><td>Liquidit&auml;tssaldo (Monat) — Einzahlungen inkl. USt &minus; Auszahlungen</td><td class="neg">&minus;6.148</td><td>656</td><td class="neg">&minus;418</td><td class="neg">&minus;568</td><td>1.246</td><td>961</td><td>6.861</td><td>7.605</td><td>7.339</td><td>7.239</td><td>7.258</td><td>7.258</td><td>39.292</td></tr>
+        <tr class="total-row"><td>ENDBESTAND (kumuliert)</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td>2.590</td><td>10.196</td><td>17.535</td><td>24.775</td><td>32.033</td><td>39.292</td><td>39.292</td></tr>
       </tbody>
     </table>
-
-    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: 30 Tage Zahlungsziel, Einnahmen starten ab Dez 2026, erster Gro&szlig;kunden-Retainer ab Feb 2027, monatliche USt-Voranmeldung. Die Startfinanzierung von rund 6.500 &euro; wird aus Eigenmitteln bereitgestellt.</em></p>
   </div>
 
 </div>
@@ -1040,94 +1082,48 @@
     <div class="chapter-title">Finanzen <span style="font-size: 14pt; color: var(--muted); font-weight: 300;">(Fortsetzung)</span></div>
     <div class="section-title" style="margin-top: 0;">Umsatz- und Rentabilit&auml;tsplan (Jahr 1 &ndash; 3)</div>
 
-    <p>Der Plan zeigt die geplante Entwicklung &uuml;ber die ersten drei Gesch&auml;ftsjahre. Nach der Aufbauphase im Jahr 1 wird ab Jahr 2 mit einem stabilen Gro&szlig;kunden-Portfolio und h&ouml;herer Auslastung gerechnet.</p>
+    <p style="font-size: 9pt; margin-bottom: 4mm;">Drei-Jahres-Plan mit allen Kostenpositionen, EBIT, Steuern und Gewinn nach Steuern. Alle Betr&auml;ge in Euro (netto).</p>
 
-    <div class="chart-container" style="margin: 4mm 0 2mm 0;">
-      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Umsatz, Kosten, Gewinn über 3 Jahre">
-        <!-- Achsen -->
-        <line x1="70" y1="20"  x2="70"  y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
-        <line x1="70" y1="240" x2="625" y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
-
-        <!-- Y-Gitter -->
-        <line x1="70" y1="20"    x2="625" y2="20"    stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
-        <line x1="70" y1="72.5"  x2="625" y2="72.5"  stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
-        <line x1="70" y1="125"   x2="625" y2="125"   stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
-        <line x1="70" y1="177.5" x2="625" y2="177.5" stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
-
-        <text x="65" y="24"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">200 k&euro;</text>
-        <text x="65" y="76"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">150 k&euro;</text>
-        <text x="65" y="128.5" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">100 k&euro;</text>
-        <text x="65" y="181"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">50 k&euro;</text>
-        <text x="65" y="243"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">0</text>
-
-        <!-- Gruppe Jahr 1 (Zentrum x=170) -->
-        <!-- Umsatz -->
-        <rect x="120" y="179.63" width="28" height="60.37" fill="#8c6b3a" opacity="0.9"/>
-        <text x="134" y="174" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">57,5 k</text>
-        <!-- Gesamtkosten -->
-        <rect x="152" y="225.22" width="28" height="14.78" fill="rgba(31,28,24,0.35)"/>
-        <text x="166" y="221" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">14,1 k</text>
-        <!-- Gewinn nach Steuern -->
-        <rect x="184" y="202.81" width="28" height="37.19" fill="rgba(140,107,58,0.55)"/>
-        <text x="198" y="198" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">35,4 k</text>
-        <text x="166" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 1</text>
-
-        <!-- Gruppe Jahr 2 (Zentrum x=350) -->
-        <!-- Umsatz -->
-        <rect x="300" y="76.2" width="28" height="163.8" fill="#8c6b3a" opacity="0.9"/>
-        <text x="314" y="70" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">156 k</text>
-        <!-- Gesamtkosten -->
-        <rect x="332" y="214.64" width="28" height="25.36" fill="rgba(31,28,24,0.35)"/>
-        <text x="346" y="210" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">24,2 k</text>
-        <!-- Gewinn nach Steuern -->
-        <rect x="364" y="157.21" width="28" height="82.79" fill="rgba(140,107,58,0.55)"/>
-        <text x="378" y="152" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">78,8 k</text>
-        <text x="346" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 2</text>
-
-        <!-- Gruppe Jahr 3 (Zentrum x=530) -->
-        <!-- Umsatz -->
-        <rect x="480" y="38.4" width="28" height="201.6" fill="#8c6b3a" opacity="0.9"/>
-        <text x="494" y="32" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">192 k</text>
-        <!-- Gesamtkosten -->
-        <rect x="512" y="199.14" width="28" height="40.86" fill="rgba(31,28,24,0.35)"/>
-        <text x="526" y="194" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">38,9 k</text>
-        <!-- Gewinn nach Steuern -->
-        <rect x="544" y="144.36" width="28" height="95.64" fill="rgba(140,107,58,0.55)"/>
-        <text x="558" y="139" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">91,1 k</text>
-        <text x="526" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 3</text>
-
-        <!-- Legende -->
-        <g transform="translate(70, 270)">
-          <rect x="0"  y="-8" width="10" height="8" fill="#8c6b3a" opacity="0.9"/>
-          <text x="14" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Umsatz</text>
-          <rect x="70" y="-8" width="10" height="8" fill="rgba(31,28,24,0.35)"/>
-          <text x="84" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Gesamtkosten</text>
-          <rect x="168" y="-8" width="10" height="8" fill="rgba(140,107,58,0.55)"/>
-          <text x="182" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Gewinn nach Steuern</text>
-        </g>
-      </svg>
-    </div>
-    <div class="chart-caption">Umsatz, Gesamtkosten und Gewinn nach Steuern pro Jahr (in Tausend Euro)</div>
-
-    <table class="finanz-table" style="margin-top: 6mm;">
+    <table class="finanz-table">
       <thead>
         <tr>
-          <th>Position</th>
-          <th>Jahr 1</th>
-          <th>Jahr 2</th>
-          <th>Jahr 3</th>
+          <th>Planperiode</th>
+          <th>Plan Jahr 1</th>
+          <th>Plan Jahr 2</th>
+          <th>Plan Jahr 3</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Umsatzerl&ouml;se</td><td>57.500 &euro;</td><td>156.000 &euro;</td><td>192.000 &euro;</td></tr>
-        <tr><td>Gesamtkosten</td><td>14.076 &euro;</td><td>24.156 &euro;</td><td>38.916 &euro;</td></tr>
-        <tr class="sum-row"><td>EBIT / Gewinn vor Steuern</td><td>43.424 &euro;</td><td>131.844 &euro;</td><td>153.084 &euro;</td></tr>
-        <tr><td>Einkommensteuer (gesch&auml;tzt, Splittingtarif)</td><td>8.000 &euro;</td><td>53.000 &euro;</td><td>62.000 &euro;</td></tr>
-        <tr class="total-row"><td>Gewinn nach Steuern</td><td>35.424 &euro;</td><td>78.844 &euro;</td><td>91.084 &euro;</td></tr>
+        <tr><td>Kommunikationsdienstleistungen</td><td>57.500</td><td>156.000</td><td>192.000</td></tr>
+        <tr class="sum-row"><td>Umsatzerl&ouml;se (Summe)</td><td>57.500</td><td>156.000</td><td>192.000</td></tr>
+        <tr class="sum-row"><td>Rohertrag</td><td>57.500</td><td>156.000</td><td>192.000</td></tr>
+
+        <tr class="section-row"><td colspan="4">Kosten</td></tr>
+        <tr class="indent"><td>Personalkosten</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr class="indent"><td>Fremdleistungen</td><td>0</td><td>0</td><td>12.000</td></tr>
+        <tr class="indent"><td>Miete (einschl. Nebenkosten)</td><td>0</td><td>4.200</td><td>4.200</td></tr>
+        <tr class="indent"><td>Telefon</td><td>120</td><td>120</td><td>120</td></tr>
+        <tr class="indent"><td>Marketing (laufend)</td><td>1.200</td><td>1.200</td><td>1.200</td></tr>
+        <tr class="indent"><td>Deutschland Ticket</td><td>756</td><td>756</td><td>756</td></tr>
+        <tr class="indent"><td>Reisekosten</td><td>2.450</td><td>9.600</td><td>11.400</td></tr>
+        <tr class="indent"><td>Betriebs- / Verm&ouml;gensschadenshaftpflicht</td><td>420</td><td>420</td><td>420</td></tr>
+        <tr class="indent"><td>Steuerberaterkosten</td><td>1.920</td><td>4.800</td><td>5.760</td></tr>
+        <tr class="indent"><td>Software / Tools / Cloud / KI</td><td>360</td><td>360</td><td>360</td></tr>
+        <tr class="indent"><td>Website / Hosting / Domain</td><td>1.200</td><td>1.200</td><td>1.200</td></tr>
+        <tr class="indent"><td>Fotoshooting Website (einmalig)</td><td>2.000</td><td>0</td><td>0</td></tr>
+        <tr class="indent"><td>LinkedIn-Kampagne (j&auml;hrlich)</td><td>1.500</td><td>1.500</td><td>1.500</td></tr>
+        <tr class="indent"><td>Websiteerstellung (einmalig)</td><td>2.000</td><td>0</td><td>0</td></tr>
+        <tr class="indent"><td>Visitenkarten (einmalig)</td><td>150</td><td>0</td><td>0</td></tr>
+
+        <tr class="sum-row"><td>Gesamtkosten</td><td>14.076</td><td>24.156</td><td>38.916</td></tr>
+        <tr class="sum-row"><td>Betriebsergebnis vor Zinsen, Steuern (EBIT)</td><td>43.424</td><td>131.844</td><td>153.084</td></tr>
+        <tr class="sum-row"><td>Betriebsergebnis / Gewinn vor Steuern</td><td>43.424</td><td>131.844</td><td>153.084</td></tr>
+        <tr><td>Steuern (gesch&auml;tzt, Splittingtarif)</td><td>8.000</td><td>53.000</td><td>62.000</td></tr>
+        <tr class="total-row"><td>Gewinn nach Steuern</td><td>35.424</td><td>78.844</td><td>91.084</td></tr>
       </tbody>
     </table>
 
-    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: Jahr 1 Ramp-up mit einem Gro&szlig;kunden ab Feb 2027. Jahr 2 stabilisierter Retainer-Betrieb, Jahr 3 zus&auml;tzliche Fremdleistung f&uuml;r Kapazit&auml;tsspitzen (12.000 &euro;) und Miete f&uuml;r Coworking-Space ab Jahr 2. Steuersch&auml;tzung auf Basis Zusammenveranlagung mit Splittingtarif (2026), 1 Kind, keine Kirchensteuer.</em></p>
+    <p style="font-size: 7.5pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: Jahr 1 Ramp-up mit erstem Gro&szlig;kunden ab Februar 2027; Jahr 2 stabilisierter Retainer-Betrieb und Coworking-Space ab Jahr 2; Jahr 3 zus&auml;tzliche Fremdleistungen f&uuml;r Kapazit&auml;tsspitzen. Steuersch&auml;tzung auf Basis Zusammenveranlagung (Splittingtarif 2026, 1 Kind, keine Kirchensteuer) &ndash; Anteil, der auf das Unternehmen entf&auml;llt.</em></p>
   </div>
 
 </div>
