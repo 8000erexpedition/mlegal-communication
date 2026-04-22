@@ -32,8 +32,8 @@
     body {
       background: #e0ddd8;
       font-family: var(--font-body);
-      font-size: 10pt;
-      line-height: 1.65;
+      font-size: 9.5pt;
+      line-height: 1.5;
       color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
@@ -136,7 +136,7 @@
 
     /* ─── Content ──────────────────────────────── */
     .content {
-      padding: 8mm 25mm 15mm 25mm;
+      padding: 6mm 25mm 12mm 25mm;
     }
 
     /* ─── Deckblatt ─────────────────────────────── */
@@ -227,7 +227,7 @@
     }
 
     p {
-      margin-bottom: 3mm;
+      margin-bottom: 2mm;
       text-align: justify;
       hyphens: auto;
     }
@@ -304,41 +304,86 @@
       color: var(--border);
     }
 
+    /* ─── Porträt Gründerin ────────────────────── */
+    .profil-photo {
+      float: right;
+      width: 38mm;
+      margin: 0 0 3mm 6mm;
+      shape-outside: inset(0);
+    }
+    .profil-photo img {
+      width: 100%;
+      height: 48mm;
+      object-fit: cover;
+      object-position: center 18%;
+      border-radius: 2px;
+      display: block;
+      box-shadow: 0 1px 4px rgba(31,28,24,0.12);
+    }
+    .profil-photo__caption {
+      font-family: var(--font-body);
+      font-size: 7.5pt;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1.5mm;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Seitennummerierung ───────────────────── */
+    body { counter-reset: pagenum; }
+    .page { counter-increment: pagenum; }
+    .page::after {
+      content: counter(pagenum);
+      position: absolute;
+      bottom: 10mm;
+      right: 25mm;
+      font-family: var(--font-body);
+      font-size: 8.5pt;
+      color: rgba(31,28,24, 0.4);
+      letter-spacing: 0.05em;
+    }
+    .page.landscape::after {
+      right: 18mm;
+      bottom: 8mm;
+    }
+    /* Deckblatt hat keine Seitennummer */
+    .page:first-of-type::after { content: none; }
+
     /* ─── Finanz-Tabellen ──────────────────────── */
     .finanz-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 9pt;
-      margin: 4mm 0 3mm 0;
+      font-size: 8.5pt;
+      margin: 3mm 0 2mm 0;
       font-variant-numeric: tabular-nums;
     }
     .finanz-table th {
       font-family: var(--font-body);
       font-weight: 500;
-      font-size: 7.5pt;
+      font-size: 7pt;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
       text-align: right;
-      padding: 2mm 2mm 1.5mm 2mm;
+      padding: 1.5mm 2mm 1.2mm 2mm;
       border-bottom: 0.5px solid var(--text);
     }
     .finanz-table th:first-child { text-align: left; }
     .finanz-table td {
-      padding: 1.6mm 2mm;
+      padding: 1.1mm 2mm;
       vertical-align: top;
       border-bottom: 0.5px solid rgba(31,28,24, 0.06);
       text-align: right;
     }
     .finanz-table td:first-child { text-align: left; }
     .finanz-table tr.section-row td {
-      font-size: 8.5pt;
+      font-size: 8pt;
       font-weight: 500;
       color: var(--accent);
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      padding-top: 3.5mm;
-      padding-bottom: 1mm;
+      padding-top: 2.2mm;
+      padding-bottom: 0.6mm;
       border-bottom: none;
     }
     .finanz-table tr.indent td:first-child { padding-left: 5mm; }
@@ -346,16 +391,28 @@
       font-weight: 500;
       border-top: 0.5px solid var(--text);
       border-bottom: 0.5px solid var(--text);
+      padding-top: 1.4mm;
+      padding-bottom: 1.4mm;
     }
     .finanz-table tr.total-row td {
       font-family: var(--font-display);
-      font-size: 12pt;
+      font-size: 11pt;
       font-weight: 500;
       color: var(--accent);
       border-top: 1px solid var(--accent);
       border-bottom: 1px solid var(--accent);
-      padding: 2.5mm 2mm;
+      padding: 1.8mm 2mm;
     }
+
+    /* Kompaktere Finanz-Seiten: kleinere Chapter-Title-Margins und Paddings */
+    .page.finanz .header { padding: 14mm 25mm 3mm 25mm; }
+    .page.finanz .content { padding: 3mm 25mm 8mm 25mm; }
+    .page.finanz .chapter-title { margin-bottom: 2mm; font-size: 20pt; }
+    .page.finanz .section-title { margin-top: 0; margin-bottom: 2mm; font-size: 13pt; }
+    .page.finanz.landscape .header { padding: 7mm 18mm 2mm 18mm; }
+    .page.finanz.landscape .content { padding: 2mm 18mm 5mm 18mm; }
+    .page.finanz.landscape .chapter-title { font-size: 18pt; margin-bottom: 1mm; }
+    .page.finanz.landscape .section-title { font-size: 12pt; margin-bottom: 1mm; }
 
     /* ─── Charts ───────────────────────────────── */
     .chart-container {
@@ -386,14 +443,21 @@
 
     /* Monatstabelle (13 Spalten + Label) für Querformat */
     .finanz-table--monthly {
-      font-size: 7.8pt;
+      font-size: 7.3pt;
       width: 100%;
       table-layout: fixed;
+      line-height: 1.25;
     }
     .finanz-table--monthly th,
     .finanz-table--monthly td {
-      padding: 1mm 1mm;
+      padding: 0.5mm 1mm;
     }
+    .finanz-table--monthly tr.section-row td {
+      padding-top: 1mm;
+      padding-bottom: 0.2mm;
+    }
+    .finanz-table--monthly tr.sum-row td { padding: 0.8mm; }
+    .finanz-table--monthly tr.total-row td { padding: 1mm; font-size: 8.8pt; }
     .finanz-table--monthly th:first-child,
     .finanz-table--monthly td:first-child {
       width: 56mm;
@@ -518,15 +582,16 @@
     <div class="toc-title">Inhaltsverzeichnis</div>
 
     <table class="toc-table">
-      <tr><td>Auf einen Blick</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Gesch&auml;ftsidee</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Profil der Gr&uuml;nderin</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Markteinsch&auml;tzung und Wettbewerbssituation</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Marketing und Vertrieb</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Unternehmensorganisation</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Standort / B&uuml;ror&auml;ume</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Chancen und Risiken</td><td><em>in Arbeit</em></td></tr>
-      <tr><td>Finanzen (Lebenshaltungskosten, Liquidit&auml;tsplan, Umsatz- und Rentabilit&auml;tsplan)</td><td><em>in Arbeit</em></td></tr>
+      <tr><td>Auf einen Blick</td><td>3</td></tr>
+      <tr><td>Gesch&auml;ftsidee</td><td>4</td></tr>
+      <tr><td>Leistungsfelder</td><td>5</td></tr>
+      <tr><td>Profil der Gr&uuml;nderin</td><td>6</td></tr>
+      <tr><td>Markteinsch&auml;tzung und Wettbewerbssituation</td><td>8</td></tr>
+      <tr><td>Marketing und Vertrieb</td><td>10</td></tr>
+      <tr><td>Unternehmensorganisation</td><td>12</td></tr>
+      <tr><td>Standort &#124; B&uuml;ror&auml;ume</td><td>13</td></tr>
+      <tr><td>Chancen und Risiken</td><td>14</td></tr>
+      <tr><td>Finanzen (Lebenshaltungskosten, Liquidit&auml;tsplan, Umsatz- und Rentabilit&auml;tsplan)</td><td>15</td></tr>
     </table>
   </div>
 
@@ -672,6 +737,11 @@
 
   <div class="content">
     <div class="chapter-title">Profil der Gr&uuml;nderin</div>
+
+    <div class="profil-photo">
+      <img src="iris-meinking.jpeg" alt="Iris Meinking, Gründerin Meinking Legal Communications">
+      <div class="profil-photo__caption">Iris Meinking</div>
+    </div>
 
     <p>Ich bringe langj&auml;hrige Erfahrung in der strategischen und operativen Kommunikation im Umfeld internationaler Wirtschaftskanzleien mit. Rund zwei Jahrzehnte lang war ich von 2007 bis 2026 in der Kommunikation einer internationalen Gro&szlig;kanzlei als Senior Managerin Kommunikation t&auml;tig und habe dort klassische Presse- und Medienarbeit, Themenfindung und Themensetzung sowie die Betreuung von Presseterminen, Pressegespr&auml;chen und Interviews verantwortet. Ich verfasse und redigiere Kommunikationsinhalte in deutscher und englischer Sprache, darunter Pressemitteilungen, Fach- und Gastbeitr&auml;ge, Interviewtexte, Newslettertexte sowie Reden und Gru&szlig;worte. Zus&auml;tzlich habe ich umfassende Erfahrung in der Konzeption und Koordination von Awards- und Ranking-Einreichungen. Neben der externen Kommunikation habe ich die interne Kommunikation verantwortet, mit Schwerpunkt auf Personal- und Karrierethemen. Zudem bin ich vertraut mit Abstimmungen in internationalen Strukturen und mit Kommunikationsarbeit unter Compliance-Vorgaben.</p>
 
@@ -1015,7 +1085,7 @@
   <div class="content">
     <div class="chapter-title">Chancen und Risiken</div>
 
-    <div class="section-title" style="margin-top: 4mm;">Chancen</div>
+    <div class="section-title" style="margin-top: 2mm;">Chancen</div>
 
     <p>Meine geplante Kommunikationsagentur f&uuml;r Wirtschaftskanzleien basiert auf einer ausgepr&auml;gten Branchen- und Zielgruppenexpertise. Aus meiner Kanzleierfahrung verf&uuml;ge ich &uuml;ber ein tiefes Verst&auml;ndnis der internen Strukturen, Entscheidungswege und Kommunikationsbedarfe von Gro&szlig;kanzleien und mittelst&auml;ndischen Wirtschaftskanzleien. Ich spreche die Sprache der Anw&auml;lte und kenne die spezifischen Anforderungen dieser Branche aus eigener Erfahrung. Dies erm&ouml;glicht mir eine zielgerichtete, effiziente und praxisnahe Kommunikationsberatung.</p>
 
@@ -1023,7 +1093,7 @@
 
     <p>Ein weiterer Vorteil liegt darin, dass ich die zentralen Leistungsfelder meiner Agentur bereits in meiner bisherigen beruflichen T&auml;tigkeit intensiv begleitet und verantwortet habe. Dadurch kann ich unmittelbar operativ arbeiten und eine kurze Aufbau- und Einarbeitungsphase erwarten.</p>
 
-    <div class="section-title" style="margin-top: 6mm;">Risiken</div>
+    <div class="section-title" style="margin-top: 4mm;">Risiken</div>
 
     <p>Ein wesentliches Risiko sehe ich in der anf&auml;nglichen Akquisephase, da ich zun&auml;chst einen Kundenstamm aufbauen muss. Insbesondere im Umfeld von Wirtschaftskanzleien spielen Vertrauen, Reputation und pers&ouml;nliche Empfehlungen eine zentrale Rolle. Ich begegne diesem Risiko durch eine gezielte Ansprache ausgew&auml;hlter Kanzleien, die Aktivierung meines gewachsenen Branchennetzwerks sowie die kontinuierliche fachliche Sichtbarkeit &uuml;ber LinkedIn und eigene Ver&ouml;ffentlichungen.</p>
 
@@ -1037,7 +1107,7 @@
 <!-- ═══════════════════════════════════════════════
      SEITE 13: FINANZEN — LEBENSHALTUNGSKOSTEN
      ═══════════════════════════════════════════════ -->
-<div class="page page-break">
+<div class="page page-break finanz">
   <div class="header">
     <div class="logo-mark"></div>
     <div class="header-text">
@@ -1107,7 +1177,7 @@
 <!-- ═══════════════════════════════════════════════
      SEITE 14: FINANZEN — LIQUIDITÄTSPLAN (Querformat)
      ═══════════════════════════════════════════════ -->
-<div class="page page-break landscape">
+<div class="page page-break landscape finanz">
   <div class="header">
     <div class="logo-mark"></div>
     <div class="header-text">
@@ -1155,8 +1225,8 @@
         <tr class="indent"><td>Websiteerstellung (einmalig)</td><td>2.000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2.000</td></tr>
         <tr class="indent"><td>Visitenkarten (einmalig)</td><td>150</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>150</td></tr>
         <tr class="sum-row"><td>Gesamtausgaben</td><td>6.148</td><td>498</td><td>498</td><td>648</td><td>648</td><td>648</td><td>698</td><td>798</td><td>798</td><td>898</td><td>898</td><td>898</td><td>14.076</td></tr>
-        <tr><td>USt-Saldo Finanzamt (Vormonat); + = Zahlung, &minus; = VSt-Erstattung</td><td>0</td><td class="erstattung">&minus;1.154</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;109</td><td class="zahlung">176</td><td class="zahlung">176</td><td class="zahlung">1.117</td><td class="zahlung">1.383</td><td class="zahlung">1.383</td><td class="zahlung">1.364</td><td class="zahlung">1.364</td><td class="zahlung">5.537</td></tr>
-        <tr><td>Liquidit&auml;tssaldo (Monat) — Einnahmen inkl. USt &minus; Ausgaben</td><td class="neg">&minus;6.148</td><td>656</td><td class="neg">&minus;418</td><td class="neg">&minus;568</td><td>1.246</td><td>961</td><td>6.861</td><td>7.605</td><td>7.339</td><td>7.239</td><td>7.258</td><td>7.258</td><td>39.292</td></tr>
+        <tr><td>USt-Saldo Finanzamt (Vormonat; + = Zahlung / &minus; = Erstattung)</td><td>0</td><td class="erstattung">&minus;1.154</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;109</td><td class="zahlung">176</td><td class="zahlung">176</td><td class="zahlung">1.117</td><td class="zahlung">1.383</td><td class="zahlung">1.383</td><td class="zahlung">1.364</td><td class="zahlung">1.364</td><td class="zahlung">5.537</td></tr>
+        <tr><td>Liquidit&auml;tssaldo (Monat)</td><td class="neg">&minus;6.148</td><td>656</td><td class="neg">&minus;418</td><td class="neg">&minus;568</td><td>1.246</td><td>961</td><td>6.861</td><td>7.605</td><td>7.339</td><td>7.239</td><td>7.258</td><td>7.258</td><td>39.292</td></tr>
         <tr class="total-row"><td>ENDBESTAND (kumuliert)</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td class="pos">2.590</td><td class="pos">10.196</td><td class="pos">17.535</td><td class="pos">24.775</td><td class="pos">32.033</td><td class="pos">39.292</td><td class="pos">39.292</td></tr>
       </tbody>
     </table>
@@ -1167,7 +1237,7 @@
 <!-- ═══════════════════════════════════════════════
      SEITE 15: FINANZEN — UMSATZ- UND RENTABILITÄTSPLAN
      ═══════════════════════════════════════════════ -->
-<div class="page page-break">
+<div class="page page-break finanz">
   <div class="header">
     <div class="logo-mark"></div>
     <div class="header-text">
@@ -1221,7 +1291,6 @@
       </tbody>
     </table>
 
-    <p style="font-size: 7.5pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: Jahr 1 Ramp-up mit erstem Gro&szlig;kunden ab Februar 2027; Jahr 2 stabilisierter Retainer-Betrieb und Coworking-Space ab Jahr 2; Jahr 3 zus&auml;tzliche Fremdleistungen f&uuml;r Kapazit&auml;tsspitzen. Steuersch&auml;tzung auf Basis Zusammenveranlagung (Splittingtarif 2026, 1 Kind, keine Kirchensteuer) &ndash; Anteil, der auf das Unternehmen entf&auml;llt.</em></p>
   </div>
 
 </div>
