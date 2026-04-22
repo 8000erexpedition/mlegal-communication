@@ -285,6 +285,85 @@
       color: var(--border);
     }
 
+    /* ─── Finanz-Tabellen ──────────────────────── */
+    .finanz-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin: 4mm 0 3mm 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .finanz-table th {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      padding: 2mm 2mm 1.5mm 2mm;
+      border-bottom: 0.5px solid var(--text);
+    }
+    .finanz-table th:first-child { text-align: left; }
+    .finanz-table td {
+      padding: 1.6mm 2mm;
+      vertical-align: top;
+      border-bottom: 0.5px solid rgba(31,28,24, 0.06);
+      text-align: right;
+    }
+    .finanz-table td:first-child { text-align: left; }
+    .finanz-table tr.section-row td {
+      font-size: 8.5pt;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding-top: 3.5mm;
+      padding-bottom: 1mm;
+      border-bottom: none;
+    }
+    .finanz-table tr.indent td:first-child { padding-left: 5mm; }
+    .finanz-table tr.sum-row td {
+      font-weight: 500;
+      border-top: 0.5px solid var(--text);
+      border-bottom: 0.5px solid var(--text);
+    }
+    .finanz-table tr.total-row td {
+      font-family: var(--font-display);
+      font-size: 12pt;
+      font-weight: 500;
+      color: var(--accent);
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding: 2.5mm 2mm;
+    }
+
+    /* ─── Charts ───────────────────────────────── */
+    .chart-container {
+      margin: 5mm 0 3mm 0;
+    }
+    .chart-container svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .chart-caption {
+      font-family: var(--font-body);
+      font-size: 7.5pt;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 2mm;
+      font-style: italic;
+    }
+
+    /* Horizontal bar chart */
+    .bar-chart { display: flex; flex-direction: column; gap: 2mm; margin: 3mm 0; }
+    .bar-row { display: grid; grid-template-columns: 55mm 1fr 18mm; gap: 3mm; align-items: center; font-size: 9pt; }
+    .bar-row__label { color: var(--text); }
+    .bar-row__track { height: 4mm; background: rgba(31,28,24, 0.06); border-radius: 1px; position: relative; overflow: hidden; }
+    .bar-row__fill { height: 100%; background: var(--accent); opacity: 0.7; }
+    .bar-row__value { text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+
     /* ─── Footer ───────────────────────────────── */
     .footer {
       position: absolute;
@@ -756,7 +835,7 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════
-     SEITE 13: FINANZEN (Platzhalter)
+     SEITE 13: FINANZEN — LEBENSHALTUNGSKOSTEN
      ═══════════════════════════════════════════════ -->
 <div class="page page-break">
   <div class="header">
@@ -769,7 +848,286 @@
 
   <div class="content">
     <div class="chapter-title">Finanzen</div>
-    <p style="color: var(--muted);"><em>Lebenshaltungskosten, Liquidit&auml;tsplan sowie Umsatz- und Rentabilit&auml;tsplan werden als separate Excel-Anlagen beigef&uuml;gt.</em></p>
+    <div class="section-title" style="margin-top: 0;">Lebenshaltungskosten</div>
+
+    <p>Die folgende &Uuml;bersicht zeigt meine privaten Lebenshaltungskosten nach Kategorie. Sie bilden die Grundlage f&uuml;r den <strong>Mindestgewinn</strong>, den das Unternehmen erwirtschaften muss, um meinen Lebensunterhalt zu sichern.</p>
+
+    <div class="bar-chart" style="margin: 6mm 0 4mm 0;">
+      <!-- Max = 779 (Wohnkosten) → Fill-Prozent relativ dazu -->
+      <div class="bar-row">
+        <div class="bar-row__label">Wohnkosten</div>
+        <div class="bar-row__track"><div class="bar-row__fill" style="width: 100%;"></div></div>
+        <div class="bar-row__value">779 &euro;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__label">Lebensunterhalt</div>
+        <div class="bar-row__track"><div class="bar-row__fill" style="width: 77%;"></div></div>
+        <div class="bar-row__value">600 &euro;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__label">R&uuml;cklagen &amp; Sohn</div>
+        <div class="bar-row__track"><div class="bar-row__fill" style="width: 63.5%;"></div></div>
+        <div class="bar-row__value">495 &euro;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__label">Soziale Absicherung</div>
+        <div class="bar-row__track"><div class="bar-row__fill" style="width: 52.9%;"></div></div>
+        <div class="bar-row__value">412 &euro;</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row__label">Mobilit&auml;t</div>
+        <div class="bar-row__track"><div class="bar-row__fill" style="width: 27%;"></div></div>
+        <div class="bar-row__value">210 &euro;</div>
+      </div>
+    </div>
+    <div class="chart-caption">Monatliche Aufwendungen nach Kategorie (in Euro)</div>
+
+    <table class="finanz-table" style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>pro Monat</th>
+          <th>pro Jahr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="section-row"><td colspan="3">Wohnkosten</td></tr>
+        <tr class="indent"><td>Miete (privat)</td><td>560 &euro;</td><td>6.720 &euro;</td></tr>
+        <tr class="indent"><td>Strom, Wasser, Gas</td><td>164 &euro;</td><td>1.968 &euro;</td></tr>
+        <tr class="indent"><td>Telefon, Internet, GEZ</td><td>55 &euro;</td><td>660 &euro;</td></tr>
+
+        <tr class="section-row"><td colspan="3">Soziale Absicherung</td></tr>
+        <tr class="indent"><td>Krankenversicherung (GKV freiwillig)</td><td>213 &euro;</td><td>2.556 &euro;</td></tr>
+        <tr class="indent"><td>Rentenversicherung / Altersvorsorge</td><td>105 &euro;</td><td>1.260 &euro;</td></tr>
+        <tr class="indent"><td>Freiwillige Arbeitslosenversicherung</td><td>52 &euro;</td><td>624 &euro;</td></tr>
+        <tr class="indent"><td>Pflegeversicherung</td><td>42 &euro;</td><td>504 &euro;</td></tr>
+
+        <tr class="section-row"><td colspan="3">Mobilit&auml;t</td></tr>
+        <tr class="indent"><td>Kfz-Steuer, Leasing, Benzin</td><td>210 &euro;</td><td>2.520 &euro;</td></tr>
+
+        <tr class="section-row"><td colspan="3">Lebensunterhalt</td></tr>
+        <tr class="indent"><td>Lebensmittel, Kleidung, Freizeit</td><td>500 &euro;</td><td>6.000 &euro;</td></tr>
+        <tr class="indent"><td>Hausrat, Bildung, Unterhaltung</td><td>100 &euro;</td><td>1.200 &euro;</td></tr>
+
+        <tr class="section-row"><td colspan="3">R&uuml;cklagen &amp; Sohn</td></tr>
+        <tr class="indent"><td>R&uuml;cklagen (Urlaub, Krankheit)</td><td>300 &euro;</td><td>3.600 &euro;</td></tr>
+        <tr class="indent"><td>Sohn (PKV, Pflegezusatz, Sport)</td><td>195 &euro;</td><td>2.340 &euro;</td></tr>
+
+        <tr class="sum-row"><td>Summe private Ausgaben</td><td>2.496 &euro;</td><td>29.952 &euro;</td></tr>
+        <tr><td>+ Einkommensteuer (Pauschale 19 %)</td><td>474 &euro;</td><td>5.691 &euro;</td></tr>
+        <tr class="total-row"><td>Mindestgewinn</td><td>2.970 &euro;</td><td>35.643 &euro;</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Hinweis: Die Einkommensteuer ist hier als Pauschale von 19 % angesetzt. Die tats&auml;chliche Steuer ergibt sich aus der Zusammenveranlagung (Splittingtarif) und wird im Rentabilit&auml;tsplan berechnet. Annahme f&uuml;r die Sozialversicherung: GKV freiwillig mit Mindestbeitrag, freiwillige Altersvorsorge &uuml;ber DRV.</em></p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 14: FINANZEN — LIQUIDITÄTSPLAN
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-mark"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Finanzen <span style="font-size: 14pt; color: var(--muted); font-weight: 300;">(Fortsetzung)</span></div>
+    <div class="section-title" style="margin-top: 0;">Liquidit&auml;tsplan (Sep 2026 &ndash; Aug 2027)</div>
+
+    <p>Der Liquidit&auml;tsplan zeigt die monatliche Entwicklung des Kontostands w&auml;hrend der Gr&uuml;ndungsphase. Nach anf&auml;nglichen Setup-Kosten und Vorlaufzeit bis zum ersten Zahlungseingang wird das Konto ab M&auml;rz 2027 durchg&auml;ngig positiv und w&auml;chst bis August 2027 auf knapp 40.000 &euro; an.</p>
+
+    <div class="chart-container" style="margin: 4mm 0 2mm 0;">
+      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Endbestand-Kurve monatlich">
+        <!-- Gitter und Achsen -->
+        <line x1="60" y1="20"  x2="60"  y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
+        <line x1="60" y1="240" x2="625" y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
+
+        <!-- Nulllinie -->
+        <line x1="60" y1="204.8" x2="625" y2="204.8" stroke="rgba(31,28,24,0.4)" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="55" y="207.5" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">0</text>
+
+        <!-- Y-Achsen-Labels -->
+        <text x="55" y="24"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">42 k&euro;</text>
+        <text x="55" y="67"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">30 k&euro;</text>
+        <text x="55" y="109"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">20 k&euro;</text>
+        <text x="55" y="151.6" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">10 k&euro;</text>
+
+        <!-- Fläche unter Kurve (nur positiver Teil) -->
+        <path d="M 60,204.8 L 60,231.85 L 110,228.96 L 161,230.80 L 211,233.30 L 262,227.82 L 312,223.59 L 363,193.40 L 413,159.94 L 464,127.65 L 514,95.79 L 565,63.85 L 615,31.92 L 615,240 L 60,240 Z"
+              fill="rgba(140,107,58,0.12)"/>
+
+        <!-- Linie -->
+        <polyline points="60,231.85 110,228.96 161,230.80 211,233.30 262,227.82 312,223.59 363,193.40 413,159.94 464,127.65 514,95.79 565,63.85 615,31.92"
+                  fill="none" stroke="#8c6b3a" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- Datenpunkte -->
+        <circle cx="60"  cy="231.85" r="2.5" fill="#8c6b3a"/>
+        <circle cx="110" cy="228.96" r="2.5" fill="#8c6b3a"/>
+        <circle cx="161" cy="230.80" r="2.5" fill="#8c6b3a"/>
+        <circle cx="211" cy="233.30" r="2.5" fill="#8c6b3a"/>
+        <circle cx="262" cy="227.82" r="2.5" fill="#8c6b3a"/>
+        <circle cx="312" cy="223.59" r="2.5" fill="#8c6b3a"/>
+        <circle cx="363" cy="193.40" r="2.5" fill="#8c6b3a"/>
+        <circle cx="413" cy="159.94" r="2.5" fill="#8c6b3a"/>
+        <circle cx="464" cy="127.65" r="2.5" fill="#8c6b3a"/>
+        <circle cx="514" cy="95.79"  r="2.5" fill="#8c6b3a"/>
+        <circle cx="565" cy="63.85"  r="2.5" fill="#8c6b3a"/>
+        <circle cx="615" cy="31.92"  r="2.5" fill="#8c6b3a"/>
+
+        <!-- X-Achsen-Labels -->
+        <text x="60"  y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Sep</text>
+        <text x="110" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Okt</text>
+        <text x="161" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Nov</text>
+        <text x="211" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Dez</text>
+        <text x="262" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jan</text>
+        <text x="312" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Feb</text>
+        <text x="363" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">M&#228;r</text>
+        <text x="413" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Apr</text>
+        <text x="464" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Mai</text>
+        <text x="514" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jun</text>
+        <text x="565" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Jul</text>
+        <text x="615" y="255" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.6)" text-anchor="middle">Aug</text>
+
+        <!-- Wertbeschriftung am Ende -->
+        <text x="615" y="25" font-family="Cormorant Garamond" font-size="10" font-weight="500" fill="#8c6b3a" text-anchor="end">+39.292 &euro;</text>
+        <text x="60"  y="248" font-family="Cormorant Garamond" font-size="9" fill="rgba(31,28,24,0.55)" text-anchor="start" dy="-10">&minus;6.148 &euro;</text>
+      </svg>
+    </div>
+    <div class="chart-caption">Kontostand kumuliert &ndash; Endbestand jeweils zum Monatsende (in Euro)</div>
+
+    <table class="finanz-table" style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th>Kennzahl (Jahr 1)</th>
+          <th>Betrag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Geplanter Umsatz (Leistung, netto)</td><td>57.500 &euro;</td></tr>
+        <tr><td>Zahlungseing&auml;nge brutto (inkl. USt, 30 Tage Ziel)</td><td>58.905 &euro;</td></tr>
+        <tr><td>Gesamtauszahlungen (Betriebskosten + Setup)</td><td>14.076 &euro;</td></tr>
+        <tr><td>USt-Saldo an das Finanzamt (per Saldo)</td><td>5.537 &euro;</td></tr>
+        <tr class="sum-row"><td>Liquidit&auml;tssaldo Jahr 1</td><td>39.292 &euro;</td></tr>
+        <tr><td>Tiefststand Kontostand (Dez 2026)</td><td>&minus;6.477 &euro;</td></tr>
+        <tr><td>Break-even Kontostand (ab M&auml;rz 2027)</td><td>+2.590 &euro;</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: 30 Tage Zahlungsziel, Einnahmen starten ab Dez 2026, erster Gro&szlig;kunden-Retainer ab Feb 2027, monatliche USt-Voranmeldung. Die Startfinanzierung von rund 6.500 &euro; wird aus Eigenmitteln bereitgestellt.</em></p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 15: FINANZEN — UMSATZ- UND RENTABILITÄTSPLAN
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-mark"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR f&uuml;r Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="chapter-title">Finanzen <span style="font-size: 14pt; color: var(--muted); font-weight: 300;">(Fortsetzung)</span></div>
+    <div class="section-title" style="margin-top: 0;">Umsatz- und Rentabilit&auml;tsplan (Jahr 1 &ndash; 3)</div>
+
+    <p>Der Plan zeigt die geplante Entwicklung &uuml;ber die ersten drei Gesch&auml;ftsjahre. Nach der Aufbauphase im Jahr 1 wird ab Jahr 2 mit einem stabilen Gro&szlig;kunden-Portfolio und h&ouml;herer Auslastung gerechnet.</p>
+
+    <div class="chart-container" style="margin: 4mm 0 2mm 0;">
+      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Umsatz, Kosten, Gewinn über 3 Jahre">
+        <!-- Achsen -->
+        <line x1="70" y1="20"  x2="70"  y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
+        <line x1="70" y1="240" x2="625" y2="240" stroke="rgba(31,28,24,0.25)" stroke-width="0.5"/>
+
+        <!-- Y-Gitter -->
+        <line x1="70" y1="20"    x2="625" y2="20"    stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
+        <line x1="70" y1="72.5"  x2="625" y2="72.5"  stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
+        <line x1="70" y1="125"   x2="625" y2="125"   stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
+        <line x1="70" y1="177.5" x2="625" y2="177.5" stroke="rgba(31,28,24,0.08)" stroke-width="0.5"/>
+
+        <text x="65" y="24"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">200 k&euro;</text>
+        <text x="65" y="76"    font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">150 k&euro;</text>
+        <text x="65" y="128.5" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">100 k&euro;</text>
+        <text x="65" y="181"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">50 k&euro;</text>
+        <text x="65" y="243"   font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.5)" text-anchor="end">0</text>
+
+        <!-- Gruppe Jahr 1 (Zentrum x=170) -->
+        <!-- Umsatz -->
+        <rect x="120" y="179.63" width="28" height="60.37" fill="#8c6b3a" opacity="0.9"/>
+        <text x="134" y="174" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">57,5 k</text>
+        <!-- Gesamtkosten -->
+        <rect x="152" y="225.22" width="28" height="14.78" fill="rgba(31,28,24,0.35)"/>
+        <text x="166" y="221" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">14,1 k</text>
+        <!-- Gewinn nach Steuern -->
+        <rect x="184" y="202.81" width="28" height="37.19" fill="rgba(140,107,58,0.55)"/>
+        <text x="198" y="198" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">35,4 k</text>
+        <text x="166" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 1</text>
+
+        <!-- Gruppe Jahr 2 (Zentrum x=350) -->
+        <!-- Umsatz -->
+        <rect x="300" y="76.2" width="28" height="163.8" fill="#8c6b3a" opacity="0.9"/>
+        <text x="314" y="70" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">156 k</text>
+        <!-- Gesamtkosten -->
+        <rect x="332" y="214.64" width="28" height="25.36" fill="rgba(31,28,24,0.35)"/>
+        <text x="346" y="210" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">24,2 k</text>
+        <!-- Gewinn nach Steuern -->
+        <rect x="364" y="157.21" width="28" height="82.79" fill="rgba(140,107,58,0.55)"/>
+        <text x="378" y="152" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">78,8 k</text>
+        <text x="346" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 2</text>
+
+        <!-- Gruppe Jahr 3 (Zentrum x=530) -->
+        <!-- Umsatz -->
+        <rect x="480" y="38.4" width="28" height="201.6" fill="#8c6b3a" opacity="0.9"/>
+        <text x="494" y="32" font-family="DM Sans" font-size="8" fill="#8c6b3a" text-anchor="middle">192 k</text>
+        <!-- Gesamtkosten -->
+        <rect x="512" y="199.14" width="28" height="40.86" fill="rgba(31,28,24,0.35)"/>
+        <text x="526" y="194" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.55)" text-anchor="middle">38,9 k</text>
+        <!-- Gewinn nach Steuern -->
+        <rect x="544" y="144.36" width="28" height="95.64" fill="rgba(140,107,58,0.55)"/>
+        <text x="558" y="139" font-family="DM Sans" font-size="8" fill="rgba(140,107,58,0.85)" text-anchor="middle">91,1 k</text>
+        <text x="526" y="256" font-family="Cormorant Garamond" font-size="12" font-weight="500" fill="var(--text)" text-anchor="middle">Jahr 3</text>
+
+        <!-- Legende -->
+        <g transform="translate(70, 270)">
+          <rect x="0"  y="-8" width="10" height="8" fill="#8c6b3a" opacity="0.9"/>
+          <text x="14" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Umsatz</text>
+          <rect x="70" y="-8" width="10" height="8" fill="rgba(31,28,24,0.35)"/>
+          <text x="84" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Gesamtkosten</text>
+          <rect x="168" y="-8" width="10" height="8" fill="rgba(140,107,58,0.55)"/>
+          <text x="182" y="-1" font-family="DM Sans" font-size="8" fill="rgba(31,28,24,0.7)">Gewinn nach Steuern</text>
+        </g>
+      </svg>
+    </div>
+    <div class="chart-caption">Umsatz, Gesamtkosten und Gewinn nach Steuern pro Jahr (in Tausend Euro)</div>
+
+    <table class="finanz-table" style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Jahr 1</th>
+          <th>Jahr 2</th>
+          <th>Jahr 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Umsatzerl&ouml;se</td><td>57.500 &euro;</td><td>156.000 &euro;</td><td>192.000 &euro;</td></tr>
+        <tr><td>Gesamtkosten</td><td>14.076 &euro;</td><td>24.156 &euro;</td><td>38.916 &euro;</td></tr>
+        <tr class="sum-row"><td>EBIT / Gewinn vor Steuern</td><td>43.424 &euro;</td><td>131.844 &euro;</td><td>153.084 &euro;</td></tr>
+        <tr><td>Einkommensteuer (gesch&auml;tzt, Splittingtarif)</td><td>8.000 &euro;</td><td>53.000 &euro;</td><td>62.000 &euro;</td></tr>
+        <tr class="total-row"><td>Gewinn nach Steuern</td><td>35.424 &euro;</td><td>78.844 &euro;</td><td>91.084 &euro;</td></tr>
+      </tbody>
+    </table>
+
+    <p style="font-size: 8pt; color: var(--muted); margin-top: 3mm;"><em>Annahmen: Jahr 1 Ramp-up mit einem Gro&szlig;kunden ab Feb 2027. Jahr 2 stabilisierter Retainer-Betrieb, Jahr 3 zus&auml;tzliche Fremdleistung f&uuml;r Kapazit&auml;tsspitzen (12.000 &euro;) und Miete f&uuml;r Coworking-Space ab Jahr 2. Steuersch&auml;tzung auf Basis Zusammenveranlagung mit Splittingtarif (2026), 1 Kind, keine Kirchensteuer.</em></p>
   </div>
 
 </div>
