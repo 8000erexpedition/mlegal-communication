@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muster Dienstvertrag — Meinking Legal Communications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text:       #1f1c18;
+      --muted:      rgba(31, 28, 24, 0.50);
+      --accent:     #8c6b3a;
+      --border:     rgba(31, 28, 24, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0 0 8mm 0;
+      @bottom-right {
+        content: counter(page);
+        margin-right: 25mm;
+        margin-bottom: 3mm;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 8.5pt;
+        color: rgba(31,28,24, 0.4);
+        letter-spacing: 0.05em;
+      }
+    }
+
+    body {
+      background: #e0ddd8;
+      font-family: var(--font-body);
+      font-size: 9.5pt;
+      line-height: 1.55;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @media print {
+      html, body { background: white !important; margin: 0 !important; padding: 0 !important; }
+      .page { margin: 0 !important; box-shadow: none !important; border: none !important; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 289mm;
+      margin: 20px auto;
+      background: white;
+      position: relative;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+      opacity: 0.35;
+    }
+
+    .header {
+      padding: 18mm 25mm 4mm 25mm;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(31, 28, 24, 0.4);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-mark::after {
+      content: 'MLC';
+      font-family: var(--font-display);
+      font-size: 12pt;
+      letter-spacing: 1.2px;
+      color: var(--text);
+    }
+
+    .header-text { display: flex; flex-direction: column; gap: 1px; }
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 17pt;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .brand-sub {
+      font-family: var(--font-body);
+      font-size: 6.5pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .content {
+      padding: 4mm 25mm 15mm 25mm;
+    }
+
+    /* Deckblatt */
+    .deckblatt {
+      padding: 30mm 25mm 25mm 25mm;
+      display: flex; flex-direction: column; min-height: 210mm;
+    }
+    .deckblatt__label {
+      font-family: var(--font-body);
+      font-size: 9pt;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5mm;
+    }
+    .deckblatt__title {
+      font-family: var(--font-display);
+      font-size: 30pt;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 4mm;
+    }
+    .deckblatt__subtitle {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 25mm;
+    }
+
+    .parties {
+      margin-top: auto;
+      font-size: 10pt;
+      line-height: 1.7;
+    }
+    .parties__label {
+      font-family: var(--font-body);
+      font-size: 7.5pt;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2mm;
+    }
+    .parties__block { margin-bottom: 6mm; }
+    .parties__name { font-weight: 500; }
+    .parties__between {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 11pt;
+      color: var(--muted);
+      margin: 4mm 0;
+      text-align: center;
+    }
+
+    /* Inhalt */
+    h2 {
+      font-family: var(--font-display);
+      font-size: 13pt;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 6mm;
+      margin-bottom: 2mm;
+      page-break-after: avoid;
+    }
+    h2.first { margin-top: 2mm; }
+
+    p { margin-bottom: 2mm; }
+    ol { margin-left: 6mm; margin-bottom: 2mm; }
+    ol li { margin-bottom: 1mm; padding-left: 2mm; }
+    ol.lower-alpha { list-style-type: lower-alpha; }
+    ol.roman { list-style-type: lower-roman; }
+
+    .placeholder {
+      background: rgba(140,107,58, 0.08);
+      padding: 0 2px;
+      border-radius: 1px;
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .preamble {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--muted);
+      font-size: 10pt;
+      margin: 3mm 0 6mm 0;
+    }
+
+    .signatures {
+      margin-top: 12mm;
+      page-break-inside: avoid;
+    }
+    .signatures__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10mm;
+      margin-top: 6mm;
+    }
+    .signature-block {
+      border-top: 0.5px solid var(--text);
+      padding-top: 2mm;
+      font-size: 8.5pt;
+      color: var(--muted);
+    }
+    .signature-block__role { font-weight: 500; color: var(--text); margin-bottom: 0.5mm; }
+    .signature-block__name { color: var(--text); }
+    .date-line {
+      margin-top: 10mm;
+      font-size: 9pt;
+      color: var(--muted);
+    }
+
+    .hinweis {
+      margin-top: 10mm;
+      padding: 4mm 5mm;
+      background: rgba(140,107,58, 0.05);
+      border-left: 2px solid var(--accent);
+      font-size: 8pt;
+      font-style: italic;
+      color: rgba(31,28,24, 0.6);
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 25mm 7mm 25mm;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      font-size: 6.8pt;
+      color: var(--muted);
+      line-height: 1.4;
+      padding-top: 4mm;
+      border-top: 0.5px solid var(--border);
+    }
+    .footer-grid strong {
+      font-weight: 500;
+      color: rgba(31, 28, 24, 0.55);
+      display: block;
+      font-size: 6pt;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.8mm;
+    }
+
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(44, 37, 32, 0.95);
+      padding: 10px 24px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px;
+      z-index: 1000;
+    }
+    .print-bar__text { color: rgba(255,255,255,0.75); font-size: 12.5px; }
+    .print-bar__btn {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 7px 18px; border: none; border-radius: 3px;
+      background: var(--accent); color: white; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <span class="print-bar__text">Muster Dienstvertrag — Platzhalter in <strong style="color: #c9a96e;">[eckigen Klammern]</strong> vor Unterzeichnung ausfüllen</span>
+  <button class="print-bar__btn" onclick="window.print()">Als PDF speichern</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 1: DECKBLATT + PARTEIEN
+     ═══════════════════════════════════════════════ -->
+<div class="page">
+  <div class="header">
+    <div class="logo-mark"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="deckblatt">
+    <div class="deckblatt__label">Muster · Vertragsvorlage</div>
+    <div class="deckblatt__title">Dienstvertrag</div>
+    <div class="deckblatt__subtitle">über Kommunikations&shy;beratungs&shy;leistungen</div>
+
+    <div class="parties">
+      <div class="parties__block">
+        <div class="parties__label">Zwischen</div>
+        <p><span class="parties__name">Iris Meinking</span><br>
+          Meinking Legal Communications<br>
+          Mainzer-Tor-Anlage 29, 61169 Friedberg / Hessen<br>
+          Steuernummer: <span class="placeholder">[Steuernummer]</span>&ensp;·&ensp;USt-IdNr.: <span class="placeholder">[USt-IdNr.]</span></p>
+        <p style="margin-top: 2mm; color: var(--muted); font-size: 9pt;">&ndash; nachfolgend &bdquo;Auftragnehmerin&ldquo; &ndash;</p>
+      </div>
+
+      <div class="parties__between">und</div>
+
+      <div class="parties__block">
+        <div class="parties__label">und</div>
+        <p><span class="parties__name placeholder">[Kanzlei-/Firmenname]</span><br>
+          <span class="placeholder">[Rechtsform]</span><br>
+          <span class="placeholder">[Straße und Hausnummer]</span><br>
+          <span class="placeholder">[PLZ und Ort]</span><br>
+          vertreten durch <span class="placeholder">[Vertretungsberechtigte Person, Funktion]</span></p>
+        <p style="margin-top: 2mm; color: var(--muted); font-size: 9pt;">&ndash; nachfolgend &bdquo;Auftraggeber&ldquo; &ndash;</p>
+      </div>
+
+      <p style="margin-top: 6mm; color: var(--muted); font-size: 9pt; text-align: center;">&ndash; gemeinsam auch die &bdquo;Parteien&ldquo; &ndash;</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-grid">
+      <div><strong>Kontakt</strong>Iris Meinking<br>Mainzer-Tor-Anlage 29<br>61169 Friedberg</div>
+      <div><strong>Kommunikation</strong><span class="placeholder">[E-Mail]</span><br><span class="placeholder">[Telefon]</span><br>meinkinglegal.com</div>
+      <div><strong>Steuer</strong>St.-Nr.: <span class="placeholder">[—]</span><br>USt-IdNr.: <span class="placeholder">[—]</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 2: §§ 1 – 6
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-mark"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <p class="preamble">Die Parteien schließen den folgenden Dienstvertrag (§ 611 BGB):</p>
+
+    <h2 class="first">§ 1 Vertragsgegenstand</h2>
+    <ol>
+      <li>Die Auftragnehmerin erbringt für den Auftraggeber Leistungen der Kommunikationsberatung und -umsetzung. Gegenstand sind insbesondere <span class="placeholder">[konkrete Leistungen, z.&nbsp;B.: strategische Kommunikationsberatung; Presse- und Medienarbeit; redaktionelle Inhalte; digitale Kommunikation; Arbeitgeberkommunikation; Begleitung interner Veränderungen]</span>.</li>
+      <li>Ein bestimmter Erfolg (z.&nbsp;B. die Veröffentlichung in einem konkreten Medium) wird nicht geschuldet. Die Auftragnehmerin schuldet ein Tätigwerden unter fachgerechter Anwendung ihrer beruflichen Sorgfalt.</li>
+      <li>Eine detaillierte Leistungsbeschreibung (Scope, Umfang, Meilensteine, Ansprechpartner) ergibt sich aus <span class="placeholder">[Anlage 1 / dem Angebot vom TT.MM.JJJJ]</span>, das Bestandteil dieses Vertrages ist.</li>
+    </ol>
+
+    <h2>§ 2 Art der Leistungserbringung &middot; Selbstständigkeit</h2>
+    <ol>
+      <li>Die Auftragnehmerin erbringt ihre Leistungen als selbstständige Unternehmerin. Sie unterliegt keinen Weisungen des Auftraggebers hinsichtlich Arbeitszeit, Arbeitsort oder Art und Weise der Ausführung, soweit in diesem Vertrag oder in der Leistungsbeschreibung nichts anderes vereinbart ist.</li>
+      <li>Die Parteien sind sich einig, dass zwischen ihnen kein Arbeitsverhältnis, kein arbeitnehmerähnliches Verhältnis und kein Dienstverhältnis im Sinne der Sozialversicherung begründet wird.</li>
+      <li>Die Auftragnehmerin ist berechtigt, gleichartige Leistungen auch für andere Auftraggeber zu erbringen, soweit hierdurch die Leistungen für den Auftraggeber nicht beeinträchtigt werden und keine Interessenkonflikte entstehen.</li>
+      <li>Die Auftragnehmerin darf nach vorheriger Abstimmung mit dem Auftraggeber einzelne Leistungen durch sorgfältig ausgewählte Dritte (Freelancer, Subunternehmer) erbringen lassen. Sie bleibt in diesem Fall gegenüber dem Auftraggeber zur vertragsgemäßen Leistung verpflichtet.</li>
+    </ol>
+
+    <h2>§ 3 Vergütung</h2>
+    <ol>
+      <li>Die Vergütung beträgt <span class="placeholder">[Variante A: Pauschal-Retainer von … € netto pro Monat]</span> / <span class="placeholder">[Variante B: Tagessatz von … € netto pro geleistetem Personentag à 8 Stunden]</span> / <span class="placeholder">[Variante C: Stundensatz von … € netto pro Stunde]</span>.</li>
+      <li>Alle genannten Beträge verstehen sich zuzüglich der gesetzlichen Umsatzsteuer.</li>
+      <li>Die Abrechnung erfolgt monatlich zum Monatsende. Rechnungen sind innerhalb von <span class="placeholder">[30]</span> Tagen nach Zugang ohne Abzug zur Zahlung fällig.</li>
+      <li>Reisekosten und sonstige Aufwendungen (Bahntickets 2.&nbsp;Klasse, Hotel im wirtschaftlich üblichen Rahmen, km-Pauschale nach BRKG, externe Dienstleister nach Einzelbeauftragung) werden nach Nachweis gegen Beleg gesondert erstattet, sofern vorab mit dem Auftraggeber abgestimmt.</li>
+    </ol>
+
+    <h2>§ 4 Vertragsdauer &middot; Kündigung</h2>
+    <ol>
+      <li>Der Vertrag beginnt am <span class="placeholder">[TT.MM.JJJJ]</span> und läuft auf <span class="placeholder">[unbestimmte Zeit / bis zum TT.MM.JJJJ]</span>.</li>
+      <li>Der Vertrag kann von beiden Parteien ordentlich mit einer Frist von <span class="placeholder">[drei Monaten]</span> zum Monatsende in Textform gekündigt werden; bei einem befristeten Vertrag ist die ordentliche Kündigung ausgeschlossen, soweit nicht abweichend vereinbart.</li>
+      <li>Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Als wichtiger Grund gilt insbesondere die wesentliche Verletzung vertraglicher Pflichten, die trotz vorheriger schriftlicher Abmahnung nicht abgestellt wird.</li>
+      <li>Bis zum Wirksamwerden der Kündigung erbrachte Leistungen werden zeitanteilig vergütet.</li>
+    </ol>
+
+    <h2>§ 5 Mitwirkung des Auftraggebers</h2>
+    <ol>
+      <li>Der Auftraggeber benennt eine verantwortliche Ansprechperson und stellt die für die Leistungserbringung erforderlichen Informationen, Unterlagen und Freigaben rechtzeitig zur Verfügung.</li>
+      <li>Freigaben zu Kommunikationsmaßnahmen erfolgen grundsätzlich in Textform (E-Mail genügt) durch die benannte Ansprechperson oder eine beauftragte Stellvertretung.</li>
+      <li>Verzögerungen, die auf fehlende Mitwirkung des Auftraggebers zurückzuführen sind, verlängern vereinbarte Fristen entsprechend; sie berühren den Vergütungsanspruch der Auftragnehmerin nicht.</li>
+    </ol>
+
+    <h2>§ 6 Vertraulichkeit</h2>
+    <ol>
+      <li>Die Parteien verpflichten sich, alle ihnen im Zusammenhang mit der Zusammenarbeit bekannt werdenden vertraulichen Informationen der jeweils anderen Partei &ndash; insbesondere Mandats-, Personal-, Finanz- und Strategiedaten &ndash; streng vertraulich zu behandeln, nur für die Zwecke dieses Vertrages zu verwenden und Dritten nicht zugänglich zu machen.</li>
+      <li>Die Verpflichtung gilt auch über das Vertragsende hinaus für die Dauer von <span class="placeholder">[fünf]</span> Jahren, bei Mandantendaten und anwaltlichen Berufsgeheimnissen unbefristet.</li>
+      <li>Ausgenommen sind Informationen, die nachweislich öffentlich bekannt sind, rechtmäßig von Dritten erlangt wurden oder aufgrund gesetzlicher oder behördlicher Anordnung offenzulegen sind.</li>
+    </ol>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SEITE 3: §§ 7 – 12 + UNTERSCHRIFTEN
+     ═══════════════════════════════════════════════ -->
+<div class="page page-break">
+  <div class="header">
+    <div class="logo-mark"></div>
+    <div class="header-text">
+      <div class="brand-name">Meinking Legal Communications</div>
+      <div class="brand-sub">Strategische PR für Wirtschaftskanzleien</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <h2 class="first">§ 7 Nutzungs- und Verwertungsrechte</h2>
+    <ol>
+      <li>An den von der Auftragnehmerin im Rahmen dieses Vertrages erstellten urheberrechtlich geschützten Werken (Texte, Konzepte, Präsentationen) räumt die Auftragnehmerin dem Auftraggeber das ausschließliche, zeitlich, räumlich und inhaltlich unbeschränkte, übertragbare und unterlizenzierbare Nutzungsrecht für alle bekannten Nutzungsarten ein, sobald die Vergütung für das jeweilige Werk vollständig bezahlt ist.</li>
+      <li>Die Auftragnehmerin darf die für den Auftraggeber erbrachten Leistungen nach vorheriger Abstimmung in anonymisierter Form (ohne Nennung des konkreten Auftraggebers, sofern nicht ausdrücklich freigegeben) als Referenz und im Rahmen ihrer eigenen Außendarstellung verwenden.</li>
+      <li>Rechte Dritter (z.&nbsp;B. Fotografen, Stock-Bilder, Gastautoren) werden gesondert geregelt und gegen Nachweis weiterberechnet.</li>
+    </ol>
+
+    <h2>§ 8 Datenschutz</h2>
+    <ol>
+      <li>Die Parteien beachten die Vorschriften der Datenschutz-Grundverordnung (DSGVO) und des Bundesdatenschutzgesetzes (BDSG).</li>
+      <li>Soweit die Auftragnehmerin im Rahmen dieses Vertrages personenbezogene Daten im Auftrag des Auftraggebers verarbeitet, schließen die Parteien einen gesonderten Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO ab, der diesem Vertrag als Anlage beigefügt wird.</li>
+      <li>Die Auftragnehmerin verpflichtet sich und ihre mitarbeitenden Dritten auf das Datengeheimnis und die Einhaltung der erforderlichen technischen und organisatorischen Maßnahmen.</li>
+    </ol>
+
+    <h2>§ 9 Haftung</h2>
+    <ol>
+      <li>Die Auftragnehmerin haftet unbeschränkt nur für Vorsatz und grobe Fahrlässigkeit sowie bei Verletzung von Leben, Körper und Gesundheit.</li>
+      <li>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten (sog. Kardinalpflichten) ist die Haftung auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Die Haftung der Auftragnehmerin ist summenmäßig auf <span class="placeholder">[EUR 250.000]</span> pro Schadensfall begrenzt, jedoch nicht unter der Deckungssumme ihrer Berufs-/Vermögensschadenhaftpflichtversicherung.</li>
+      <li>Eine Haftung für entgangenen Gewinn, ausgebliebene Medienberichterstattung, ausbleibende Rankings-Platzierungen oder mittelbare Folgeschäden ist ausgeschlossen, soweit gesetzlich zulässig.</li>
+    </ol>
+
+    <h2>§ 10 Berufs- und Vermögensschadenhaftpflicht</h2>
+    <p>Die Auftragnehmerin unterhält eine Betriebs- und Vermögensschadenhaftpflichtversicherung mit einer Deckungssumme von mindestens <span class="placeholder">[EUR 250.000]</span> pro Schadensfall. Den Versicherungsnachweis legt sie dem Auftraggeber auf Anforderung vor.</p>
+
+    <h2>§ 11 Schlussbestimmungen</h2>
+    <ol>
+      <li>Änderungen und Ergänzungen dieses Vertrages bedürfen der Textform. Dies gilt auch für die Aufhebung dieses Textformerfordernisses.</li>
+      <li>Sollte eine Bestimmung dieses Vertrages unwirksam oder undurchführbar sein, wird die Gültigkeit der übrigen Bestimmungen davon nicht berührt. Die Parteien verpflichten sich, die unwirksame oder undurchführbare Bestimmung durch eine wirksame Regelung zu ersetzen, die dem wirtschaftlichen Zweck der unwirksamen Regelung möglichst nahekommt.</li>
+      <li>Erfüllungsort ist Friedberg (Hessen). Gerichtsstand für alle Streitigkeiten aus diesem Vertrag ist &ndash; soweit gesetzlich zulässig &ndash; <span class="placeholder">[Friedberg (Hessen) / Frankfurt am Main]</span>.</li>
+      <li>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</li>
+    </ol>
+
+    <div class="signatures">
+      <div class="date-line"><span class="placeholder">[Ort, Datum]</span></div>
+      <div class="signatures__grid">
+        <div class="signature-block">
+          <div class="signature-block__role">Auftragnehmerin</div>
+          <div class="signature-block__name">Iris Meinking · Meinking Legal Communications</div>
+        </div>
+        <div class="signature-block">
+          <div class="signature-block__role">Auftraggeber</div>
+          <div class="signature-block__name"><span class="placeholder">[Name, Funktion]</span> · <span class="placeholder">[Kanzleiname]</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hinweis no-print">
+      <strong>Hinweis:</strong> Dieses Muster ist eine Textvorlage auf Basis der üblichen deutschen Rechtslage (§ 611 BGB) und Branchenpraxis. Es ersetzt keine einzelfallbezogene Rechtsberatung. Vor Verwendung bitte durch eine Rechtsanwältin / einen Rechtsanwalt gegenprüfen und auf das konkrete Mandat anpassen lassen.
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
