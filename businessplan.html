@@ -395,6 +395,8 @@
     /* USt-Saldo: Zahlung an FA = rot, Erstattung = grün */
     .finanz-table--monthly .zahlung { color: #a23a2a; }
     .finanz-table--monthly .erstattung { color: #3a7a3a; }
+    /* Endbestand positiv = grün (kumulierter Saldo) */
+    .finanz-table--monthly tr.total-row td.pos { color: #3a7a3a; }
 
     /* ─── Footer ───────────────────────────────── */
     .footer {
@@ -1139,7 +1141,7 @@
         <tr class="sum-row"><td>Gesamtausgaben</td><td>6.148</td><td>498</td><td>498</td><td>648</td><td>648</td><td>648</td><td>698</td><td>798</td><td>798</td><td>898</td><td>898</td><td>898</td><td>14.076</td></tr>
         <tr><td>USt-Saldo Finanzamt (Vormonat); + = Zahlung, &minus; = VSt-Erstattung</td><td>0</td><td class="erstattung">&minus;1.154</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;80</td><td class="erstattung">&minus;109</td><td class="zahlung">176</td><td class="zahlung">176</td><td class="zahlung">1.117</td><td class="zahlung">1.383</td><td class="zahlung">1.383</td><td class="zahlung">1.364</td><td class="zahlung">1.364</td><td class="zahlung">5.537</td></tr>
         <tr><td>Liquidit&auml;tssaldo (Monat) — Einnahmen inkl. USt &minus; Ausgaben</td><td class="neg">&minus;6.148</td><td>656</td><td class="neg">&minus;418</td><td class="neg">&minus;568</td><td>1.246</td><td>961</td><td>6.861</td><td>7.605</td><td>7.339</td><td>7.239</td><td>7.258</td><td>7.258</td><td>39.292</td></tr>
-        <tr class="total-row"><td>ENDBESTAND (kumuliert)</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td>2.590</td><td>10.196</td><td>17.535</td><td>24.775</td><td>32.033</td><td>39.292</td><td>39.292</td></tr>
+        <tr class="total-row"><td>ENDBESTAND (kumuliert)</td><td class="neg">&minus;6.148</td><td class="neg">&minus;5.492</td><td class="neg">&minus;5.910</td><td class="neg">&minus;6.477</td><td class="neg">&minus;5.231</td><td class="neg">&minus;4.270</td><td class="pos">2.590</td><td class="pos">10.196</td><td class="pos">17.535</td><td class="pos">24.775</td><td class="pos">32.033</td><td class="pos">39.292</td><td class="pos">39.292</td></tr>
       </tbody>
     </table>
   </div>
