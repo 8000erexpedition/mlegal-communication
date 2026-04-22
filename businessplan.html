@@ -22,7 +22,7 @@
 
     @page {
       size: A4;
-      margin: 20mm 25mm 22mm 25mm;
+      margin: 0;
     }
 
     body {
@@ -35,8 +35,23 @@
     }
 
     @media print {
-      body { background: white; }
-      .page { margin: 0; box-shadow: none; }
+      html, body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 210mm;
+        min-height: 297mm;
+        page-break-inside: avoid;
+      }
+      .page.landscape {
+        width: 297mm;
+        min-height: 210mm;
+      }
       .no-print { display: none !important; }
       .page-break { page-break-before: always; }
     }
@@ -359,7 +374,7 @@
     /* Querformatseite für breite Monats-Tabelle */
     @page landscape-finanz {
       size: A4 landscape;
-      margin: 15mm 16mm 15mm 16mm;
+      margin: 0;
     }
     .page.landscape {
       page: landscape-finanz;
@@ -452,6 +467,7 @@
 
 <div class="print-bar no-print">
   <span class="print-bar__text">Business Plan — Meinking Legal Communications</span>
+  <span class="print-bar__text" style="font-size: 11px; opacity: 0.7;">Im Druckdialog: „Kopf- und Fußzeilen" deaktivieren, „Hintergrundgrafiken" aktivieren</span>
   <button class="print-bar__btn" onclick="window.print()">Als PDF speichern (Strg+P)</button>
 </div>
 
