@@ -48,10 +48,6 @@
         min-height: 297mm;
         page-break-inside: avoid;
       }
-      .page.landscape {
-        width: 297mm;
-        min-height: 210mm;
-      }
       .no-print { display: none !important; }
       .page-break { page-break-before: always; }
     }
@@ -371,32 +367,28 @@
       font-style: italic;
     }
 
-    /* Querformatseite für breite Monats-Tabelle */
-    @page landscape-finanz {
-      size: A4 landscape;
-      margin: 0;
-    }
-    .page.landscape {
-      page: landscape-finanz;
-      width: 297mm;
-      min-height: 210mm;
-    }
-    .page.landscape .header { padding: 14mm 18mm 5mm 18mm; }
-    .page.landscape .content { padding: 4mm 18mm 8mm 18mm; }
+    /* Seite mit reduzierten Horizontal-Paddings für die breite Liquiditätsplan-Tabelle */
+    .page.wide-content .header { padding: 22mm 12mm 6mm 12mm; }
+    .page.wide-content .content { padding: 8mm 12mm 15mm 12mm; }
 
-    /* Kompakte Monatstabelle (13 Spalten + Label) */
+    /* Kompakte Monatstabelle (13 Spalten + Label) für Hochformat */
     .finanz-table--monthly {
-      font-size: 7.8pt;
+      font-size: 6.8pt;
       width: 100%;
       table-layout: fixed;
+      line-height: 1.3;
     }
     .finanz-table--monthly th,
     .finanz-table--monthly td {
-      padding: 1mm 1mm;
+      padding: 0.8mm 0.6mm;
+      word-break: normal;
+      overflow-wrap: break-word;
     }
     .finanz-table--monthly th:first-child,
     .finanz-table--monthly td:first-child {
-      width: 56mm;
+      width: 40mm;
+      padding-left: 1.5mm;
+      padding-right: 1.5mm;
       text-align: left;
     }
     .finanz-table--monthly th:last-child,
@@ -1107,7 +1099,7 @@
 <!-- ═══════════════════════════════════════════════
      SEITE 14: FINANZEN — LIQUIDITÄTSPLAN (Querformat)
      ═══════════════════════════════════════════════ -->
-<div class="page page-break landscape">
+<div class="page page-break wide-content">
   <div class="header">
     <div class="logo-mark"></div>
     <div class="header-text">
